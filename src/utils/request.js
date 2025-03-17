@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 
 // 创建axios实例
 const request = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   timeout: 300000 // 设置超时时间为5分钟
 })
 
@@ -40,4 +40,4 @@ request.interceptors.response.use(
   }
 )
 
-export default request 
+export default request
