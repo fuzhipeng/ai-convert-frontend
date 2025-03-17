@@ -4,41 +4,42 @@
     <header class="header">
       <div class="header-left">
         <router-link to="/" class="logo">
-          <img src="@/assets/logo.png" alt="Logo">
-          <span>AI文档转换</span>
+          <img src="@/assets/logo.png" alt="">
+          <span class="logo-text">{{ $t('nav.home') }}</span>
         </router-link>
         <nav class="nav-menu">
-          <router-link to="/features">功能</router-link>
-          <router-link to="/faq">常见问题</router-link>
-          <router-link to="/pricing">定价</router-link>
+          <a href="#features" @click.prevent="scrollToSection('features')">{{ $t('nav.features') }}</a>
+          <a href="#faq" @click.prevent="scrollToSection('faq')">{{ $t('nav.faq') }}</a>
+          <router-link to="/pricing">{{ $t('nav.pricing') }}</router-link>
         </nav>
       </div>
       <div class="header-right">
-        <el-dropdown class="language-dropdown">
+        <el-dropdown class="language-dropdown" @command="handleLanguageChange">
           <span class="el-dropdown-link">
-            简体中文 <el-icon><arrow-down /></el-icon>
+            {{ currentLanguageLabel }} <el-icon><arrow-down /></el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>简体中文</el-dropdown-item>
-              <el-dropdown-item>English</el-dropdown-item>
+              <el-dropdown-item v-for="lang in supportedLanguages" :key="lang.value" :command="lang.value">
+                {{ lang.icon }} {{ lang.label }}
+              </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-button type="primary" class="login-btn">登录</el-button>
+        <el-button type="primary" class="login-btn">{{ $t('nav.login') }}</el-button>
       </div>
     </header>
 
     <!-- 主要内容区 -->
     <main class="main-content">
       <div class="hero-section">
-        <h1>一键提取文章精华，将复杂内容转化为精美知识卡片</h1>
-        <p class="subtitle">✨ 让复杂内容变得简单易懂，让知识传播更加高效 ✨</p>
+        <h1>{{ $t('hero.title') }}</h1>
+        <p class="subtitle">{{ $t('hero.subtitle') }}</p>
         <div class="feature-tags">
-          <span class="tag">智能提取</span>
-          <span class="tag">精美卡片</span>
-          <span class="tag">一键操作</span>
-          <span class="tag">高效学习</span>
+          <span class="tag">{{ $t('hero.tags.free') }}</span>
+          <span class="tag">{{ $t('hero.tags.ai') }}</span>
+          <span class="tag">{{ $t('hero.tags.noRegister') }}</span>
+          <span class="tag">{{ $t('hero.tags.unlimited') }}</span>
         </div>
       </div>
 
@@ -58,8 +59,8 @@
           >
           <div v-if="!converting" class="upload-placeholder">
             <el-icon class="upload-icon"><upload-filled /></el-icon>
-            <h3>拖放文件到这里，或点击上传</h3>
-            <p>支持 PDF、Word、TXT 等格式</p>
+            <h3>{{ $t('upload.title') }}</h3>
+            <p>{{ $t('upload.subtitle') }}</p>
           </div>
           <div v-else class="converting-status">
             <div class="file-info">
@@ -75,11 +76,11 @@
               <el-button v-if="convertStatus === 'exception'" 
                         type="primary" 
                         @click="retryConvert">
-                重试
+                {{ $t('upload.retry') }}
               </el-button>
               <el-button v-if="convertStatus !== 'success'" 
                         @click="cancelConvert">
-                取消
+                {{ $t('upload.cancel') }}
               </el-button>
             </div>
           </div>
@@ -88,13 +89,13 @@
         <!-- 转换结果预览 -->
         <div v-if="showPreview" class="preview-area">
           <div class="preview-header">
-            <h3>转换结果预览</h3>
+            <h3>{{ $t('preview.title') }}</h3>
             <div class="preview-actions">
               <el-button type="primary" @click="downloadHtml">
-                下载HTML
+                {{ $t('preview.download') }}
               </el-button>
               <el-button @click="copyHtml">
-                复制HTML
+                {{ $t('preview.copy') }}
               </el-button>
             </div>
           </div>
@@ -103,59 +104,59 @@
       </div>
 
       <!-- 功能特点展示 -->
-      <div class="features-section">
-        <h2>AI文章精华提炼的主要功能</h2>
-        <p class="features-subtitle">体验下一代 AI文章精华提炼 - 智能分析，精准提取，高效学习</p>
+      <div id="features" class="features-section">
+        <h2>{{ $t('features.title') }}</h2>
+        <p class="features-subtitle">{{ $t('features.subtitle') }}</p>
         
         <div class="features-grid">
           <div class="feature-card">
             <el-icon class="feature-icon"><reading /></el-icon>
-            <h3>AI智能分析</h3>
-            <p>先进算法自动识别文章核心观点和关键信息，无需人工筛选。</p>
+            <h3>{{ $t('features.cards.free.title') }}</h3>
+            <p>{{ $t('features.cards.free.desc') }}</p>
           </div>
           
           <div class="feature-card">
             <el-icon class="feature-icon"><star /></el-icon>
-            <h3>精华提取</h3>
-            <p>智能提炼文章价值，将冗长内容浓缩为清晰要点，节省阅读时间。</p>
+            <h3>{{ $t('features.cards.quality.title') }}</h3>
+            <p>{{ $t('features.cards.quality.desc') }}</p>
           </div>
           
           <div class="feature-card">
             <el-icon class="feature-icon"><magic-stick /></el-icon>
-            <h3>精美呈现</h3>
-            <p>运用现代设计技术，将内容转化为视觉吸引的卡片，便于分享与记忆。</p>
+            <h3>{{ $t('features.cards.smart.title') }}</h3>
+            <p>{{ $t('features.cards.smart.desc') }}</p>
           </div>
 
           <div class="feature-card">
             <el-icon class="feature-icon"><lock /></el-icon>
-            <h3>增强的隐私保护</h3>
-            <p>采用先进加密技术，确保您的文档内容安全，处理后立即删除所有数据。</p>
+            <h3>{{ $t('features.cards.privacy.title') }}</h3>
+            <p>{{ $t('features.cards.privacy.desc') }}</p>
           </div>
           
           <div class="feature-card">
             <el-icon class="feature-icon"><document /></el-icon>
-            <h3>高级文本理解</h3>
-            <p>深度学习模型理解文本语义和上下文关系，提取真正有价值的信息。</p>
+            <h3>{{ $t('features.cards.understanding.title') }}</h3>
+            <p>{{ $t('features.cards.understanding.desc') }}</p>
           </div>
           
           <div class="feature-card">
             <el-icon class="feature-icon"><medal /></el-icon>
-            <h3>最先进的质量</h3>
-            <p>基于最新AI技术，提供业界领先的转换质量，确保内容精准无误。</p>
+            <h3>{{ $t('features.cards.advanced.title') }}</h3>
+            <p>{{ $t('features.cards.advanced.desc') }}</p>
           </div>
         </div>
       </div>
 
       <!-- 用户提取示例部分 -->
       <div class="examples-section">
-        <h2>用户提取示例</h2>
-        <p class="examples-subtitle">看看其他用户如何使用AI文章精华提炼工具获得精美的知识卡片</p>
+        <h2>{{ $t('features.examples.title') }}</h2>
+        <p class="examples-subtitle">{{ $t('features.examples.subtitle') }}</p>
         
         <div class="examples-grid">
-          <div v-for="(image, i) in exampleImages.slice(0, 9)" :key="i" class="example-item">
-            <img :src="image" :alt="`示例 ${i+1}`" class="example-image">
+          <div v-for="i in 9" :key="i" class="example-item">
+            <img :src="`/images/examples/example-${i}.jpg`" :alt="`${$t('features.examples.tag')} ${i}`" class="example-image">
             <div class="example-overlay">
-              <span class="example-tag">示例 {{i+1}}</span>
+              <span class="example-tag">{{ $t('features.examples.tag') }} {{i}}</span>
             </div>
           </div>
         </div>
@@ -165,7 +166,9 @@
       <Testimonials />
 
       <!-- FAQ部分 -->
-      <FAQ />
+      <div id="faq">
+        <FAQ />
+      </div>
     </main>
   </div>
 </template>
@@ -173,27 +176,38 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal } from '@element-plus/icons-vue'
+import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal, ArrowDown } from '@element-plus/icons-vue'
 import Testimonials from '@/components/Testimonials.vue'
 import FAQ from '@/components/FAQ.vue'
+import { useI18n } from 'vue-i18n'
+import { SUPPORT_LANGUAGES } from '@/i18n'
 
-// 创建9个不同的占位图片
-const createPlaceholder = (text) => {
-  const svg = `<svg width="1280" height="948" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#333333"/><text x="50%" y="50%" font-family="Arial, sans-serif" font-size="36" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">${text}</text></svg>`
-  return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)))
+// 国际化
+const { t, locale } = useI18n()
+
+// 支持的语言
+const supportedLanguages = SUPPORT_LANGUAGES
+
+// 当前语言标签
+const currentLanguageLabel = computed(() => {
+  const currentLang = supportedLanguages.find(lang => lang.value === locale.value)
+  return currentLang ? currentLang.label : '简体中文'
+})
+
+// 处理语言切换
+const handleLanguageChange = (langValue) => {
+  locale.value = langValue
+  localStorage.setItem('language', langValue)
+  ElMessage.success(t('system.languageChanged', { lang: currentLanguageLabel.value }))
 }
 
-const exampleImages = [
-  createPlaceholder('AI文章精华提炼示例1'),
-  createPlaceholder('AI文章精华提炼示例2'),
-  createPlaceholder('AI文章精华提炼示例3'),
-  createPlaceholder('AI文章精华提炼示例4'),
-  createPlaceholder('AI文章精华提炼示例5'),
-  createPlaceholder('AI文章精华提炼示例6'),
-  createPlaceholder('AI文章精华提炼示例7'),
-  createPlaceholder('AI文章精华提炼示例8'),
-  createPlaceholder('AI文章精华提炼示例9')
-]
+// 滚动到指定部分
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 // 文件上传相关
 const fileInput = ref(null)
@@ -349,6 +363,9 @@ const formatFileSize = (size) => {
   }
   return `${size.toFixed(2)} ${units[index]}`
 }
+
+// 实际图片路径数组
+const exampleImages = Array.from({ length: 9 }, (_, i) => `/images/examples/example-${i + 1}.jpg`)
 </script>
 
 <style scoped>
@@ -375,13 +392,21 @@ const formatFileSize = (size) => {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   text-decoration: none;
   color: #e0e0e0;
 }
 
 .logo img {
-  height: 32px;
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .nav-menu {

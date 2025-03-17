@@ -1,5 +1,6 @@
 export default {
   nav: {
+    home: 'AI文档转换',
     features: '功能',
     faq: '常见问题',
     pricing: '定价',
@@ -65,8 +66,8 @@ export default {
       }
     },
     examples: {
-      title: '用户提取示例',
-      subtitle: '看看其他用户如何使用AI文章精华提炼工具获得精美的知识卡片',
+      title: '灵感展示',
+      subtitle: '巧妙提炼文章精华',
       tag: '示例'
     }
   },

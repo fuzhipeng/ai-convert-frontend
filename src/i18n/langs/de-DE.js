@@ -6,13 +6,13 @@ export default {
     login: 'Anmelden'
   },
   hero: {
-    title: 'Konvertieren Sie jedes Dokument in Sekunden zu HTML',
-    subtitle: '✨ Der weltweit erste kostenlose und unbegrenzte KI-Dokumentenkonverter ✨',
+    title: 'Extrahieren Sie mit einem Klick die Essenz von Artikeln und verwandeln Sie komplexe Inhalte in schöne Wissenskarten',
+    subtitle: '✨ Komplexe Inhalte einfach verständlich machen und Wissensverbreitung effizienter gestalten ✨',
     tags: {
-      free: '100% Kostenlos',
-      ai: 'Powered by Claude AI',
-      noRegister: 'Keine Registrierung',
-      unlimited: 'Unbegrenzte Konvertierungen'
+      free: 'Intelligente Extraktion',
+      ai: 'Schöne Wissenskarten',
+      noRegister: 'Ein-Klick-Bedienung',
+      unlimited: 'Effizientes Lernen'
     }
   },
   upload: {
@@ -33,8 +33,8 @@ export default {
     copyError: 'Kopieren fehlgeschlagen'
   },
   features: {
-    title: 'Hauptfunktionen der KI-Dokumentenkonvertierung',
-    subtitle: 'Erleben Sie die nächste Generation der KI-Dokumentenkonvertierung - Leistungsstark, kostenlos und unbegrenzt',
+    title: 'Hauptfunktionen der KI-Artikelessenz-Extraktion',
+    subtitle: 'Erleben Sie die nächste Generation der KI-Artikelessenz-Extraktion - Intelligente Analyse, Präzise Extraktion, Effizientes Lernen',
     cards: {
       free: {
         title: 'Keine Kosten',
@@ -48,6 +48,11 @@ export default {
         title: 'Intelligentes Verständnis',
         desc: 'Erkennt präzise die Dokumentstruktur und behält das ursprüngliche Format und Styling bei.'
       }
+    },
+    examples: {
+      title: 'Inspirationsgalerie',
+      subtitle: 'Geschickte Extraktion von Artikelessenzen',
+      tag: 'Beispiel'
     }
   },
   testimonials: {
@@ -88,39 +93,39 @@ export default {
   },
   faq: {
     title: 'Häufig gestellte Fragen',
-    subtitle: 'Weitere Fragen? Senden Sie eine E-Mail an fuzhipeng66@gmail.com',
+    subtitle: 'Haben Sie weitere Fragen? Schreiben Sie uns an fuzhipeng66@gmail.com',
     questions: [
       {
-        q: 'Was ist DocSmart und wie kann es mir helfen?',
-        a: 'DocSmart ist ein leistungsstarkes KI-Dokumentenkonvertierungstool, das verschiedene Dokumentformate intelligent in strukturiertes HTML umwandelt. Es hilft Ihnen, Dokumente schnell zu verarbeiten und dabei das ursprüngliche Format und Styling beizubehalten, was die Arbeitseffizienz steigert. Ob für technische Dokumentation, akademische Artikel oder Geschäftsberichte, DocSmart bietet professionelle Konvertierungsdienste.'
+        q: 'Was ist der KI-Dokumentenkonverter? Wie hilft er mir, die Essenz von Artikeln zu extrahieren?',
+        a: 'Der KI-Dokumentenkonverter ist ein intelligentes Tool, das automatisch Artikelinhalte analysiert, Kernaussagen und Schlüsselinformationen extrahiert und komplexe, umfangreiche Inhalte in schöne Wissenskarten umwandelt. Es hilft Ihnen, die wichtigsten Punkte eines Artikels schnell zu verstehen, Lesezeit zu sparen und die Lern- und Arbeitseffizienz zu verbessern.'
       },
       {
-        q: 'Ist DocSmart kostenlos?',
-        a: 'Ja, DocSmart ist völlig kostenlos! Wir verpflichten uns, den hochwertigsten Dokumentenkonvertierungsdienst ohne versteckte Kosten, ohne Kreditkartenanforderung und ohne Nutzungsbeschränkungen anzubieten. Wir glauben, dass hochwertige KI-Technologie für jeden zugänglich sein sollte.'
+        q: 'Welche Vorteile haben Wissenskarten? Warum sind sie effektiver als herkömmliche Notizen?',
+        a: 'Wissenskarten verwenden visuelle Darstellungen, um komplexe Informationen zu strukturieren und zu vereinfachen, was das Verständnis und das Merken erleichtert. Im Vergleich zu herkömmlichen Notizen sind Wissenskarten intuitiver, optisch ansprechender und informationsdichter. Sie lassen sich leichter teilen und überprüfen, was die Lerneffizienz und die Wissensaufnahme erheblich verbessert.'
       },
       {
-        q: 'Wie funktioniert die KI-Technologie von DocSmart?',
-        a: 'DocSmart verwendet fortschrittliche Claude AI-Technologie und Deep Learning-Algorithmen, um die Struktur und den Inhalt von Dokumenten zu verstehen. Das System erkennt intelligent Elemente wie Überschriften, Absätze, Tabellen und Bilder und behält das ursprüngliche Format bei der Konvertierung bei. Unsere KI optimiert auch das Layout, um sowohl schöne als auch lesbare Dokumente zu gewährleisten.'
+        q: 'Wie stellt die KI sicher, dass der extrahierte Inhalt die ursprüngliche Essenz genau wiedergibt?',
+        a: 'Wir verwenden fortschrittliche Deep-Learning-Modelle, die Textbedeutungen und kontextuelle Beziehungen verstehen, um Kernaussagen, Schlüsselargumente und wichtige Schlussfolgerungen zu identifizieren. Unsere KI konzentriert sich nicht nur auf Schlüsselwörter, sondern versteht auch logische Beziehungen zwischen Sätzen und stellt sicher, dass der extrahierte Inhalt die Essenz und die Absicht des Autors genau wiedergibt.'
       },
       {
-        q: 'Welche Dateitypen unterstützt DocSmart?',
-        a: 'DocSmart unterstützt verschiedene gängige Dokumentformate, einschließlich PDF, Word-Dokumente (DOC/DOCX), Textdateien (TXT) und mehr. Wir erweitern kontinuierlich unsere unterstützten Dateitypen, um den vielfältigen Bedürfnissen der Benutzer gerecht zu werden. Hochwertige Konvertierung ist für alle unterstützten Formate garantiert.'
+        q: 'Welche Arten von Dokumenten werden unterstützt? Kann das System spezialisierte Inhalte verarbeiten?',
+        a: 'Wir unterstützen verschiedene gängige Dokumentformate, darunter PDF, Word-Dokumente (DOC/DOCX), Textdateien (TXT) und mehr. Das System kann Artikel aus verschiedenen Fachgebieten verarbeiten, darunter wissenschaftliche Arbeiten, technische Dokumentationen, Geschäftsberichte, Nachrichtenartikel usw., und kann basierend auf den Eigenschaften verschiedener Bereiche intelligent analysieren und extrahieren.'
       },
       {
-        q: 'Muss ich mich registrieren, um DocSmart zu nutzen?',
-        a: 'Nein! DocSmart verfolgt eine Sofort-Nutzungs-Philosophie - Sie können unseren Service sofort ohne Registrierung nutzen. Besuchen Sie einfach die Website und laden Sie Ihr Dokument hoch, um mit der Konvertierung zu beginnen. Dies spiegelt unser Engagement wider, KI-Technologie wirklich zugänglich zu machen.'
+        q: 'Ist mein Dokumenteninhalt sicher? Wie wird die Privatsphäre geschützt?',
+        a: 'Wir verwenden fortschrittliche Verschlüsselungstechnologie, um Ihre Dokumenteninhalte zu schützen. Alle hochgeladenen Dokumente werden nur für die Extraktionsverarbeitung verwendet und nach Abschluss sofort vom Server gelöscht. Wir speichern keine Originalinhalte. Der gesamte Prozess findet in einer sicheren Umgebung statt, wodurch Ihre Datenprivatsphäre auf höchstem Niveau geschützt wird.'
       },
       {
-        q: 'Sind meine Daten und meine Privatsphäre geschützt?',
-        a: 'Absolut! Wir nehmen die Datensicherheit und den Schutz der Privatsphäre der Benutzer sehr ernst. Alle von Ihnen hochgeladenen Dokumente werden verschlüsselt und sofort nach der Konvertierung gelöscht. Wir speichern keine Dokumentinhalte und verwenden Ihre Daten nicht für andere Zwecke.'
+        q: 'Können die generierten Wissenskarten angepasst oder bearbeitet werden?',
+        a: 'Ja, die vom System generierten Wissenskarten können im HTML-Format heruntergeladen werden, das Sie nach Bedarf bearbeiten und anpassen können. In Zukunft werden wir weitere Anpassungsoptionen einführen, darunter Kartenstile, Layoutstrukturen, Hervorhebungsmarkierungen und andere Funktionen, um Ihre Wissenskarten persönlicher und praktischer zu gestalten.'
       },
       {
-        q: 'Unterstützt DocSmart mehrere Sprachen?',
-        a: 'Ja, DocSmart unterstützt die Verarbeitung mehrsprachiger Dokumente. Unser KI-System kann Dokumente in verschiedenen Sprachen erkennen und verarbeiten, einschließlich Deutsch, Englisch und anderen Hauptsprachen. Die Benutzeroberfläche unterstützt derzeit Deutsch und Englisch, weitere Sprachen folgen in Kürze.'
+        q: 'Ist dieser Service kostenpflichtig? Gibt es Nutzungsbeschränkungen?',
+        a: 'Wir bieten einen grundlegenden kostenlosen Service an, der neuen Nutzern ermöglicht, 3 vollständige Dokumentumwandlungen kostenlos zu erleben und die leistungsstarken KI-Extraktionsfunktionen kennenzulernen. Für Nutzer, die häufigeren Zugriff benötigen, bieten wir wertvolle Premium-Pläne an, die unbegrenzte Umwandlungen und zusätzliche erweiterte Funktionen freischalten. Unsere Preisstrategie zielt darauf ab, Zugänglichkeit mit Nachhaltigkeit zu verbinden, sodass jeder dieses leistungsstarke Tool erleben kann, während Vielnutzern erweiterte Funktionalität geboten wird.'
       },
       {
-        q: 'Kann ich DocSmart auf allen Geräten nutzen?',
-        a: 'Ja, DocSmart ist eine Webanwendung, die auf jedem Gerät mit einem modernen Browser funktioniert, einschließlich Computern, Tablets und Smartphones. Unser responsives Design gewährleistet die beste Erfahrung auf allen Geräten.'
+        q: 'Wird die Verarbeitung mehrsprachiger Dokumente unterstützt?',
+        a: 'Ja, unser KI-System kann Dokumente in mehreren Sprachen erkennen und verarbeiten, darunter Deutsch, Englisch und andere wichtige Sprachen. Unabhängig davon, welche Sprache Ihr Dokument verwendet, können wir hochwertige Essenzextraktions- und Wissenskartengenerierungsdienste anbieten.'
       }
     ]
   }

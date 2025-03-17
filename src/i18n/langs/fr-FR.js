@@ -6,13 +6,13 @@ export default {
     login: 'Connexion'
   },
   hero: {
-    title: 'Convertissez n\'importe quel document en HTML en quelques secondes',
-    subtitle: '✨ Premier convertisseur de documents AI gratuit et illimité au monde ✨',
+    title: 'Extrayez l\'essence des articles en un clic, transformez un contenu complexe en magnifiques cartes de connaissance',
+    subtitle: '✨ Rendre le contenu complexe simple et le partage des connaissances plus efficace ✨',
     tags: {
-      free: '100% Gratuit',
-      ai: 'Propulsé par Claude AI',
-      noRegister: 'Sans inscription',
-      unlimited: 'Conversions illimitées'
+      free: 'Extraction Intelligente',
+      ai: 'Cartes Élégantes',
+      noRegister: 'Opération en Un Clic',
+      unlimited: 'Apprentissage Efficace'
     }
   },
   upload: {
@@ -33,8 +33,8 @@ export default {
     copyError: 'Échec de la copie'
   },
   features: {
-    title: 'Fonctionnalités clés de la conversion AI de documents',
-    subtitle: 'Découvrez la conversion de documents AI de nouvelle génération - Puissante, gratuite et illimitée',
+    title: 'Fonctionnalités clés de l\'extraction d\'essence d\'articles par IA',
+    subtitle: 'Découvrez l\'extraction d\'essence d\'articles par IA de nouvelle génération - Analyse Intelligente, Extraction Précise, Apprentissage Efficace',
     cards: {
       free: {
         title: 'Coût zéro',
@@ -48,6 +48,11 @@ export default {
         title: 'Compréhension intelligente',
         desc: 'Reconnaît avec précision la structure du document, préservant la mise en forme et les styles d\'origine.'
       }
+    },
+    examples: {
+      title: 'Galerie d\'Inspiration',
+      subtitle: 'Extraction Ingénieuse de l\'Essence des Articles',
+      tag: 'Exemple'
     }
   },
   testimonials: {
@@ -87,40 +92,40 @@ export default {
     ]
   },
   faq: {
-    title: 'Questions fréquemment posées',
-    subtitle: 'Vous avez d\'autres questions ? Envoyez un email à fuzhipeng66@gmail.com',
+    title: 'Questions Fréquemment Posées',
+    subtitle: 'Vous avez d\'autres questions ? Écrivez-nous à fuzhipeng66@gmail.com',
     questions: [
       {
-        q: 'Qu\'est-ce que DocSmart et comment peut-il m\'aider ?',
-        a: 'DocSmart est un puissant outil de conversion de documents AI qui transforme intelligemment divers formats de documents en HTML structuré. Il vous aide à traiter rapidement les documents tout en conservant la mise en forme et les styles d\'origine, améliorant l\'efficacité du travail. Que ce soit pour la documentation technique, les articles académiques ou les rapports commerciaux, DocSmart fournit des services de conversion professionnels.'
+        q: 'Qu\'est-ce que le Convertisseur de Documents IA ? Comment m\'aide-t-il à extraire l\'essence des articles ?',
+        a: 'Le Convertisseur de Documents IA est un outil intelligent qui analyse automatiquement le contenu des articles, extrait les points de vue essentiels et les informations clés, et transforme un contenu complexe et volumineux en de magnifiques cartes de connaissance. Il vous aide à comprendre rapidement les points clés d\'un article, à économiser du temps de lecture et à améliorer l\'efficacité de l\'apprentissage et du travail.'
       },
       {
-        q: 'DocSmart est-il gratuit ?',
-        a: 'Oui, DocSmart est totalement gratuit ! Nous nous engageons à fournir le service de conversion de documents de la plus haute qualité sans frais cachés, sans carte de crédit requise et sans limite d\'utilisation. Nous pensons que la technologie AI de qualité devrait être accessible à tous.'
+        q: 'Quels avantages offrent les cartes de connaissance ? Pourquoi sont-elles plus efficaces que les notes traditionnelles ?',
+        a: 'Les cartes de connaissance utilisent une présentation visuelle pour structurer et simplifier les informations complexes, facilitant la compréhension et la mémorisation. Par rapport aux notes traditionnelles, les cartes de connaissance sont plus intuitives, visuellement attrayantes et denses en information. Elles sont plus faciles à partager et à réviser, améliorant considérablement l\'efficacité de l\'apprentissage et la rétention des connaissances.'
       },
       {
-        q: 'Comment fonctionne la technologie AI de DocSmart ?',
-        a: 'DocSmart utilise la technologie Claude AI avancée et des algorithmes d\'apprentissage profond pour comprendre la structure et le contenu des documents. Le système identifie intelligemment les éléments comme les titres, les paragraphes, les tableaux et les images, maintenant la mise en forme d\'origine lors de la conversion. Notre AI optimise également la mise en page pour garantir des documents à la fois beaux et lisibles.'
+        q: 'Comment l\'IA garantit-elle que le contenu extrait reflète fidèlement l\'essence originale ?',
+        a: 'Nous utilisons des modèles avancés d\'apprentissage profond qui comprennent la sémantique du texte et les relations contextuelles pour identifier les points de vue essentiels, les arguments clés et les conclusions importantes. Notre IA ne se concentre pas uniquement sur les mots-clés, mais comprend également les relations logiques entre les phrases, garantissant que le contenu extrait reflète fidèlement l\'essence et l\'intention de l\'auteur.'
       },
       {
-        q: 'Quels types de fichiers DocSmart prend-il en charge ?',
-        a: 'DocSmart prend en charge divers formats de documents courants, notamment PDF, documents Word (DOC/DOCX), fichiers texte (TXT) et plus encore. Nous élargissons continuellement nos types de fichiers pris en charge pour répondre aux divers besoins des utilisateurs. Une conversion de haute qualité est garantie pour tous les formats pris en charge.'
+        q: 'Quels types de documents sont pris en charge ? Le système peut-il traiter du contenu spécialisé ?',
+        a: 'Nous prenons en charge divers formats de documents courants, notamment PDF, documents Word (DOC/DOCX), fichiers texte (TXT) et plus encore. Le système peut traiter des articles de divers domaines spécialisés, y compris des articles académiques, de la documentation technique, des rapports commerciaux, des articles de presse, etc., et peut analyser et extraire intelligemment en fonction des caractéristiques des différents domaines.'
       },
       {
-        q: 'Dois-je m\'inscrire pour utiliser DocSmart ?',
-        a: 'Non ! DocSmart adopte une philosophie d\'utilisation instantanée - vous pouvez utiliser notre service immédiatement sans inscription. Il suffit de visiter le site et de télécharger votre document pour commencer la conversion. Cela reflète notre engagement à rendre la technologie AI vraiment accessible.'
+        q: 'Le contenu de mon document est-il sécurisé ? Comment la confidentialité est-elle protégée ?',
+        a: 'Nous utilisons une technologie de cryptage avancée pour protéger le contenu de votre document. Tous les documents téléchargés sont uniquement utilisés pour le traitement d\'extraction et sont immédiatement supprimés du serveur une fois terminé. Nous ne stockons aucun contenu original. L\'ensemble du processus se déroule dans un environnement sécurisé, garantissant que la confidentialité de vos données bénéficie du plus haut niveau de protection.'
       },
       {
-        q: 'Mes données et ma vie privée sont-elles protégées ?',
-        a: 'Absolument ! Nous prenons très au sérieux la sécurité des données et la protection de la vie privée des utilisateurs. Tous les documents que vous téléchargez sont cryptés et sont immédiatement supprimés après la conversion. Nous ne stockons aucun contenu de document et n\'utilisons pas vos données à d\'autres fins.'
+        q: 'Les cartes de connaissance générées peuvent-elles être personnalisées ou modifiées ?',
+        a: 'Oui, les cartes de connaissance générées par le système peuvent être téléchargées au format HTML, que vous pouvez modifier et personnaliser selon vos besoins. À l\'avenir, nous introduirons davantage d\'options de personnalisation, notamment des styles de cartes, des structures de mise en page, des marqueurs de surlignage et d\'autres fonctionnalités pour rendre vos cartes de connaissance plus personnalisées et pratiques.'
       },
       {
-        q: 'DocSmart prend-il en charge plusieurs langues ?',
-        a: 'Oui, DocSmart prend en charge le traitement de documents multilingues. Notre système AI peut reconnaître et traiter des documents dans diverses langues, y compris le français, l\'anglais et d\'autres langues principales. L\'interface prend actuellement en charge le français et l\'anglais, avec plus de langues à venir prochainement.'
+        q: 'Ce service nécessite-t-il un paiement ? Y a-t-il des limites d\'utilisation ?',
+        a: 'Nous proposons un service de base gratuit qui permet aux nouveaux utilisateurs de bénéficier de 3 conversions complètes de documents sans frais, vous donnant un aperçu complet de nos puissantes capacités d\'extraction par IA. Pour les utilisateurs nécessitant un accès plus fréquent, nous offrons des forfaits premium à forte valeur ajoutée qui débloquent des conversions illimitées et des fonctionnalités avancées supplémentaires. Notre stratégie tarifaire vise à équilibrer accessibilité et durabilité, garantissant que chacun puisse expérimenter cet outil puissant tout en offrant des fonctionnalités améliorées aux utilisateurs intensifs.'
       },
       {
-        q: 'Puis-je utiliser DocSmart sur tous les appareils ?',
-        a: 'Oui, DocSmart est une application web qui fonctionne sur n\'importe quel appareil avec un navigateur moderne, y compris les ordinateurs, tablettes et smartphones. Notre design responsive garantit la meilleure expérience sur tous les appareils.'
+        q: 'Le traitement de documents multilingues est-il pris en charge ?',
+        a: 'Oui, notre système d\'IA peut reconnaître et traiter des documents dans plusieurs langues, notamment le français, l\'anglais et d\'autres langues principales. Quelle que soit la langue utilisée par votre document, nous pouvons fournir des services d\'extraction d\'essence et de génération de cartes de connaissance de haute qualité.'
       }
     ]
   }
