@@ -32,13 +32,13 @@
     <!-- 主要内容区 -->
     <main class="main-content">
       <div class="hero-section">
-        <h1>几秒钟内将任何文档转换为精美的HTML</h1>
-        <p class="subtitle">✨ 世界首个免费无限制的AI文档转换器 ✨</p>
+        <h1>一键提取文章精华，将复杂内容转化为精美知识卡片</h1>
+        <p class="subtitle">✨ 让复杂内容变得简单易懂，让知识传播更加高效 ✨</p>
         <div class="feature-tags">
-          <span class="tag">100% 免费</span>
-          <span class="tag">由 Claude AI 提供支持</span>
-          <span class="tag">无需注册</span>
-          <span class="tag">无限转换</span>
+          <span class="tag">智能提取</span>
+          <span class="tag">精美卡片</span>
+          <span class="tag">一键操作</span>
+          <span class="tag">高效学习</span>
         </div>
       </div>
 
@@ -104,29 +104,68 @@
 
       <!-- 功能特点展示 -->
       <div class="features-section">
-        <h2>AI文档转换的主要功能</h2>
-        <p class="features-subtitle">体验下一代 AI 文档转换 - 强大、免费且无限制</p>
+        <h2>AI文章精华提炼的主要功能</h2>
+        <p class="features-subtitle">体验下一代 AI文章精华提炼 - 智能分析，精准提取，高效学习</p>
         
         <div class="features-grid">
           <div class="feature-card">
-            <el-icon class="feature-icon"><money /></el-icon>
-            <h3>零成本使用</h3>
-            <p>完全免费的AI文档转换器，没有使用限制或注册要求。</p>
+            <el-icon class="feature-icon"><reading /></el-icon>
+            <h3>AI智能分析</h3>
+            <p>先进算法自动识别文章核心观点和关键信息，无需人工筛选。</p>
           </div>
           
           <div class="feature-card">
             <el-icon class="feature-icon"><star /></el-icon>
-            <h3>卓越的质量</h3>
-            <p>由Claude AI提供支持，确保最高质量的转换结果。</p>
+            <h3>精华提取</h3>
+            <p>智能提炼文章价值，将冗长内容浓缩为清晰要点，节省阅读时间。</p>
           </div>
           
           <div class="feature-card">
-            <el-icon class="feature-icon"><reading /></el-icon>
-            <h3>智能排版理解</h3>
-            <p>准确识别文档结构，保持原始格式和样式。</p>
+            <el-icon class="feature-icon"><magic-stick /></el-icon>
+            <h3>精美呈现</h3>
+            <p>运用现代设计技术，将内容转化为视觉吸引的卡片，便于分享与记忆。</p>
+          </div>
+
+          <div class="feature-card">
+            <el-icon class="feature-icon"><lock /></el-icon>
+            <h3>增强的隐私保护</h3>
+            <p>采用先进加密技术，确保您的文档内容安全，处理后立即删除所有数据。</p>
+          </div>
+          
+          <div class="feature-card">
+            <el-icon class="feature-icon"><document /></el-icon>
+            <h3>高级文本理解</h3>
+            <p>深度学习模型理解文本语义和上下文关系，提取真正有价值的信息。</p>
+          </div>
+          
+          <div class="feature-card">
+            <el-icon class="feature-icon"><medal /></el-icon>
+            <h3>最先进的质量</h3>
+            <p>基于最新AI技术，提供业界领先的转换质量，确保内容精准无误。</p>
           </div>
         </div>
       </div>
+
+      <!-- 用户提取示例部分 -->
+      <div class="examples-section">
+        <h2>用户提取示例</h2>
+        <p class="examples-subtitle">看看其他用户如何使用AI文章精华提炼工具获得精美的知识卡片</p>
+        
+        <div class="examples-grid">
+          <div v-for="(image, i) in exampleImages.slice(0, 9)" :key="i" class="example-item">
+            <img :src="image" :alt="`示例 ${i+1}`" class="example-image">
+            <div class="example-overlay">
+              <span class="example-tag">示例 {{i+1}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 用户评价部分 -->
+      <Testimonials />
+
+      <!-- FAQ部分 -->
+      <FAQ />
     </main>
   </div>
 </template>
@@ -134,7 +173,27 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { UploadFilled, Document, Money, Star, Reading } from '@element-plus/icons-vue'
+import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal } from '@element-plus/icons-vue'
+import Testimonials from '@/components/Testimonials.vue'
+import FAQ from '@/components/FAQ.vue'
+
+// 创建9个不同的占位图片
+const createPlaceholder = (text) => {
+  const svg = `<svg width="1280" height="948" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#333333"/><text x="50%" y="50%" font-family="Arial, sans-serif" font-size="36" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">${text}</text></svg>`
+  return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)))
+}
+
+const exampleImages = [
+  createPlaceholder('AI文章精华提炼示例1'),
+  createPlaceholder('AI文章精华提炼示例2'),
+  createPlaceholder('AI文章精华提炼示例3'),
+  createPlaceholder('AI文章精华提炼示例4'),
+  createPlaceholder('AI文章精华提炼示例5'),
+  createPlaceholder('AI文章精华提炼示例6'),
+  createPlaceholder('AI文章精华提炼示例7'),
+  createPlaceholder('AI文章精华提炼示例8'),
+  createPlaceholder('AI文章精华提炼示例9')
+]
 
 // 文件上传相关
 const fileInput = ref(null)
@@ -464,39 +523,164 @@ const formatFileSize = (size) => {
 .features-section {
   text-align: center;
   margin-top: 4rem;
+  padding: 0 1rem;
 }
 
 .features-subtitle {
   color: #888;
   margin-bottom: 3rem;
+  font-size: 1.1rem;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-rows: repeat(2, auto);
+  gap: 1.5rem;
   margin-top: 2rem;
+  margin-bottom: 3rem;
+  width: 100%;
+  overflow: visible;
+  max-height: none !important;
 }
 
 .feature-card {
   background-color: #2d2d2d;
-  padding: 2rem;
-  border-radius: 8px;
+  padding: 1.8rem;
+  border-radius: 10px;
   text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .feature-icon {
   font-size: 48px;
   color: #d4a055;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .feature-card h3 {
   margin-bottom: 1rem;
   color: #e0e0e0;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .feature-card p {
   color: #888;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.examples-section {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 0 1rem;
+  margin-bottom: 4rem;
+}
+
+.examples-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #e0e0e0;
+}
+
+.examples-subtitle {
+  color: #888;
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.example-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  aspect-ratio: 4/3;
+}
+
+.example-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.example-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.example-item:hover .example-image {
+  transform: scale(1.05);
+}
+
+.example-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.example-item:hover .example-overlay {
+  opacity: 1;
+}
+
+.example-tag {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background-color: rgba(212, 160, 85, 0.8);
+  border-radius: 20px;
+}
+
+.debug-info {
+  margin-top: 2rem;
+  text-align: center;
+  background-color: rgba(212, 160, 85, 0.1);
+  border: 1px solid #d4a055;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.debug-info p {
+  margin: 0.5rem 0;
+  color: #d4a055;
 }
 </style> 
