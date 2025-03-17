@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 初始化文件上传
 export function initFileUpload(data) {
   return request({
-    url: '/files/init',
+    url: '/api/files/init',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function initFileUpload(data) {
 // 上传文件分片
 export function uploadFileChunk(data) {
   return request({
-    url: '/files/chunk',
+    url: '/api/files/chunk',
     method: 'post',
     data,
     headers: {
@@ -24,7 +24,7 @@ export function uploadFileChunk(data) {
 // 合并文件分片
 export function mergeFileChunks(data) {
   return request({
-    url: '/files/merge',
+    url: '/api/files/merge',
     method: 'post',
     data
   })
@@ -33,7 +33,7 @@ export function mergeFileChunks(data) {
 // 创建转换任务
 export function createConvertTask(data) {
   return request({
-    url: '/convert/task',
+    url: '/api/convert/task',
     method: 'post',
     data
   })
@@ -42,7 +42,7 @@ export function createConvertTask(data) {
 // 获取转换进度
 export function getConvertProgress(taskId) {
   return request({
-    url: `/convert/progress/${taskId}`,
+    url: `/api/convert/progress/${taskId}`,
     method: 'get'
   })
 }
@@ -50,7 +50,7 @@ export function getConvertProgress(taskId) {
 // 获取转换结果
 export function getConversionResult(fileId) {
   return request({
-    url: `/file/conversion/${fileId}`,
+    url: `/api/file/conversion/${fileId}`,
     method: 'get'
   })
 }
@@ -58,7 +58,7 @@ export function getConversionResult(fileId) {
 // 上传文件
 export function uploadFile(data) {
   return request({
-    url: '/file/upload',
+    url: '/api/file/upload',
     method: 'post',
     data,
     headers: {
