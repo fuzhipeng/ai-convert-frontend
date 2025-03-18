@@ -150,5 +150,12 @@ export default {
         a: 'Yes, our AI system can recognize and process documents in multiple languages, including Chinese, English, and other major languages. Regardless of what language your document uses, we can provide high-quality essence extraction and knowledge card generation services.'
       }
     ]
+  },
+  error: {
+    title: 'Error Occurred',
+    defaultMessage: 'There was a problem loading the page',
+    backHome: 'Back to Home',
+    refresh: 'Refresh Page',
+    details: 'Error Details'
   }
 } 

@@ -167,17 +167,9 @@ const currentLanguageLabel = computed(() => {
 
 // 处理语言切换
 const handleLanguageChange = (lang) => {
-  // 先更新 localStorage
-  localStorage.setItem('language', lang)
-  // 更新 locale
   locale.value = lang
-  const selectedLang = SUPPORT_LANGUAGES.find(l => l.value === lang)
-  ElMessage.success(t('system.languageChanged', { lang: selectedLang.label }))
-  // 使用 nextTick 等待 DOM 更新
-  nextTick(() => {
-    // 强制重新加载所有组件
-    window.location.reload()
-  })
+  localStorage.setItem('lang', lang)
+  ElMessage.success(t('system.languageChanged', { lang: SUPPORT_LANGUAGES.find(item => item.value === lang)?.label || lang }))
 }
 
 // 文件上传相关
