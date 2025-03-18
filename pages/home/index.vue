@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="home">
     <!-- 顶部导航栏 -->
     <header class="header">
@@ -97,15 +97,6 @@
               <el-button @click="copyHtml">
                 {{ $t('preview.copy') }}
               </el-button>
-              <el-button v-if="isDev" @click="testPreview" type="success">
-                测试预览
-              </el-button>
-              <el-button v-if="isDev" @click="toggleDirectDisplay" type="warning">
-                {{ directDisplay ? '使用iframe' : '直接显示' }}
-              </el-button>
-              <el-button v-if="isDev" @click="toggleRenderMethod" type="info">
-                {{ renderMethod }}
-              </el-button>
             </div>
           </div>
           <div class="preview-container">
@@ -116,33 +107,6 @@
               </template>
             </el-skeleton>
           </div>
-        </div>
-      </div>
-
-      <!-- 调试信息 -->
-      <div v-if="isDev" class="debug-info">
-        <h4>调试信息</h4>
-        <p>HTML内容长度: {{ previewHtml.length }}</p>
-        <p>HTML内容前100个字符: {{ previewHtml.substring(0, 100) }}...</p>
-        <p>渲染模式: {{ directDisplay ? '直接显示' : 'iframe' }}</p>
-        <p>iframe渲染方法: {{ renderMethod }}</p>
-        <p>加载状态: {{ previewLoading ? '加载中' : '加载完成' }}</p>
-        <p>文件已上传: {{ fileUploaded ? '是' : '否' }}</p>
-        <p>文件ID: {{ fileId || '无' }}</p>
-        <div class="api-url-form">
-          <p>当前API基础URL: {{ apiBaseUrl.value || '未设置' }}</p>
-          <el-input v-model="customApiUrl" placeholder="输入自定义API URL" style="margin-bottom: 10px;" />
-          <el-button type="primary" size="small" @click="updateApiUrl">
-            更新API URL
-          </el-button>
-        </div>
-        <div class="debug-actions">
-          <el-button type="danger" size="small" @click="dumpHtmlContent">
-            打印完整HTML到控制台
-          </el-button>
-          <el-button type="warning" size="small" @click="forceRerender">
-            强制重新渲染
-          </el-button>
         </div>
       </div>
 
@@ -230,10 +194,9 @@ import axios from 'axios'
 const apiBaseUrlDefault = import.meta.env.VITE_API_BASE_URL || ''
 console.log('初始API基础URL:', apiBaseUrlDefault)
 const apiBaseUrl = ref(apiBaseUrlDefault)
-const customApiUrl = ref(apiBaseUrlDefault)
 
 // 是否为开发环境
-const isDev = import.meta.env.DEV
+const isDev = false // 修改为false，禁用所有开发环境特性
 
 // 国际化
 const { t, locale } = useI18n()
@@ -282,125 +245,11 @@ const previewFrame = ref(null)
 // 改为默认使用iframe模式
 const directDisplay = ref(false)
 
-// 新增的渲染方法选项
-const renderMethod = ref('srcdoc')
-
 // 添加测试预览内容变量
-const testHtmlContent = ref(`
-  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 1000px; margin: 0 auto; background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 24px; background-color: white;">
-      <div>
-        <h1 style="font-size: 28px; color: #0052cc; margin: 0 0 8px 0; font-weight: 600;">首破万亿美元，深圳服务贸易大有潜力</h1>
-        <p style="color: #666; margin: 0; font-size: 14px;">深圳发布 | 2025年03月12日</p>
-      </div>
-      <div style="background-color: #0052cc; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-      </div>
-    </div>
-    
-    <div style="display: flex; gap: 20px; padding: 0 24px 24px;">
-      <div style="flex: 1; background-color: #f0f5ff; padding: 20px; border-radius: 8px;">
-        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
-          <h2 style="margin: 0 0 0 8px; font-size: 18px; color: #333;">2024年服务贸易进出口总额</h2>
-        </div>
-        <p style="font-size: 32px; font-weight: 700; color: #ff6b00; margin: 0 0 8px 0;">1402.4亿美元</p>
-        <p style="color: #666; margin: 0; font-size: 14px;">创历史新高</p>
-      </div>
-      
-      <div style="flex: 1; background-color: #f0f5ff; padding: 20px; border-radius: 8px;">
-        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-          <h2 style="margin: 0 0 0 8px; font-size: 18px; color: #333;">2025年服务贸易目标</h2>
-        </div>
-        <p style="font-size: 32px; font-weight: 700; color: #ff6b00; margin: 0 0 8px 0;">1500亿美元以上</p>
-        <p style="color: #666; margin: 0; font-size: 14px;">高质量发展行动计划</p>
-      </div>
-    </div>
-    
-    <div style="display: flex; gap: 20px; padding: 0 24px 24px;">
-      <div style="flex: 1; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
-        <div style="display: flex; align-items: center; margin-bottom: 16px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0052cc">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-          <h3 style="margin: 0 0 0 8px; font-size: 18px; color: #333;">现状与挑战</h3>
-        </div>
-        <ul style="padding-left: 20px; margin: 0; color: #333;">
-          <li style="margin-bottom: 8px; display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px; margin-right: 8px;">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            深圳服务贸易排名全国第三，低于上海、北京
-          </li>
-          <li style="margin-bottom: 8px; display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px; margin-right: 8px;">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            服务贸易仅占全国外贸总额的14.6%
-          </li>
-          <li style="display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px; margin-right: 8px;">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            知识密集型服务贸易占比仅38.5%
-          </li>
-        </ul>
-      </div>
-      
-      <div style="flex: 1; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
-        <div style="display: flex; align-items: center; margin-bottom: 16px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-            <line x1="6" y1="1" x2="6" y2="4"></line>
-            <line x1="10" y1="1" x2="10" y2="4"></line>
-            <line x1="14" y1="1" x2="14" y2="4"></line>
-          </svg>
-          <h3 style="margin: 0 0 0 8px; font-size: 18px; color: #333;">深圳优势</h3>
-        </div>
-        <ul style="padding-left: 20px; margin: 0; color: #333;">
-          <li style="margin-bottom: 8px; display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px; margin-right: 8px;">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            雄厚的数字经济、先进制造业基础
-          </li>
-          <li style="margin-bottom: 8px; display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px; margin-right: 8px;">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            华为、中兴、腾讯等企业国际竞争力强
-          </li>
-          <li style="display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0052cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 16px; margin-right: 8px;">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            跨境电商等数字订购贸易成为新动能
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-    <div style="padding: 16px 24px; background-color: #f8f9fa; border-top: 1px solid #eee; font-size: 12px; color: #666; display: flex; justify-content: space-between;">
-      <div>来源：深圳发布</div>
-      <div>文章概念卡片 © 2025</div>
-    </div>
-  </div>
-`)
+const testHtmlContent = ref('')
+
+// 实际图片路径数组
+// const exampleImages = Array.from({ length: 9 }, (_, i) => `/images/examples/example-${i + 1}.jpg`)
 
 // 触发文件选择
 const triggerFileInput = () => {
@@ -629,176 +478,23 @@ const copyHtml = async () => {
   }
 }
 
-// 处理API响应数据时，增强原始内容的展示效果
+// 处理HTML内容使其适合在预览窗口中显示
 const processHtmlContent = (htmlContent) => {
-  if (!htmlContent) return htmlContent;
-  
-  // 记录原始HTML
-  console.log('处理前的HTML内容:', htmlContent.substring(0, 500) + '...');
-  
-  // 检查HTML结构类型
-  const hasStyle = htmlContent.includes('style="');
-  const hasDiv = htmlContent.includes('<div');
-  const hasTable = htmlContent.includes('<table');
-  const hasList = htmlContent.includes('<ul') || htmlContent.includes('<ol');
-  const hasHeading = /(<h[1-6][^>]*>)/i.test(htmlContent);
-  const hasSVG = htmlContent.includes('<svg');
-  const isJSON = htmlContent.trim().startsWith('{') && htmlContent.trim().endsWith('}');
-  
-  // 检查是否包含服务贸易关键词
-  const isServiceTradeContent = htmlContent.includes('深圳服务贸易') || 
-                                htmlContent.includes('首破万亿美元') || 
-                                htmlContent.includes('服务贸易发展策略') ||
-                                htmlContent.includes('1402.4亿美元') ||
-                                htmlContent.includes('1500亿美元以上');
-  
-  console.log('内容类型检测结果:', {hasStyle, hasDiv, hasTable, hasList, hasHeading, hasSVG, isJSON, isServiceTradeContent});
-  
-  // 处理深圳服务贸易内容 - 保留原始内容结构
-  if (isServiceTradeContent) {
-    console.log('检测到深圳服务贸易相关内容，增强原始样式');
-    
-    // 保留原始内容，但添加增强样式
-    let enhancedHtml = htmlContent;
-    
-    // 提取标题并增强
-    if (enhancedHtml.includes('首破万亿美元') && !enhancedHtml.includes('font-size: 28px; color: #0052cc')) {
-      enhancedHtml = enhancedHtml.replace(/([^>]*首破万亿美元[^<]*)/gi, 
-        '<span style="font-size: 28px; color: #0052cc; font-weight: 600; display: block; margin-bottom: 8px;">$1</span>');
-    }
-    
-    // 增强数据值
-    if (enhancedHtml.includes('1402.4亿美元') && !enhancedHtml.includes('color: #ff6b00')) {
-      enhancedHtml = enhancedHtml.replace(/1402\.4亿美元/g, 
-        '<span style="font-size: 32px; font-weight: 700; color: #ff6b00; display: inline-block;">1402.4亿美元</span>');
-    }
-    
-    if (enhancedHtml.includes('1500亿美元以上') && !enhancedHtml.includes('color: #ff6b00')) {
-      enhancedHtml = enhancedHtml.replace(/1500亿美元以上/g, 
-        '<span style="font-size: 32px; font-weight: 700; color: #ff6b00; display: inline-block;">1500亿美元以上</span>');
-    }
-    
-    // 如果内容没有div包装，添加一个
-    if (!hasDiv) {
-      enhancedHtml = `<div>${enhancedHtml}</div>`;
-    }
-    
-    // 确保有基本样式和包装
-    if (!enhancedHtml.includes('font-family:') || !enhancedHtml.includes('margin: 0 auto')) {
-      enhancedHtml = `<div class="service-trade-card" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 20px; max-width: 1000px; margin: 0 auto; background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); color: #333;">
-        ${enhancedHtml}
-      </div>`;
-    }
-    
-    return enhancedHtml;
-  }
-  
-  // 处理可能的JSON字符串
-  if (isJSON) {
-    try {
-      const jsonData = JSON.parse(htmlContent);
-      console.log('检测到JSON数据:', jsonData);
-      
-      // 尝试从JSON中提取HTML内容
-      let extractedHtml = '';
-      if (jsonData.html) {
-        extractedHtml = jsonData.html;
-      } else if (jsonData.content) {
-        extractedHtml = jsonData.content;
-      } else if (jsonData.data && (jsonData.data.html || jsonData.data.content || jsonData.data.htmlContent)) {
-        extractedHtml = jsonData.data.html || jsonData.data.content || jsonData.data.htmlContent;
-      }
-      
-      if (extractedHtml) {
-        console.log('从JSON中提取到HTML内容');
-        return processHtmlContent(extractedHtml); // 递归处理提取出的HTML
-      }
-      
-      // 如果没有提取到HTML，将JSON格式化为HTML
-      return `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 20px; background-color: #f8f9fa; border-radius: 8px; max-width: 1000px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        <h2 style="color: #333; margin-top: 0;">API 响应数据</h2>
-        <pre style="background-color: #fff; padding: 15px; border-radius: 5px; overflow: auto; max-height: 500px;">${JSON.stringify(jsonData, null, 2)}</pre>
-      </div>`;
-    } catch (e) {
-      console.error('JSON解析失败:', e);
-      // 不是有效的JSON，继续按普通HTML处理
-    }
-  }
-  
-  // 处理简单文本内容（没有HTML标签）
-  if (!hasDiv && !htmlContent.includes('<')) {
-    console.log('检测到纯文本内容，添加基本样式');
-    return `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 10px; background-color: #fff; border-radius: 8px; max-width: 1000px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-      <p style="white-space: pre-wrap; line-height: 1.6; color: #333;">${htmlContent}</p>
-    </div>`;
-  }
-  
-  // 处理HTML内容但缺少样式的情况
-  if ((hasDiv || hasTable || hasList || hasHeading) && !hasStyle) {
-    console.log('检测到HTML内容但缺少样式，添加基本样式');
-    
-    let enhancedHtml = htmlContent;
-    
-    // 尝试修复可能的HTML结构问题
-    if (enhancedHtml.includes('<div>') && !enhancedHtml.includes('</div>')) {
-      enhancedHtml = enhancedHtml.replace(/<div>/g, '<div>') + '</div>';
-    }
-    
-    // 包装并添加基本样式
-    enhancedHtml = `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 10px; max-width: 1000px; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); color: #333;">
-      ${enhancedHtml}
-    </div>`;
-    
-    // 增强表格样式
-    if (hasTable && !enhancedHtml.includes('border-collapse')) {
-      enhancedHtml = enhancedHtml.replace(/<table/g, '<table style="width: 100%; border-collapse: collapse; margin: 15px 0;"');
-      enhancedHtml = enhancedHtml.replace(/<th/g, '<th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;"');
-      enhancedHtml = enhancedHtml.replace(/<td/g, '<td style="border: 1px solid #ddd; padding: 8px; text-align: left;"');
-      enhancedHtml = enhancedHtml.replace(/<tr/g, '<tr style="border-bottom: 1px solid #ddd;"');
-    }
-    
-    // 增强列表样式
-    if (hasList) {
-      enhancedHtml = enhancedHtml.replace(/<ul/g, '<ul style="padding-left: 20px; margin: 15px 0;"');
-      enhancedHtml = enhancedHtml.replace(/<ol/g, '<ol style="padding-left: 20px; margin: 15px 0;"');
-      enhancedHtml = enhancedHtml.replace(/<li/g, '<li style="margin-bottom: 8px; line-height: 1.5;"');
-    }
-    
-    // 增强标题样式
-    if (hasHeading) {
-      enhancedHtml = enhancedHtml.replace(/<h1([^>]*)>/g, '<h1$1 style="font-size: 28px; color: #333; margin: 20px 0 10px 0; font-weight: 600;">');
-      enhancedHtml = enhancedHtml.replace(/<h2([^>]*)>/g, '<h2$1 style="font-size: 24px; color: #333; margin: 18px 0 9px 0; font-weight: 600;">');
-      enhancedHtml = enhancedHtml.replace(/<h3([^>]*)>/g, '<h3$1 style="font-size: 20px; color: #333; margin: 16px 0 8px 0; font-weight: 600;">');
-      enhancedHtml = enhancedHtml.replace(/<h4([^>]*)>/g, '<h4$1 style="font-size: 18px; color: #333; margin: 14px 0 7px 0; font-weight: 600;">');
-      enhancedHtml = enhancedHtml.replace(/<h5([^>]*)>/g, '<h5$1 style="font-size: 16px; color: #333; margin: 12px 0 6px 0; font-weight: 600;">');
-      enhancedHtml = enhancedHtml.replace(/<h6([^>]*)>/g, '<h6$1 style="font-size: 14px; color: #333; margin: 10px 0 5px 0; font-weight: 600;">');
-    }
-    
-    // 增强段落样式
-    enhancedHtml = enhancedHtml.replace(/<p(?![^>]*style)/g, '<p style="margin: 10px 0; line-height: 1.6; color: #333;"');
-    
-    return enhancedHtml;
-  }
-  
-  // 其他已有样式的HTML内容增强
-  if (hasStyle) {
-    let enhancedHtml = htmlContent;
-    
-    // 为没有主要包装样式的内容添加外部容器
-    if (!enhancedHtml.includes('margin: 0 auto') || !enhancedHtml.includes('max-width:')) {
-      enhancedHtml = `<div style="max-width: 1000px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        ${enhancedHtml}
-      </div>`;
-    }
-    
-    return enhancedHtml;
-  }
-  
-  // 其他任何类型的内容，至少添加基本样式容器
-  if (htmlContent.trim().length > 0) {
-    return `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 10px; max-width: 1000px; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); color: #333;">
+  // 如果内容很简单（纯文本），给它添加一些基本样式
+  if (htmlContent.trim().length > 0 && !htmlContent.includes('<div')) {
+    return `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 10px; width: auto; max-width: 100%; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); color: #333;">
       ${htmlContent}
     </div>`;
+  }
+  
+  // 如果是服务贸易卡片，添加响应式样式
+  if (htmlContent.includes('service-trade-card')) {
+    // 使用正则表达式为service-trade-card添加样式
+    const enhancedHtml = htmlContent.replace(
+      /<div class="service-trade-card"/g, 
+      '<div class="service-trade-card" style="width: auto; max-width: 100%; margin: 0 auto; box-sizing: border-box;"'
+    );
+    return enhancedHtml;
   }
   
   // 如果内容已经有足够的样式，则保持原样
@@ -1032,62 +728,6 @@ const formatFileSize = (size) => {
   return `${size.toFixed(2)} ${units[index]}`
 }
 
-// 测试预览功能
-const testPreview = () => {
-  console.log('开始测试预览')
-  previewHtml.value = testHtmlContent.value
-  previewLoading.value = true
-
-  // 始终使用iframe模式
-  if (!directDisplay.value) {
-    console.log('使用iframe模式预览测试内容')
-    // 使用renderHTMLInIframe函数渲染HTML内容
-    setTimeout(() => {
-      renderHTMLInIframe()
-    }, 0)
-  } else {
-    console.log('使用直接显示模式预览测试内容')
-    previewLoading.value = false
-  }
-}
-
-// 实际图片路径数组
-const exampleImages = Array.from({ length: 9 }, (_, i) => `/images/examples/example-${i + 1}.jpg`)
-
-// 切换直接显示HTML内容的选项
-const toggleDirectDisplay = () => {
-  directDisplay.value = !directDisplay.value
-  
-  // 如果切换到iframe模式且有HTML内容，立即渲染
-  if (!directDisplay.value && previewHtml.value && showPreview.value) {
-    previewLoading.value = true
-    setTimeout(() => {
-      try {
-        renderHTMLInIframe();
-      } catch (error) {
-        console.error('切换到iframe模式时出错:', error)
-        previewLoading.value = false
-      }
-    }, 100)
-  }
-}
-
-// 切换渲染方法
-const toggleRenderMethod = () => {
-  const methods = ['srcdoc', 'blob', 'write']
-  const currentIndex = methods.indexOf(renderMethod.value)
-  const nextIndex = (currentIndex + 1) % methods.length
-  renderMethod.value = methods[nextIndex]
-}
-
-// 打印完整HTML到控制台
-const dumpHtmlContent = () => {
-  console.group('HTML内容调试')
-  console.log('HTML内容长度:', previewHtml.value.length)
-  console.log('HTML内容完整字符串:', previewHtml.value)
-  console.groupEnd()
-}
-
 // 强制重新渲染
 const forceRerender = () => {
   if (!previewHtml.value) {
@@ -1104,7 +744,7 @@ const forceRerender = () => {
       const newFrame = document.createElement('iframe')
       newFrame.className = 'preview-frame'
       newFrame.style.width = '100%'
-      newFrame.style.minWidth = '1280px'
+      newFrame.style.minWidth = '100%' /* 修改最小宽度为100% */
       newFrame.style.minHeight = '948px'
       newFrame.style.border = 'none'
       newFrame.style.display = 'block'
@@ -1119,12 +759,14 @@ const forceRerender = () => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <base href="${window.location.origin}">
           <style>
-            body {
+            html, body {
               margin: 0;
-              padding: 0; /* 移除内边距 */
+              padding: 0;
+              width: 100%;
               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
               color: #333;
               background-color: #fff;
+              overflow-x: hidden; /* 防止水平滚动 */
             }
             img {
               max-width: 100%;
@@ -1135,6 +777,13 @@ const forceRerender = () => {
               vertical-align: middle;
             }
             * {
+              box-sizing: border-box;
+            }
+            .service-trade-card {
+              width: auto;
+              max-width: 100%; /* 确保卡片不超出容器 */
+              margin: 0 auto;
+              padding: 0;
               box-sizing: border-box;
             }
           </style>
@@ -1217,11 +866,11 @@ const renderHTMLInIframe = () => {
   
   // 添加样式
   htmlParts.push('<style>');
-  htmlParts.push('body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; color: #333; background-color: #fff; overflow-x: hidden; }');
+  htmlParts.push('html, body { margin: 0; padding: 0; width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; color: #333; background-color: #fff; overflow-x: hidden; }');
   htmlParts.push('img { max-width: 100%; height: auto; }');
   htmlParts.push('svg { display: inline-block; vertical-align: middle; }');
   htmlParts.push('* { box-sizing: border-box; }');
-  htmlParts.push('.service-trade-card { background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 0 auto; max-width: 1000px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }');
+  htmlParts.push('.service-trade-card { background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 0 auto; width: auto; max-width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }');
   htmlParts.push('.service-trade-card h1 { font-size: 28px; color: #0052cc; margin: 0 0 8px 0; font-weight: 600; }');
   htmlParts.push('.service-trade-card h2, .service-trade-card h3 { font-size: 18px; color: #333; margin: 0 0 8px 0; }');
   htmlParts.push('.service-trade-card p[style*="font-size: 32px"], .service-trade-card span[style*="font-size: 32px"], .service-trade-card p:has(span[style*="font-size: 32px"]) { font-size: 32px !important; font-weight: 700 !important; color: #ff6b00 !important; margin: 0 0 8px 0 !important; }');
@@ -1403,13 +1052,6 @@ const renderHTMLInIframe = () => {
   
   return newFrame;
 }
-
-// 更新API URL
-const updateApiUrl = () => {
-  apiBaseUrl.value = customApiUrl.value
-  console.log('API URL已更新为:', apiBaseUrl.value)
-  ElMessage.success('API URL已更新')
-}
 </script>
 
 <style scoped>
@@ -1570,10 +1212,11 @@ const updateApiUrl = () => {
 
 .preview-area {
   width: 100%;
-  background-color: #2d2d2d;
+  background-color: #fff; /* 修改为白色背景 */
   border-radius: 8px;
-  padding: 0; /* 移除内边距 */
+  padding: 0;
   margin-top: 2rem;
+  overflow: hidden; /* 添加溢出隐藏 */
 }
 
 .preview-header {
@@ -1581,19 +1224,21 @@ const updateApiUrl = () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  padding: 0 1rem; /* 只给header添加内边距 */
+  padding: 1rem; /* 修改header内边距 */
+  background-color: #2d2d2d; /* 保持header为深色背景 */
+  color: #fff; /* 添加文字颜色 */
 }
 
 .preview-container {
   width: 100%;
-  overflow: visible;
-  background-color: transparent; /* 改为透明背景 */
-  border-radius: 4px;
-  box-shadow: none; /* 移除阴影 */
-  max-width: 1280px;
-  margin: 0 auto;
+  overflow: hidden; /* 修改为隐藏溢出 */
+  background-color: #fff;
+  border-radius: 0; /* 移除圆角 */
+  box-shadow: none;
+  max-width: 100%; /* 修改最大宽度为100% */
+  margin: 0;
   max-height: none;
-  padding: 0; /* 确保没有内边距 */
+  padding: 0;
 }
 
 .preview-frame {
@@ -1603,14 +1248,21 @@ const updateApiUrl = () => {
   border: none;
   display: block;
   background-color: #fff;
-  padding: 0; /* 确保没有内边距 */
-  margin: 0; /* 确保没有外边距 */
+  padding: 0;
+  margin: 0;
+  overflow: visible; /* 确保内容可见 */
 }
 
 /* 确保预览区域在移动设备上也能正常显示 */
 @media (max-width: 1280px) {
   .preview-container {
-    overflow-x: auto;
+    overflow: hidden; /* 修改为隐藏溢出 */
+    width: 100%;
+  }
+  
+  .preview-frame {
+    width: 100%;
+    min-width: auto; /* 允许自适应宽度 */
   }
 }
 
