@@ -161,7 +161,7 @@
         
         <div class="examples-grid">
           <div v-for="i in 9" :key="i" class="example-item">
-            <img :src="'/images/examples/example-' + i + '.jpg'" :alt="$t('features.examples.tag') + ' ' + i" class="example-image">
+            <img :src="'./images/examples/example-' + i + '.jpg'" :alt="$t('features.examples.tag') + ' ' + i" class="example-image">
             <div class="example-overlay">
               <span class="example-tag">{{ $t('features.examples.tag') }} {{i}}</span>
             </div>
@@ -480,25 +480,46 @@ const copyHtml = async () => {
 
 // 处理HTML内容使其适合在预览窗口中显示
 const processHtmlContent = (htmlContent) => {
-  // 如果内容很简单（纯文本），给它添加一些基本样式
-  if (htmlContent.trim().length > 0 && !htmlContent.includes('<div')) {
-    return `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 10px; width: auto; max-width: 100%; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); color: #333;">
-      ${htmlContent}
-    </div>`;
-  }
-  
-  // 如果是服务贸易卡片，添加响应式样式
-  if (htmlContent.includes('service-trade-card')) {
-    // 使用正则表达式为service-trade-card添加样式
-    const enhancedHtml = htmlContent.replace(
-      /<div class="service-trade-card"/g, 
-      '<div class="service-trade-card" style="width: auto; max-width: 100%; margin: 0 auto; box-sizing: border-box;"'
+  try {
+    // 如果内容很简单（纯文本），给它添加一些基本样式
+    if (htmlContent.trim().length > 0 && !htmlContent.includes('<div')) {
+      return `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; padding: 10px; width: auto; max-width: 100%; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); color: #333;">
+        ${htmlContent}
+      </div>`;
+    }
+    
+    // 如果是服务贸易卡片，添加响应式样式并修复可能的图片路径
+    if (htmlContent.includes('service-trade-card')) {
+      // 处理服务贸易卡片样式
+      let enhancedHtml = htmlContent.replace(
+        /<div class="service-trade-card"/g, 
+        '<div class="service-trade-card" style="width: auto; max-width: 100%; margin: 0 auto; box-sizing: border-box;"'
+      );
+      
+      // 修复图片相对路径问题
+      enhancedHtml = enhancedHtml.replace(
+        /src="\/images\//g,
+        'src="./images/'
+      );
+      
+      return enhancedHtml;
+    }
+    
+    // 修复所有内容中的相对路径
+    let processedHtml = htmlContent;
+    
+    // 修复图片相对路径问题
+    processedHtml = processedHtml.replace(
+      /src="\/images\//g,
+      'src="./images/'
     );
-    return enhancedHtml;
+    
+    // 如果内容已经有足够的样式，则保持原样
+    return processedHtml;
+  } catch (error) {
+    console.error('处理HTML内容时出错:', error);
+    return htmlContent; // 发生错误时返回原始内容
   }
-  
-  // 如果内容已经有足够的样式，则保持原样
-  return htmlContent;
 }
 
 // 提取iframe渲染逻辑为单独的函数，确保和下载HTML时的结构一致
@@ -528,8 +549,9 @@ const renderHTMLInIframe = () => {
   const title = (currentFile.value?.name?.replace(/\.[^/.]+$/, '') || '文档') + ' - 预览';
   htmlParts.push(`<title>${title}</title>`);
   
-  // 添加base标签
-  htmlParts.push(`<base href="${window.location.origin}">`);
+  // 添加base标签，确保相对路径正确解析
+  const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+  htmlParts.push(`<base href="${baseUrl}">`);
   
   // 添加样式
   htmlParts.push('<style>');
@@ -558,6 +580,19 @@ const renderHTMLInIframe = () => {
   htmlParts.push('html, body { height: auto !important; overflow: visible !important; }');
   htmlParts.push('body > div { margin: 0 !important; padding: 5px !important; }'); /* 减少内容顶部和底部空白 */
   htmlParts.push('</style>');
+  
+  // 添加脚本处理相对路径
+  htmlParts.push('<script>');
+  htmlParts.push('window.addEventListener("DOMContentLoaded", function() {');
+  htmlParts.push('  // 处理图片路径问题');
+  htmlParts.push('  document.querySelectorAll("img").forEach(function(img) {');
+  htmlParts.push('    const src = img.getAttribute("src");');
+  htmlParts.push('    if(src && src.startsWith("/")) {');
+  htmlParts.push('      img.setAttribute("src", "." + src);');
+  htmlParts.push('    }');
+  htmlParts.push('  });');
+  htmlParts.push('});');
+  htmlParts.push('</' + 'script>'); // 添加分隔符避免与Vue模板混淆
   
   // 简化高度调整脚本
   htmlParts.push('<script>');

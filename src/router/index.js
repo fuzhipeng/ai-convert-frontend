@@ -5,7 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../pages/home/index.vue'),
+    component: () => import('../../pages/home/index.vue'),
     meta: {
       title: 'AI文档转换 - 一键提取文章精华',
       keepAlive: true
@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/error',
     name: 'Error',
-    component: () => import('../pages/error/index.vue'),
+    component: () => import('../../pages/error/index.vue'),
     meta: {
       title: '出错了 - AI文档转换',
       keepAlive: false
