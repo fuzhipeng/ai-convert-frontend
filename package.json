@@ -6,8 +6,7 @@
     "dev": "vite",
     "build": "vite build --mode production",
     "preview": "vite preview",
-    "start": "serve -s dist",
-    "build:zeabur": "vite build --mode production && node frontend-app/scripts/optimize-for-zeabur.js"
+    "start": "serve -s dist"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
@@ -20,6 +19,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "glob": "^11.0.1",
     "vite": "^4.4.9"
   },
   "engines": {

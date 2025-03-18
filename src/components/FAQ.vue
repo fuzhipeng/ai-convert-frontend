@@ -24,8 +24,13 @@ const { t, tm } = useI18n()
 
 const faqList = computed(() => {
   try {
+    // 添加调试日志
+    console.log('正在获取FAQ问题列表...');
+    
     // 使用tm()而不是t()来获取数组/对象类型的翻译
     const questions = tm('faq.questions')
+    console.log('获取到的FAQ数据:', questions);
+    
     if (!questions) {
       console.warn('FAQ questions is null or undefined')
       return []
@@ -37,7 +42,7 @@ const faqList = computed(() => {
       return Object.values(questions || {})
     }
     
-    return questions.filter(q => {
+    const filteredQuestions = questions.filter(q => {
       if (!q || typeof q !== 'object') {
         console.warn('Invalid question object:', q)
         return false
@@ -48,6 +53,10 @@ const faqList = computed(() => {
       }
       return true
     })
+    
+    console.log('处理后的FAQ列表:', filteredQuestions);
+    return filteredQuestions
+    
   } catch (error) {
     console.error('Failed to load FAQ questions:', error)
     return []

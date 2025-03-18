@@ -173,9 +173,7 @@
       <Testimonials />
 
       <!-- FAQ部分 -->
-      <div id="faq">
-        <FAQ />
-      </div>
+      <FAQ />
     </main>
   </div>
 </template>
