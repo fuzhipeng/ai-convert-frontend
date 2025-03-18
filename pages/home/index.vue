@@ -560,56 +560,46 @@ const renderHTMLInIframe = () => {
   htmlParts.push('svg { display: inline-block; vertical-align: middle; }');
   htmlParts.push('* { box-sizing: border-box; }');
   htmlParts.push('.service-trade-card { background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 0 auto; width: auto; max-width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }');
-  htmlParts.push('.service-trade-card h1 { font-size: 28px; color: #0052cc; margin: 0 0 5px 0 !important; font-weight: 600; }');
-  htmlParts.push('.service-trade-card h2, .service-trade-card h3 { font-size: 18px; color: #333; margin: 0 0 5px 0 !important; }');
-  htmlParts.push('.service-trade-card p[style*="font-size: 32px"], .service-trade-card span[style*="font-size: 32px"], .service-trade-card p:has(span[style*="font-size: 32px"]) { font-size: 32px !important; font-weight: 700 !important; color: #ff6b00 !important; margin: 0 0 5px 0 !important; }');
-  htmlParts.push('.service-trade-card ul { padding-left: 20px; margin: 0; color: #333; }');
-  htmlParts.push('.service-trade-card li { margin-bottom: 5px !important; display: flex; align-items: center; }');
-  htmlParts.push('.service-trade-card svg { display: inline-block; vertical-align: middle; min-width: 16px; margin-right: 8px; }');
-  htmlParts.push('.service-trade-card > div { padding: 5px !important; }');
-  htmlParts.push('.service-trade-card div[style*="background-color: #f0f5ff"] { background-color: #f0f5ff; padding: 5px !important; border-radius: 8px; }');
-  htmlParts.push('.service-trade-card > div:last-child { padding: 5px !important; background-color: #f8f9fa; border-top: 1px solid #eee; font-size: 12px; color: #666; display: flex; justify-content: space-between; }');
-  htmlParts.push('table { width: 100%; border-collapse: collapse; margin: 5px 0 !important; }');
-  htmlParts.push('th { border: 1px solid #ddd; padding: 5px !important; text-align: left; background-color: #f2f2f2; }');
-  htmlParts.push('td { border: 1px solid #ddd; padding: 5px !important; text-align: left; }');
-  htmlParts.push('tr { border-bottom: 1px solid #ddd; }');
-  htmlParts.push('ul, ol { padding-left: 20px; margin: 5px 0 !important; }');
-  htmlParts.push('li { margin-bottom: 5px !important; line-height: 1.5; }');
-  htmlParts.push('h1, h2, h3, h4, h5, h6 { color: #333; margin-top: 0.5em !important; margin-bottom: 0.3em !important; font-weight: 600; }');
-  htmlParts.push('p { margin: 5px 0 !important; line-height: 1.5; color: #333; }');
+  htmlParts.push('.service-trade-card-header { padding: 1rem; background-color: #ffffff; border-bottom: 1px solid #e9ecef; }');
+  htmlParts.push('.service-trade-card-body { padding: 1rem; }');
+  htmlParts.push('.service-trade-card-footer { padding: 1rem; background-color: #f8f9fa; border-top: 1px solid #e9ecef; }');
+  htmlParts.push('.service-trade-card-title { margin: 0; font-size: 1.25rem; color: #212529; }');
+  htmlParts.push('.service-trade-card-subtitle { margin: 0.5rem 0 0; font-size: 0.875rem; color: #6c757d; }');
+  htmlParts.push('.service-trade-card-text { margin-bottom: 1rem; color: #212529; }');
+  htmlParts.push('.service-trade-card-link { color: #007bff; text-decoration: none; }');
+  htmlParts.push('.service-trade-card-link:hover { color: #0056b3; text-decoration: underline; }');
   htmlParts.push('html, body { height: auto !important; overflow: visible !important; }');
   htmlParts.push('body > div { margin: 0 !important; padding: 5px !important; }'); /* 减少内容顶部和底部空白 */
   htmlParts.push('</style>');
   
-  // 添加脚本处理相对路径
+  // 处理路径的脚本
   htmlParts.push('<script>');
   htmlParts.push('window.addEventListener("DOMContentLoaded", function() {');
-  htmlParts.push('  // 处理图片路径问题');
   htmlParts.push('  document.querySelectorAll("img").forEach(function(img) {');
-  htmlParts.push('    const src = img.getAttribute("src");');
+  htmlParts.push('    var src = img.getAttribute("src");');
   htmlParts.push('    if(src && src.startsWith("/")) {');
   htmlParts.push('      img.setAttribute("src", "." + src);');
   htmlParts.push('    }');
   htmlParts.push('  });');
   htmlParts.push('});');
-  htmlParts.push('</' + 'script>'); // 添加分隔符避免与Vue模板混淆
+  htmlParts.push('</' + 'script>');
   
-  // 简化高度调整脚本
+  // 高度调整脚本
   htmlParts.push('<script>');
   htmlParts.push('function updateHeight() {');
-  htmlParts.push('  const height = document.body.scrollHeight;');
+  htmlParts.push('  var height = document.body.scrollHeight;');
   htmlParts.push('  window.parent.postMessage({ type: "resize", height: height }, "*");');
   htmlParts.push('}');
   htmlParts.push('window.addEventListener("load", updateHeight);');
   htmlParts.push('window.addEventListener("DOMContentLoaded", updateHeight);');
   htmlParts.push('setTimeout(updateHeight, 100);');
   htmlParts.push('setTimeout(updateHeight, 500);');
-  htmlParts.push('</' + 'script>'); // 避免Vue解析错误
+  htmlParts.push('</' + 'script>');
   
   // 添加body标签和内容
   htmlParts.push('</head>');
   htmlParts.push('<body>');
-  htmlParts.push(previewHtml.value);
+  htmlParts.push(previewHtml.value || '<div style="padding: 20px; text-align: center; color: #666;">请上传文件查看预览</div>');
   htmlParts.push('</body>');
   htmlParts.push('</html>');
   
