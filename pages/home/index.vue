@@ -101,7 +101,7 @@
           </div>
           <div class="preview-container">
             <div v-if="directDisplay" class="direct-preview" v-html="previewHtml"></div>
-            <el-skeleton v-else :loading="previewLoading" animated :rows="20" style="width: 100%; min-height: 948px;">
+            <el-skeleton v-else :loading="previewLoading" animated :rows="20" style="width: 100%; min-height: 300px;">
               <template #default>
                 <iframe ref="previewFrame" class="preview-frame"></iframe>
               </template>
@@ -501,7 +501,168 @@ const processHtmlContent = (htmlContent) => {
   return htmlContent;
 }
 
-// 开始转换
+// 提取iframe渲染逻辑为单独的函数，确保和下载HTML时的结构一致
+const renderHTMLInIframe = () => {
+  console.log('开始渲染HTML内容到iframe');
+  
+  // 创建新的iframe元素
+  const newFrame = document.createElement('iframe');
+  newFrame.className = 'preview-frame';
+  newFrame.style.width = '100%';
+  newFrame.style.minWidth = '100%';
+  newFrame.style.minHeight = '300px'; 
+  newFrame.style.border = 'none';
+  newFrame.style.display = 'block';
+  newFrame.style.backgroundColor = '#fff';
+  newFrame.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+  
+  // 构建HTML内容
+  const htmlParts = [];
+  htmlParts.push('<!DOCTYPE html>');
+  htmlParts.push('<html>');
+  htmlParts.push('<head>');
+  htmlParts.push('<meta charset="UTF-8">');
+  htmlParts.push('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+  
+  // 添加标题
+  const title = (currentFile.value?.name?.replace(/\.[^/.]+$/, '') || '文档') + ' - 预览';
+  htmlParts.push(`<title>${title}</title>`);
+  
+  // 添加base标签
+  htmlParts.push(`<base href="${window.location.origin}">`);
+  
+  // 添加样式
+  htmlParts.push('<style>');
+  htmlParts.push('html, body { margin: 0; padding: 0; width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; color: #333; background-color: #fff; overflow-x: hidden; }');
+  htmlParts.push('img { max-width: 100%; height: auto; }');
+  htmlParts.push('svg { display: inline-block; vertical-align: middle; }');
+  htmlParts.push('* { box-sizing: border-box; }');
+  htmlParts.push('.service-trade-card { background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 0 auto; width: auto; max-width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }');
+  htmlParts.push('.service-trade-card h1 { font-size: 28px; color: #0052cc; margin: 0 0 5px 0 !important; font-weight: 600; }');
+  htmlParts.push('.service-trade-card h2, .service-trade-card h3 { font-size: 18px; color: #333; margin: 0 0 5px 0 !important; }');
+  htmlParts.push('.service-trade-card p[style*="font-size: 32px"], .service-trade-card span[style*="font-size: 32px"], .service-trade-card p:has(span[style*="font-size: 32px"]) { font-size: 32px !important; font-weight: 700 !important; color: #ff6b00 !important; margin: 0 0 5px 0 !important; }');
+  htmlParts.push('.service-trade-card ul { padding-left: 20px; margin: 0; color: #333; }');
+  htmlParts.push('.service-trade-card li { margin-bottom: 5px !important; display: flex; align-items: center; }');
+  htmlParts.push('.service-trade-card svg { display: inline-block; vertical-align: middle; min-width: 16px; margin-right: 8px; }');
+  htmlParts.push('.service-trade-card > div { padding: 5px !important; }');
+  htmlParts.push('.service-trade-card div[style*="background-color: #f0f5ff"] { background-color: #f0f5ff; padding: 5px !important; border-radius: 8px; }');
+  htmlParts.push('.service-trade-card > div:last-child { padding: 5px !important; background-color: #f8f9fa; border-top: 1px solid #eee; font-size: 12px; color: #666; display: flex; justify-content: space-between; }');
+  htmlParts.push('table { width: 100%; border-collapse: collapse; margin: 5px 0 !important; }');
+  htmlParts.push('th { border: 1px solid #ddd; padding: 5px !important; text-align: left; background-color: #f2f2f2; }');
+  htmlParts.push('td { border: 1px solid #ddd; padding: 5px !important; text-align: left; }');
+  htmlParts.push('tr { border-bottom: 1px solid #ddd; }');
+  htmlParts.push('ul, ol { padding-left: 20px; margin: 5px 0 !important; }');
+  htmlParts.push('li { margin-bottom: 5px !important; line-height: 1.5; }');
+  htmlParts.push('h1, h2, h3, h4, h5, h6 { color: #333; margin-top: 0.5em !important; margin-bottom: 0.3em !important; font-weight: 600; }');
+  htmlParts.push('p { margin: 5px 0 !important; line-height: 1.5; color: #333; }');
+  htmlParts.push('html, body { height: auto !important; overflow: visible !important; }');
+  htmlParts.push('body > div { margin: 0 !important; padding: 5px !important; }'); /* 减少内容顶部和底部空白 */
+  htmlParts.push('</style>');
+  
+  // 简化高度调整脚本
+  htmlParts.push('<script>');
+  htmlParts.push('function updateHeight() {');
+  htmlParts.push('  const height = document.body.scrollHeight;');
+  htmlParts.push('  window.parent.postMessage({ type: "resize", height: height }, "*");');
+  htmlParts.push('}');
+  htmlParts.push('window.addEventListener("load", updateHeight);');
+  htmlParts.push('window.addEventListener("DOMContentLoaded", updateHeight);');
+  htmlParts.push('setTimeout(updateHeight, 100);');
+  htmlParts.push('setTimeout(updateHeight, 500);');
+  htmlParts.push('</' + 'script>'); // 避免Vue解析错误
+  
+  // 添加body标签和内容
+  htmlParts.push('</head>');
+  htmlParts.push('<body>');
+  htmlParts.push(previewHtml.value);
+  htmlParts.push('</body>');
+  htmlParts.push('</html>');
+  
+  // 合并所有HTML部分
+  const frameContent = htmlParts.join('\n');
+  
+  // 使用srcdoc属性设置HTML内容
+  newFrame.srcdoc = frameContent;
+  
+  // 监听从iframe发送的消息，用于动态调整高度
+  const handleMessage = (event) => {
+    if (event.data && event.data.type === 'resize') {
+      console.log('收到iframe高度调整消息:', event.data.height);
+      // 不限制最大高度，允许内容完全显示
+      const newHeight = Math.max(event.data.height, 300);
+      newFrame.style.height = `${newHeight}px`;
+    }
+  };
+  
+  window.addEventListener('message', handleMessage);
+  
+  // 等待iframe加载完成
+  newFrame.onload = () => {
+    console.log('iframe加载完成');
+    previewLoading.value = false;
+    
+    // 确保内容可见
+    try {
+      if (newFrame.contentDocument?.body) {
+        const height = Math.max(newFrame.contentDocument.body.scrollHeight, 300);
+        newFrame.style.height = `${height}px`;
+      }
+    } catch (e) {
+      console.error('调整iframe高度时出错:', e);
+    }
+  };
+  
+  // 替换现有iframe
+  setTimeout(() => {
+    if (previewFrame.value && previewFrame.value.parentNode) {
+      previewFrame.value.parentNode.replaceChild(newFrame, previewFrame.value);
+      previewFrame.value = newFrame;
+    } else {
+      // 如果previewFrame.value为null，则尝试找到容器并添加iframe
+      const container = document.querySelector('.preview-container');
+      if (container) {
+        // 首先移除el-skeleton的加载状态
+        previewLoading.value = false;
+        // 然后清空容器并添加iframe
+        container.innerHTML = '';
+        container.appendChild(newFrame);
+        previewFrame.value = newFrame;
+      } else {
+        console.error('找不到预览容器');
+        previewLoading.value = false;
+      }
+    }
+  }, 0);
+  
+  // 确保加载状态最终会被清除
+  setTimeout(() => {
+    previewLoading.value = false;
+  }, 2000);
+  
+  return newFrame;
+}
+
+// 同样修改强制重渲染函数中的逻辑
+const forceRerender = () => {
+  if (!previewHtml.value) {
+    ElMessage.warning('没有HTML内容可渲染')
+    return
+  }
+  
+  previewLoading.value = true
+  
+  // 重新调用渲染函数
+  setTimeout(() => {
+    try {
+      renderHTMLInIframe();
+    } catch (error) {
+      console.error('强制重渲染时出错:', error);
+      previewLoading.value = false;
+    }
+  }, 100);
+}
+
+// 启动文件转换进程
 const startConvert = async () => {
   if (!currentFile.value) {
     ElMessage.error('请先选择文件')
@@ -664,17 +825,10 @@ const startConvert = async () => {
         previewHtml.value = processHtmlContent(htmlContent)
         console.log('HTML内容已处理完成，长度:', previewHtml.value.length)
         
-        // 根据显示模式决定渲染方式
-        if (!directDisplay.value) {
-          console.log('使用iframe模式渲染HTML')
-          // 使用renderHTMLInIframe函数渲染HTML内容
-          setTimeout(() => {
-            renderHTMLInIframe()
-          }, 0)
-        } else {
-          console.log('使用直接显示模式')
-          previewLoading.value = false
-        }
+        // 使用iframe模式渲染HTML
+        setTimeout(() => {
+          renderHTMLInIframe()
+        }, 0)
       } else {
         console.warn('未获取到有效的HTML内容')
         previewHtml.value = '<div class="error-message">未获取到有效的HTML内容</div>'
@@ -726,331 +880,6 @@ const formatFileSize = (size) => {
     index++
   }
   return `${size.toFixed(2)} ${units[index]}`
-}
-
-// 强制重新渲染
-const forceRerender = () => {
-  if (!previewHtml.value) {
-    ElMessage.warning('没有HTML内容可渲染')
-    return
-  }
-  
-  previewLoading.value = true
-  
-  // 使用iframe渲染当前的HTML内容
-  setTimeout(() => {
-    try {
-      // 创建新的iframe元素
-      const newFrame = document.createElement('iframe')
-      newFrame.className = 'preview-frame'
-      newFrame.style.width = '100%'
-      newFrame.style.minWidth = '100%' /* 修改最小宽度为100% */
-      newFrame.style.minHeight = '948px'
-      newFrame.style.border = 'none'
-      newFrame.style.display = 'block'
-      newFrame.style.backgroundColor = '#fff'
-      
-      // 构建完整的HTML内容
-      const frameContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <base href="${window.location.origin}">
-          <style>
-            html, body {
-              margin: 0;
-              padding: 0;
-              width: 100%;
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-              color: #333;
-              background-color: #fff;
-              overflow-x: hidden; /* 防止水平滚动 */
-            }
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-            svg {
-              display: inline-block;
-              vertical-align: middle;
-            }
-            * {
-              box-sizing: border-box;
-            }
-            .service-trade-card {
-              width: auto;
-              max-width: 100%; /* 确保卡片不超出容器 */
-              margin: 0 auto;
-              padding: 0;
-              box-sizing: border-box;
-            }
-          </style>
-        </head>
-        <body>
-          ${previewHtml.value}
-        </body>
-        </html>
-      `
-      
-      console.log('强制重渲染 - HTML frame内容长度:', frameContent.length)
-      
-      // 使用srcdoc属性设置HTML内容
-      newFrame.srcdoc = frameContent
-      
-      // 等待iframe加载完成
-      newFrame.onload = () => {
-        console.log('强制重渲染 - iframe加载完成')
-        previewLoading.value = false
-        
-        // 调整iframe高度以适应内容
-        try {
-          const body = newFrame.contentDocument.body
-          if (body) {
-            const height = Math.max(body.scrollHeight, 948)
-            newFrame.style.height = `${height}px`
-            console.log('强制重渲染 - iframe高度已调整为:', height)
-          }
-        } catch (e) {
-          console.error('强制重渲染 - 调整iframe高度时出错:', e)
-        }
-      }
-      
-      // 替换现有iframe
-      if (previewFrame.value && previewFrame.value.parentNode) {
-        previewFrame.value.parentNode.replaceChild(newFrame, previewFrame.value)
-        previewFrame.value = newFrame
-        console.log('强制重渲染 - 替换了iframe')
-      } else {
-        console.error('强制重渲染 - 无法找到现有iframe或其父节点')
-        previewLoading.value = false
-      }
-    } catch (error) {
-      console.error('强制重渲染时出错:', error)
-      previewLoading.value = false
-      ElMessage.error('强制重渲染时出错')
-    }
-  }, 100)
-}
-
-// 提取iframe渲染逻辑为单独的函数，确保和下载HTML时的结构一致
-const renderHTMLInIframe = () => {
-  console.log('开始渲染HTML内容到iframe');
-  
-  // 创建新的iframe元素
-  const newFrame = document.createElement('iframe');
-  newFrame.className = 'preview-frame';
-  newFrame.style.width = '100%';
-  newFrame.style.minWidth = '100%';
-  newFrame.style.minHeight = '800px'; 
-  newFrame.style.border = 'none';
-  newFrame.style.display = 'block';
-  newFrame.style.backgroundColor = '#fff';
-  newFrame.setAttribute('sandbox', 'allow-same-origin allow-scripts');
-  
-  // 构建HTML内容
-  const htmlParts = [];
-  htmlParts.push('<!DOCTYPE html>');
-  htmlParts.push('<html>');
-  htmlParts.push('<head>');
-  htmlParts.push('<meta charset="UTF-8">');
-  htmlParts.push('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-  
-  // 添加标题
-  const title = (currentFile.value?.name?.replace(/\.[^/.]+$/, '') || '文档') + ' - 预览';
-  htmlParts.push(`<title>${title}</title>`);
-  
-  // 添加base标签
-  htmlParts.push(`<base href="${window.location.origin}">`);
-  
-  // 添加样式
-  htmlParts.push('<style>');
-  htmlParts.push('html, body { margin: 0; padding: 0; width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; color: #333; background-color: #fff; overflow-x: hidden; }');
-  htmlParts.push('img { max-width: 100%; height: auto; }');
-  htmlParts.push('svg { display: inline-block; vertical-align: middle; }');
-  htmlParts.push('* { box-sizing: border-box; }');
-  htmlParts.push('.service-trade-card { background-color: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 0 auto; width: auto; max-width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }');
-  htmlParts.push('.service-trade-card h1 { font-size: 28px; color: #0052cc; margin: 0 0 8px 0; font-weight: 600; }');
-  htmlParts.push('.service-trade-card h2, .service-trade-card h3 { font-size: 18px; color: #333; margin: 0 0 8px 0; }');
-  htmlParts.push('.service-trade-card p[style*="font-size: 32px"], .service-trade-card span[style*="font-size: 32px"], .service-trade-card p:has(span[style*="font-size: 32px"]) { font-size: 32px !important; font-weight: 700 !important; color: #ff6b00 !important; margin: 0 0 8px 0 !important; }');
-  htmlParts.push('.service-trade-card ul { padding-left: 20px; margin: 0; color: #333; }');
-  htmlParts.push('.service-trade-card li { margin-bottom: 8px; display: flex; align-items: center; }');
-  htmlParts.push('.service-trade-card svg { display: inline-block; vertical-align: middle; min-width: 16px; margin-right: 8px; }');
-  htmlParts.push('.service-trade-card > div { padding: 10px 15px; }');
-  htmlParts.push('.service-trade-card div[style*="background-color: #f0f5ff"] { background-color: #f0f5ff; padding: 10px; border-radius: 8px; }');
-  htmlParts.push('.service-trade-card > div:last-child { padding: 8px 15px; background-color: #f8f9fa; border-top: 1px solid #eee; font-size: 12px; color: #666; display: flex; justify-content: space-between; }');
-  htmlParts.push('table { width: 100%; border-collapse: collapse; margin: 15px 0; }');
-  htmlParts.push('th { border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2; }');
-  htmlParts.push('td { border: 1px solid #ddd; padding: 8px; text-align: left; }');
-  htmlParts.push('tr { border-bottom: 1px solid #ddd; }');
-  htmlParts.push('ul, ol { padding-left: 20px; margin: 15px 0; }');
-  htmlParts.push('li { margin-bottom: 8px; line-height: 1.5; }');
-  htmlParts.push('h1, h2, h3, h4, h5, h6 { color: #333; margin-top: 1.5em; margin-bottom: 0.5em; font-weight: 600; }');
-  htmlParts.push('p { margin: 10px 0; line-height: 1.6; color: #333; }');
-  htmlParts.push('html, body { height: auto !important; overflow: visible !important; }');
-  htmlParts.push('</style>');
-  
-  // 添加脚本
-  htmlParts.push('<script>');
-  htmlParts.push('function updateHeight() {');
-  htmlParts.push('  const height = Math.max(');
-  htmlParts.push('    document.documentElement.scrollHeight,');
-  htmlParts.push('    document.documentElement.offsetHeight,');
-  htmlParts.push('    document.documentElement.clientHeight,');
-  htmlParts.push('    document.body.scrollHeight,');
-  htmlParts.push('    document.body.offsetHeight,');
-  htmlParts.push('    document.body.clientHeight,');
-  htmlParts.push('    800');
-  htmlParts.push('  );');
-  htmlParts.push('  window.parent.postMessage({ type: "resize", height: height }, "*");');
-  htmlParts.push('}');
-  htmlParts.push('window.addEventListener("load", function() {');
-  htmlParts.push('  updateHeight();');
-  htmlParts.push('  setTimeout(updateHeight, 500);');
-  htmlParts.push('  setTimeout(updateHeight, 1000);');
-  htmlParts.push('  setTimeout(updateHeight, 2000);');
-  htmlParts.push('});');
-  htmlParts.push('window.addEventListener("resize", updateHeight);');
-  htmlParts.push('const observer = new MutationObserver(function() {');
-  htmlParts.push('  updateHeight();');
-  htmlParts.push('});');
-  htmlParts.push('document.addEventListener("DOMContentLoaded", function() {');
-  htmlParts.push('  observer.observe(document.body, {');
-  htmlParts.push('    childList: true,');
-  htmlParts.push('    subtree: true');
-  htmlParts.push('  });');
-  htmlParts.push('  updateHeight();');
-  htmlParts.push('});');
-  htmlParts.push('</' + 'script>'); // 避免Vue解析错误
-  
-  // 添加body标签和内容
-  htmlParts.push('</' + 'head>'); // 避免Vue解析错误
-  htmlParts.push('<body>');
-  htmlParts.push(previewHtml.value);
-  htmlParts.push('</body>');
-  htmlParts.push('</html>');
-  
-  // 合并所有HTML部分
-  const frameContent = htmlParts.join('\n');
-  
-  // 使用srcdoc属性设置HTML内容
-  newFrame.srcdoc = frameContent;
-  
-  // 监听从iframe发送的消息，用于动态调整高度
-  const handleMessage = (event) => {
-    if (event.data && event.data.type === 'resize') {
-      console.log('收到iframe高度调整消息:', event.data.height);
-      newFrame.style.height = `${event.data.height}px`;
-    }
-  };
-  
-  window.addEventListener('message', handleMessage);
-  
-  // 等待iframe加载完成
-  newFrame.onload = () => {
-    console.log('iframe加载完成');
-    previewLoading.value = false;
-    
-    // 调整iframe高度以适应内容
-    try {
-      const body = newFrame.contentDocument?.body;
-      if (body) {
-        // 使用更精确的方式计算内容高度
-        const height = Math.max(
-          body.scrollHeight,
-          body.offsetHeight,
-          body.clientHeight,
-          document.documentElement.clientHeight * 0.8,
-          800
-        );
-        newFrame.style.height = `${height + 50}px`;
-        console.log('iframe高度已调整为:', height + 50);
-      }
-    } catch (e) {
-      console.error('调整iframe高度时出错:', e);
-    }
-  };
-  
-  // 替换现有iframe
-  setTimeout(() => {
-    if (previewFrame.value && previewFrame.value.parentNode) {
-      previewFrame.value.parentNode.replaceChild(newFrame, previewFrame.value);
-      previewFrame.value = newFrame;
-    } else if (previewFrame.value === null) {
-      // 如果previewFrame.value为null，则尝试找到容器并添加iframe
-      const container = document.querySelector('.preview-container');
-      if (container) {
-        container.innerHTML = '';
-        container.appendChild(newFrame);
-        previewFrame.value = newFrame;
-      }
-    }
-  }, 0);
-  
-  // 如果onload事件没有触发，手动设置加载完成
-  setTimeout(() => {
-    if (previewLoading.value) {
-      console.log('iframe加载超时，手动设置加载完成');
-      previewLoading.value = false;
-    }
-  }, 3000);
-  
-  // 添加多次检查高度的定时任务，确保内容完全显示
-  const checkHeightIntervals = [500, 1000, 2000, 3000, 5000];
-  checkHeightIntervals.forEach(delay => {
-    setTimeout(() => {
-      try {
-        if (newFrame.contentDocument && newFrame.contentDocument.body) {
-          const height = Math.max(
-            newFrame.contentDocument.body.scrollHeight,
-            newFrame.contentDocument.body.offsetHeight,
-            newFrame.contentDocument.body.clientHeight,
-            newFrame.contentDocument.documentElement.scrollHeight,
-            newFrame.contentDocument.documentElement.offsetHeight,
-            newFrame.contentDocument.documentElement.clientHeight,
-            800
-          );
-          newFrame.style.height = `${height + 50}px`;
-          console.log(`${delay}ms后重新检查高度: ${height + 50}px`);
-        }
-      } catch (e) {
-        console.error(`${delay}ms后检查高度出错:`, e);
-      }
-    }, delay);
-  });
-  
-  // 监听iframe内容变化
-  setTimeout(() => {
-    try {
-      if (newFrame.contentDocument) {
-        const contentObserver = new MutationObserver(() => {
-          try {
-            const height = Math.max(
-              newFrame.contentDocument.body.scrollHeight,
-              newFrame.contentDocument.body.offsetHeight,
-              newFrame.contentDocument.body.clientHeight,
-              800
-            );
-            newFrame.style.height = `${height + 50}px`;
-            console.log('DOM变化后调整高度:', height + 50);
-          } catch (e) {
-            console.error('DOM变化后调整高度出错:', e);
-          }
-        });
-        
-        contentObserver.observe(newFrame.contentDocument.body, {
-          childList: true,
-          subtree: true,
-          attributes: true
-        });
-      }
-    } catch (e) {
-      console.error('设置DOM观察器出错:', e);
-    }
-  }, 1000);
-  
-  return newFrame;
 }
 </script>
 
@@ -1212,30 +1041,30 @@ const renderHTMLInIframe = () => {
 
 .preview-area {
   width: 100%;
-  background-color: #fff; /* 修改为白色背景 */
+  background-color: #fff;
   border-radius: 8px;
   padding: 0;
-  margin-top: 2rem;
-  overflow: hidden; /* 添加溢出隐藏 */
+  margin-top: 0.5rem; /* 进一步减少顶部外边距 */
+  overflow: hidden;
 }
 
 .preview-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  padding: 1rem; /* 修改header内边距 */
-  background-color: #2d2d2d; /* 保持header为深色背景 */
-  color: #fff; /* 添加文字颜色 */
+  margin-bottom: 0;
+  padding: 0.3rem 1rem; /* 减少内边距 */
+  background-color: #2d2d2d;
+  color: #fff;
 }
 
 .preview-container {
   width: 100%;
-  overflow: hidden; /* 修改为隐藏溢出 */
+  overflow: hidden;
   background-color: #fff;
-  border-radius: 0; /* 移除圆角 */
+  border-radius: 0;
   box-shadow: none;
-  max-width: 100%; /* 修改最大宽度为100% */
+  max-width: 100%;
   margin: 0;
   max-height: none;
   padding: 0;
@@ -1244,30 +1073,30 @@ const renderHTMLInIframe = () => {
 .preview-frame {
   width: 100%;
   min-width: 100%;
-  min-height: 800px;
+  min-height: 300px; /* 进一步减少最小高度 */
   border: none;
   display: block;
   background-color: #fff;
   padding: 0;
   margin: 0;
-  overflow: visible; /* 确保内容可见 */
+  overflow: visible;
 }
 
 /* 确保预览区域在移动设备上也能正常显示 */
 @media (max-width: 1280px) {
   .preview-container {
-    overflow: hidden; /* 修改为隐藏溢出 */
+    overflow: hidden;
     width: 100%;
   }
   
   .preview-frame {
     width: 100%;
-    min-width: auto; /* 允许自适应宽度 */
+    min-width: auto;
   }
 }
 
 .preview-content {
-  display: none; /* 隐藏原来的预览内容区域 */
+  display: none;
 }
 
 .direct-preview {
@@ -1275,7 +1104,7 @@ const renderHTMLInIframe = () => {
   min-height: 300px;
   background-color: #fff;
   color: #333;
-  padding: 0; /* 移除内边距 */
+  padding: 0;
   border-radius: 4px;
   overflow: auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
