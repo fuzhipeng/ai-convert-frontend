@@ -76,40 +76,46 @@ export default {
     subtitle: 'Hear from creators and professionals who use our AI document converter every day.',
     list: [
       {
+        name: 'Jennifer Chen',
+        title: 'Content Creator | 100K+ Followers',
+        text: 'As a content creator, I read numerous articles daily for inspiration. DocSmart helps me quickly extract article essence and transform it into beautiful knowledge cards, greatly improving my content production efficiency. I especially love the beautiful presentation feature - the generated cards work perfectly for my videos and posts, and my followers love them!',
+        avatar: ''
+      },
+      {
         name: 'David Thompson',
         title: 'Technical Documentation Engineer',
-        text: 'DocSmart has revolutionized our documentation process. The AI-powered conversion is incredibly accurate and saves us countless hours.',
+        text: 'DocSmart has revolutionized our documentation process. The AI-powered conversion is incredibly accurate and saves us countless hours. The essence extraction feature makes complex technical content much more digestible.',
         avatar: ''
       },
       {
         name: 'Emily Parker',
         title: 'University Researcher',
-        text: 'The ability to maintain complex formatting while converting academic papers is invaluable. DocSmart understands document structure perfectly.',
+        text: 'The ability to maintain complex formatting while converting academic papers is invaluable. DocSmart understands document structure and contextual relationships perfectly, extracting information points with precision.',
         avatar: ''
       },
       {
         name: 'Michael Anderson',
         title: 'Business Management Consultant',
-        text: 'DocSmart streamlines our workflow by quickly converting client documents while preserving their professional appearance.',
+        text: 'DocSmart streamlines our workflow by quickly converting client documents while preserving their professional appearance. The essence extraction feature allows us to quickly grasp the core points of lengthy reports.',
         avatar: ''
       },
       {
         name: 'Sarah Williams',
         title: 'Medical Records Administrator',
-        text: 'The accuracy and security features of DocSmart make it perfect for handling sensitive medical documentation.',
+        text: 'The accuracy and security features of DocSmart make it perfect for handling sensitive medical documentation. Its privacy protection measures give us tremendous confidence.',
         avatar: ''
       },
       {
         name: 'Robert Wilson',
         title: 'Legal Advisor',
-        text: 'DocSmart\'s conversion quality and format preservation are essential for our legal document processing needs.',
+        text: 'DocSmart\'s conversion quality and format preservation are essential for our legal document processing needs. The depth of AI understanding makes me very satisfied with the extraction of complex legal clauses.',
         avatar: ''
       }
     ]
   },
   faq: {
     title: 'Frequently Asked Questions',
-    subtitle: 'Have more questions? Email us at fuzhipeng66@gmail.com',
+    subtitle: 'Have more questions? Email us at 758771757@qq.com',
     questions: [
       {
         q: 'What is the AI Document Converter? How does it help me extract article essence?',

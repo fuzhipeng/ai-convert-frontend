@@ -105,7 +105,7 @@ export default {
   },
   faq: {
     title: 'よくある質問',
-    subtitle: '他に質問がありますか？ fuzhipeng66@gmail.com までメールでお問い合わせください',
+    subtitle: '他に質問がありますか？ 758771757@qq.com までメールでお問い合わせください',
     questions: [
       {
         q: 'AIドキュメントコンバーターとは何ですか？記事のエッセンスを抽出するのにどう役立ちますか？',

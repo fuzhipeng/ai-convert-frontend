@@ -93,7 +93,7 @@ export default {
   },
   faq: {
     title: 'Preguntas Frecuentes',
-    subtitle: '¿Tienes más preguntas? Escríbenos a fuzhipeng66@gmail.com',
+    subtitle: '¿Tienes más preguntas? Escríbenos a 758771757@qq.com',
     questions: [
       {
         q: '¿Qué es el Convertidor de Documentos IA? ¿Cómo me ayuda a extraer la esencia de los artículos?',

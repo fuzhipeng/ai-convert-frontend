@@ -952,12 +952,15 @@ const formatFileSize = (size) => {
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 2rem;
+  & > div:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .hero-section {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .hero-section h1 {
@@ -989,8 +992,8 @@ const formatFileSize = (size) => {
 .convert-section {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 4rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .upload-area {
@@ -1195,13 +1198,14 @@ const formatFileSize = (size) => {
 
 .features-section {
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   padding: 0 1rem;
 }
 
 .features-subtitle {
   color: #888;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   font-size: 1.1rem;
 }
 
@@ -1209,9 +1213,9 @@ const formatFileSize = (size) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, auto);
-  gap: 1.5rem;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
   width: 100%;
   overflow: visible;
   max-height: none !important;
@@ -1219,10 +1223,11 @@ const formatFileSize = (size) => {
 
 .feature-card {
   background-color: #2d2d2d;
-  padding: 1.8rem;
+  padding: 1.2rem 1.5rem;
   border-radius: 10px;
   text-align: center;
-  height: 100%;
+  height: auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1238,13 +1243,13 @@ const formatFileSize = (size) => {
 }
 
 .feature-icon {
-  font-size: 48px;
+  font-size: 40px;
   color: #d4a055;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .feature-card h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #e0e0e0;
   font-size: 1.2rem;
   font-weight: 600;
@@ -1253,25 +1258,27 @@ const formatFileSize = (size) => {
 .feature-card p {
   color: #888;
   font-size: 0.9rem;
-  line-height: 1.6;
+  line-height: 1.4;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .examples-section {
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 3rem;
   padding: 0 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .examples-section h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   color: #e0e0e0;
 }
 
 .examples-subtitle {
   color: #888;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   font-size: 1.1rem;
   max-width: 700px;
   margin-left: auto;
@@ -1282,8 +1289,8 @@ const formatFileSize = (size) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 2rem auto;
+  gap: 1.25rem;
+  margin: 1rem auto;
   width: 100%;
   max-width: 1200px;
 }
@@ -1381,5 +1388,65 @@ const formatFileSize = (size) => {
 
 .api-url-form .el-button {
   margin-top: 0.5rem;
+}
+
+/* 添加Testimonials组件的样式 */
+:deep(.testimonials-section) {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+:deep(.testimonials-section h2) {
+  margin-bottom: 0.8rem;
+}
+
+:deep(.testimonials-section .testimonials-subtitle) {
+  margin-bottom: 1rem;
+}
+
+:deep(.testimonials-container) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+:deep(.testimonial-card) {
+  padding: 1rem;
+}
+
+/* 减少主页面中各部分的间距 */
+.examples-section {
+  margin-bottom: 2rem;
+}
+
+#faq {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* 添加FAQ组件样式 */
+:deep(.faq-section) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+:deep(.faq-section h2) {
+  margin-bottom: 0.5rem;
+}
+
+:deep(.faq-header-wrap) {
+  margin-bottom: 0.5rem;
+}
+
+:deep(.faq-content) {
+  margin-top: 0.5rem;
+}
+
+/* 减少FAQ与上方区域的间距 */
+.main-content > div:nth-last-child(2) {
+  margin-bottom: 1rem;
 }
 </style> 
