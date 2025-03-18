@@ -34,7 +34,8 @@ export default {
     download: '下载HTML',
     copy: '复制HTML',
     copySuccess: '复制成功',
-    copyError: '复制失败'
+    copyError: '复制失败',
+    noContent: '未能获取到内容'
   },
   features: {
     title: 'AI文章精华提炼的主要功能',

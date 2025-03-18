@@ -33,7 +33,8 @@ export default {
     download: 'Download HTML',
     copy: 'Copy HTML',
     copySuccess: 'Copied Successfully',
-    copyError: 'Copy Failed'
+    copyError: 'Copy Failed',
+    noContent: 'No content available'
   },
   features: {
     title: 'Key Features of AI Article Essence Extraction',
