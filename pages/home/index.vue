@@ -5,7 +5,7 @@
       <div class="header-left">
         <router-link to="/" class="logo">
           <img src="@/assets/logo.png" alt="">
-          <span class="logo-text">{{ $t('nav.home') }}</span>
+          <span class="logo-text">AI文档提取</span>
         </router-link>
         <nav class="nav-menu">
           <a href="#features" @click.prevent="scrollToSection('features')">{{ $t('nav.features') }}</a>
@@ -26,157 +26,190 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-button type="primary" class="login-btn" @click="handleLogin">{{ $t('nav.login') }}</el-button>
+        
+        <!-- 未登录时显示登录按钮 -->
+        <template v-if="!userStore.isAuthenticated">
+          <el-button type="primary" class="login-btn" @click="handleLogin">
+            {{ $t('nav.login') }}
+          </el-button>
+        </template>
+        
+        <!-- 已登录时显示用户头像 -->
+        <template v-else>
+          <el-dropdown trigger="click">
+            <div class="user-info">
+              <el-avatar :size="32" :src="userStore.userAvatar" />
+              <span class="username">{{ userStore.userName }}</span>
+            </div>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click="handleSettings">
+                  <el-icon><setting /></el-icon>
+                  设置
+                </el-dropdown-item>
+                <el-dropdown-item divided @click="handleLogout">
+                  <el-icon><switch-button /></el-icon>
+                  退出登录
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
       </div>
     </header>
 
     <!-- 登录弹窗 -->
     <LoginDialog ref="loginDialog" />
 
-    <!-- 主要内容区 -->
+    <!-- 首页内容 -->
     <main class="main-content">
-      <div class="hero-section">
-        <h1>{{ $t('hero.title') }}</h1>
-        <p class="subtitle">{{ $t('hero.subtitle') }}</p>
-        <div class="feature-tags">
-          <span class="tag">{{ $t('hero.tags.free') }}</span>
-          <span class="tag">{{ $t('hero.tags.ai') }}</span>
-          <span class="tag">{{ $t('hero.tags.noRegister') }}</span>
-          <span class="tag">{{ $t('hero.tags.unlimited') }}</span>
-        </div>
-      </div>
-
-      <!-- 文件上传和转换区域 -->
-      <div class="convert-section">
-        <div class="upload-area" 
-             @drop.prevent="handleDrop"
-             @dragover.prevent
-             @click="triggerFileInput">
-          <input
-            type="file"
-            ref="fileInput"
-            class="file-input"
-            @change="handleFileChange"
-            accept=".pdf,.doc,.docx,.txt"
-            hidden
-          >
-          <div v-if="!converting" class="upload-placeholder">
-            <el-icon class="upload-icon"><upload-filled /></el-icon>
-            <h3>{{ $t('upload.title') }}</h3>
-            <p>{{ $t('upload.subtitle') }}</p>
-          </div>
-          <div v-else class="converting-status">
-            <div class="file-info">
-              <el-icon><document /></el-icon>
-              <span class="filename">{{ currentFile.name }}</span>
-              <span class="filesize">{{ formatFileSize(currentFile.size) }}</span>
-            </div>
-            <el-progress 
-              :percentage="convertProgress"
-              :status="convertStatus"
-            />
-            <div class="convert-actions">
-              <el-button v-if="convertStatus === 'exception'" 
-                        type="primary" 
-                        @click="retryConvert">
-                {{ $t('upload.retry') }}
-              </el-button>
-              <el-button v-if="convertStatus !== 'success'" 
-                        @click="cancelConvert">
-                {{ $t('upload.cancel') }}
-              </el-button>
-            </div>
+      <template v-if="route.path === '/'">
+        <div class="hero-section">
+          <h1>{{ $t('hero.title') }}</h1>
+          <p class="subtitle">{{ $t('hero.subtitle') }}</p>
+          <div class="feature-tags">
+            <span class="tag">{{ $t('hero.tags.free') }}</span>
+            <span class="tag">{{ $t('hero.tags.ai') }}</span>
+            <span class="tag">{{ $t('hero.tags.noRegister') }}</span>
+            <span class="tag">{{ $t('hero.tags.unlimited') }}</span>
           </div>
         </div>
 
-        <!-- 转换结果预览 -->
-        <div v-if="showPreview" class="preview-area">
-          <div class="preview-header">
-            <h3>{{ $t('preview.title') }}</h3>
-            <div class="preview-actions">
-              <el-button type="primary" @click="downloadHtml">
-                {{ $t('preview.download') }}
-              </el-button>
-              <el-button @click="copyHtml">
-                {{ $t('preview.copy') }}
-              </el-button>
+        <!-- 文件上传和转换区域 -->
+        <div class="convert-section">
+          <div class="upload-area" 
+               @drop.prevent="handleDrop"
+               @dragover.prevent
+               @click="triggerFileInput">
+            <input
+              type="file"
+              ref="fileInput"
+              class="file-input"
+              @change="handleFileChange"
+              accept=".pdf,.doc,.docx,.txt"
+              hidden
+            >
+            <div v-if="!converting" class="upload-placeholder">
+              <el-icon class="upload-icon"><upload-filled /></el-icon>
+              <h3>{{ $t('upload.title') }}</h3>
+              <p>{{ $t('upload.subtitle') }}</p>
+            </div>
+            <div v-else class="converting-status">
+              <div class="file-info">
+                <el-icon><document /></el-icon>
+                <span class="filename">{{ currentFile.name }}</span>
+                <span class="filesize">{{ formatFileSize(currentFile.size) }}</span>
+              </div>
+              <el-progress 
+                :percentage="convertProgress"
+                :status="convertStatus"
+              />
+              <div class="convert-actions">
+                <el-button v-if="convertStatus === 'exception'" 
+                          type="primary" 
+                          @click="retryConvert">
+                  {{ $t('upload.retry') }}
+                </el-button>
+                <el-button v-if="convertStatus !== 'success'" 
+                          @click="cancelConvert">
+                  {{ $t('upload.cancel') }}
+                </el-button>
+              </div>
             </div>
           </div>
-          <div class="preview-container">
-            <div v-if="directDisplay" class="direct-preview" v-html="previewHtml"></div>
-            <el-skeleton v-else :loading="previewLoading" animated :rows="20" style="width: 100%; min-height: 300px;">
-              <template #default>
-                <iframe ref="previewFrame" class="preview-frame"></iframe>
-              </template>
-            </el-skeleton>
-          </div>
-        </div>
-      </div>
 
-      <!-- 功能特点展示 -->
-      <div id="features" class="features-section">
-        <h2>{{ $t('features.title') }}</h2>
-        <p class="features-subtitle">{{ $t('features.subtitle') }}</p>
-        
-        <div class="features-grid">
-          <div class="feature-card">
-            <el-icon class="feature-icon"><reading /></el-icon>
-            <h3>{{ $t('features.cards.free.title') }}</h3>
-            <p>{{ $t('features.cards.free.desc') }}</p>
-          </div>
-          
-          <div class="feature-card">
-            <el-icon class="feature-icon"><star /></el-icon>
-            <h3>{{ $t('features.cards.quality.title') }}</h3>
-            <p>{{ $t('features.cards.quality.desc') }}</p>
-          </div>
-          
-          <div class="feature-card">
-            <el-icon class="feature-icon"><magic-stick /></el-icon>
-            <h3>{{ $t('features.cards.smart.title') }}</h3>
-            <p>{{ $t('features.cards.smart.desc') }}</p>
-          </div>
-
-          <div class="feature-card">
-            <el-icon class="feature-icon"><lock /></el-icon>
-            <h3>{{ $t('features.cards.privacy.title') }}</h3>
-            <p>{{ $t('features.cards.privacy.desc') }}</p>
-        </div>
-          
-          <div class="feature-card">
-            <el-icon class="feature-icon"><document /></el-icon>
-            <h3>{{ $t('features.cards.understanding.title') }}</h3>
-            <p>{{ $t('features.cards.understanding.desc') }}</p>
-          </div>
-          
-          <div class="feature-card">
-            <el-icon class="feature-icon"><medal /></el-icon>
-            <h3>{{ $t('features.cards.advanced.title') }}</h3>
-            <p>{{ $t('features.cards.advanced.desc') }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 用户提取示例部分 -->
-      <div class="examples-section">
-        <h2>{{ $t('features.examples.title') }}</h2>
-        <p class="examples-subtitle">{{ $t('features.examples.subtitle') }}</p>
-        
-        <div class="examples-grid">
-          <div v-for="i in 9" :key="i" class="example-item">
-            <img :src="'./images/examples/example-' + i + '.jpg'" :alt="$t('features.examples.tag') + ' ' + i" class="example-image">
-            <div class="example-overlay">
-              <span class="example-tag">{{ $t('features.examples.tag') }} {{i}}</span>
+          <!-- 转换结果预览 -->
+          <div v-if="showPreview" class="preview-area">
+            <div class="preview-header">
+              <h3>{{ $t('preview.title') }}</h3>
+              <div class="preview-actions">
+                <el-button type="primary" @click="downloadHtml">
+                  {{ $t('preview.download') }}
+                </el-button>
+                <el-button @click="copyHtml">
+                  {{ $t('preview.copy') }}
+                </el-button>
+              </div>
+            </div>
+            <div class="preview-container">
+              <div v-if="directDisplay" class="direct-preview" v-html="previewHtml"></div>
+              <el-skeleton v-else :loading="previewLoading" animated :rows="20" style="width: 100%; min-height: 300px;">
+                <template #default>
+                  <iframe ref="previewFrame" class="preview-frame"></iframe>
+                </template>
+              </el-skeleton>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- 用户评价部分 -->
-      <Testimonials />
+        <!-- 功能特点展示 -->
+        <div id="features" class="features-section">
+          <h2>{{ $t('features.title') }}</h2>
+          <p class="features-subtitle">{{ $t('features.subtitle') }}</p>
+          
+          <div class="features-grid">
+            <div class="feature-card">
+              <el-icon class="feature-icon"><reading /></el-icon>
+              <h3>{{ $t('features.cards.free.title') }}</h3>
+              <p>{{ $t('features.cards.free.desc') }}</p>
+            </div>
+            
+            <div class="feature-card">
+              <el-icon class="feature-icon"><star /></el-icon>
+              <h3>{{ $t('features.cards.quality.title') }}</h3>
+              <p>{{ $t('features.cards.quality.desc') }}</p>
+            </div>
+            
+            <div class="feature-card">
+              <el-icon class="feature-icon"><magic-stick /></el-icon>
+              <h3>{{ $t('features.cards.smart.title') }}</h3>
+              <p>{{ $t('features.cards.smart.desc') }}</p>
+            </div>
 
-      <!-- FAQ部分 -->
+            <div class="feature-card">
+              <el-icon class="feature-icon"><lock /></el-icon>
+              <h3>{{ $t('features.cards.privacy.title') }}</h3>
+              <p>{{ $t('features.cards.privacy.desc') }}</p>
+            </div>
+            
+            <div class="feature-card">
+              <el-icon class="feature-icon"><document /></el-icon>
+              <h3>{{ $t('features.cards.understanding.title') }}</h3>
+              <p>{{ $t('features.cards.understanding.desc') }}</p>
+            </div>
+            
+            <div class="feature-card">
+              <el-icon class="feature-icon"><medal /></el-icon>
+              <h3>{{ $t('features.cards.advanced.title') }}</h3>
+              <p>{{ $t('features.cards.advanced.desc') }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 用户提取示例部分 -->
+        <div class="examples-section">
+          <h2>{{ $t('features.examples.title') }}</h2>
+          <p class="examples-subtitle">{{ $t('features.examples.subtitle') }}</p>
+          
+          <div class="examples-grid">
+            <div v-for="i in 9" :key="i" class="example-item">
+              <img :src="'./images/examples/example-' + i + '.jpg'" :alt="$t('features.examples.tag') + ' ' + i" class="example-image">
+              <div class="example-overlay">
+                <span class="example-tag">{{ $t('features.examples.tag') }} {{i}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 用户评价部分 -->
+        <Testimonials />
+
+        <!-- FAQ部分 -->
         <FAQ />
+      </template>
+      <template v-else>
+        <router-view></router-view>
+      </template>
     </main>
   </div>
 </template>
@@ -184,7 +217,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal, ArrowDown } from '@element-plus/icons-vue'
+import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal, ArrowDown, SwitchButton, Setting } from '@element-plus/icons-vue'
 import Testimonials from '@/components/Testimonials.vue'
 import FAQ from '@/components/FAQ.vue'
 import { useI18n } from 'vue-i18n'
@@ -192,6 +225,8 @@ import { SUPPORT_LANGUAGES } from '@/i18n'
 import axios from 'axios'
 import LoginDialog from '@/components/LoginDialog.vue'
 import type { Ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 interface FileInfo {
   name: string
@@ -921,6 +956,44 @@ const loginDialog = ref()
 const handleLogin = () => {
   loginDialog.value?.open()
 }
+
+const router = useRouter()
+const userStore = useUserStore()
+
+// 处理退出登录
+const handleLogout = async () => {
+  try {
+    // 直接调用clearUser方法
+    userStore.clearUser()
+    ElMessage.success('已退出登录')
+    // 强制刷新页面以确保状态更新
+    window.location.reload()
+  } catch (error) {
+    console.error('退出登录失败:', error)
+    ElMessage.error('退出登录失败，请重试')
+  }
+}
+
+// 处理设置按钮点击
+const handleSettings = () => {
+  console.log('点击设置按钮')
+  console.log('用户认证状态:', userStore.isAuthenticated)
+  console.log('当前路由:', router.currentRoute.value.path)
+  
+  if (userStore.isAuthenticated) {
+    console.log('用户已登录，正在导航到设置页面')
+    router.push('/settings').catch(err => {
+      console.error('导航失败:', err)
+      ElMessage.error('导航到设置页面失败，请重试')
+    })
+  } else {
+    console.log('用户未登录，显示登录对话框')
+    ElMessage.warning('请先登录')
+    handleLogin()
+  }
+}
+
+const route = useRoute()
 </script>
 
 <style scoped>
@@ -935,7 +1008,15 @@ const handleLogin = () => {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(26, 26, 26, 0.8);  /* 增加背景色透明度 */
+  backdrop-filter: blur(10px);  /* 添加毛玻璃效果 */
+  -webkit-backdrop-filter: blur(10px);  /* Safari支持 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;  /* 确保在最上层 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);  /* 添加微妙的边框 */
 }
 
 .header-left {
@@ -985,6 +1066,21 @@ const handleLogin = () => {
   gap: 1rem;
 }
 
+.login-btn {
+  background-color: #d4a055;
+  border-color: #d4a055;
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #c28d42;
+    border-color: #c28d42;
+  }
+}
+
 .language-dropdown {
   color: #e0e0e0;
 }
@@ -992,7 +1088,7 @@ const handleLogin = () => {
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 7rem 2rem 1rem;
   & > div:not(:last-child) {
     margin-bottom: 1.5rem;
   }
@@ -1000,6 +1096,7 @@ const handleLogin = () => {
 
 .hero-section {
   text-align: center;
+  margin-top: 1rem;  /* 调整顶部外边距 */
   margin-bottom: 2rem;
 }
 
@@ -1490,32 +1587,99 @@ const handleLogin = () => {
   margin-bottom: 1rem;
 }
 
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  padding: 0 24px;
-  background: #1a1a1a;
+/* 用户信息样式 */
+.user-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  z-index: 100;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
-.nav-left {
+.user-info:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.username {
+  margin-left: 8px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.dropdown-user-info {
   display: flex;
   align-items: center;
+  padding: 8px;
+  min-width: 200px;
 }
 
-.logo {
-  height: 32px;
-}
-
-.nav-right {
+.dropdown-user-details {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  margin-left: 12px;
+}
+
+.dropdown-user-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dropdown-user-email {
+  font-size: 12px;
+  color: #909399;
+  margin-top: 4px;
+}
+
+/* Element Plus 暗色主题覆盖 */
+:deep(.el-dropdown-menu) {
+  background-color: #1f1f1f !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+:deep(.el-dropdown-menu__item) {
+  color: #ffffff !important;
+}
+
+:deep(.el-dropdown-menu__item:hover) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:deep(.el-dropdown-menu__item.is-disabled) {
+  color: #606266 !important;
+}
+
+:deep(.el-button--primary) {
+  background-color: #d4a055 !important;
+  border-color: #d4a055 !important;
+  
+  &:hover {
+    background-color: #c28d42 !important;
+    border-color: #c28d42 !important;
+  }
+}
+
+/* 其他页面容器样式 */
+.other-pages {
+  margin-top: 70px; /* 为导航栏留出空间 */
+  padding: 2rem;
+  min-height: calc(100vh - 70px);
+}
+
+/* 其他页面内容样式 */
+.other-page-content {
+  padding-top: 80px; /* 为顶部导航栏留出空间 */
+  min-height: calc(100vh - 80px);
+}
+
+/* 子路由内容样式 */
+.main-content {
+  padding-top: 64px; /* 为固定的header留出空间 */
+}
+
+.router-view-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 </style> 

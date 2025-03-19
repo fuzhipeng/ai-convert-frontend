@@ -1,9 +1,9 @@
 export default {
   nav: {
-    home: 'AI文档转换',
-    features: '功能',
+    home: 'AI文档提取',
+    features: '功能特点',
     faq: '常见问题',
-    pricing: '定价',
+    pricing: '价格',
     login: '登录'
   },
   system: {
@@ -115,14 +115,14 @@ export default {
     ]
   },
   faq: {
-    title: '常见问题解答',
+    title: '常见问题',
     subtitle: '还有其他问题？请联系我们',
     emailName: '758771757',
     emailDomain: 'qq.com',
     questions: [
       {
-        q: '什么是AI文档转换器？它如何帮助我提取文章精华？',
-        a: 'AI文档转换器是一款智能工具，能够自动分析文章内容，提取核心观点和关键信息，将复杂冗长的内容转化为精美的知识卡片。它可以帮助您快速理解文章要点，节省阅读时间，提高学习和工作效率。'
+        q: '什么是AI文档提取？它如何帮助我提取文章精华？',
+        a: 'AI文档提取是一款智能工具，能够自动分析文章内容，提取核心观点和关键信息，将复杂冗长的内容转化为精美的知识卡片。它可以帮助您快速理解文章要点，节省阅读时间，提高学习和工作效率。'
       },
       {
         q: '知识卡片有什么优势？为什么比传统笔记更有效？',
@@ -160,5 +160,13 @@ export default {
     backHome: '返回首页',
     refresh: '刷新页面',
     details: '错误详情'
+  },
+  login: {
+    title: '登录到 DocSmart',
+    subtitle: '使用您的Google账号登录以继续',
+    terms: '登录即表示您同意我们的',
+    termsLink: '服务条款和隐私政策',
+    success: '登录成功',
+    error: '登录失败，请重试'
   }
 } 
