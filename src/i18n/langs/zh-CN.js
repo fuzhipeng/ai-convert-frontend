@@ -116,7 +116,9 @@ export default {
   },
   faq: {
     title: '常见问题解答',
-    subtitle: '还有其他问题？请联系我们：758771757@qq.com',
+    subtitle: '还有其他问题？请联系我们',
+    emailName: '758771757',
+    emailDomain: 'qq.com',
     questions: [
       {
         q: '什么是AI文档转换器？它如何帮助我提取文章精华？',

@@ -105,7 +105,9 @@ export default {
   },
   faq: {
     title: 'よくある質問',
-    subtitle: '他に質問がありますか？ 758771757@qq.com までメールでお問い合わせください',
+    subtitle: 'その他の質問がありますか？お問い合わせください',
+    emailName: '758771757',
+    emailDomain: 'qq.com',
     questions: [
       {
         q: 'AIドキュメントコンバーターとは何ですか？記事のエッセンスを抽出するのにどう役立ちますか？',

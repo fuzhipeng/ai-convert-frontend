@@ -115,7 +115,9 @@ export default {
   },
   faq: {
     title: 'Frequently Asked Questions',
-    subtitle: 'Have more questions? Email us at 758771757@qq.com',
+    subtitle: 'Have more questions? Contact us',
+    emailName: '758771757',
+    emailDomain: 'qq.com',
     questions: [
       {
         q: 'What is the AI Document Converter? How does it help me extract article essence?',

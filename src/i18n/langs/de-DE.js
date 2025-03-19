@@ -93,7 +93,9 @@ export default {
   },
   faq: {
     title: 'Häufig gestellte Fragen',
-    subtitle: 'Haben Sie weitere Fragen? Schreiben Sie uns an 758771757@qq.com',
+    subtitle: 'Weitere Fragen? Kontaktieren Sie uns',
+    emailName: '758771757',
+    emailDomain: 'qq.com',
     questions: [
       {
         q: 'Was ist der KI-Dokumentenkonverter? Wie hilft er mir, die Essenz von Artikeln zu extrahieren?',

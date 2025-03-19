@@ -2,7 +2,12 @@
   <div class="faq-section">
     <div class="faq-tag">FAQ</div>
     <h2 class="faq-title">{{ $t('faq.title') }}</h2>
-    <p class="faq-subtitle">{{ $t('faq.subtitle') }}</p>
+    <p class="faq-subtitle">
+      {{ $t('faq.subtitle') }}
+      <a :href="'mailto:' + $t('faq.emailName') + '@' + $t('faq.emailDomain')" class="faq-email">
+        {{ $t('faq.emailName') + '@' + $t('faq.emailDomain') }}
+      </a>
+    </p>
     
     <div class="faq-list">
       <div v-for="(qa, index) in faqList" :key="index" class="faq-item">
@@ -146,6 +151,18 @@ const faqList = computed(() => {
   line-height: 1.6;
   margin: 0;
   padding-left: calc(28px + 1rem);
+}
+
+.faq-email {
+  color: #c4804e;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.3s;
+}
+
+.faq-email:hover {
+  color: #d99b69;
+  text-decoration: underline;
 }
 
 @media (min-width: 768px) {

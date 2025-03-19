@@ -26,9 +26,12 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-button type="primary" class="login-btn">{{ $t('nav.login') }}</el-button>
+        <el-button type="primary" class="login-btn" @click="handleLogin">{{ $t('nav.login') }}</el-button>
       </div>
     </header>
+
+    <!-- 登录弹窗 -->
+    <LoginDialog ref="loginDialog" />
 
     <!-- 主要内容区 -->
     <main class="main-content">
@@ -173,12 +176,12 @@
       <Testimonials />
 
       <!-- FAQ部分 -->
-      <FAQ />
+        <FAQ />
     </main>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal, ArrowDown } from '@element-plus/icons-vue'
@@ -187,6 +190,14 @@ import FAQ from '@/components/FAQ.vue'
 import { useI18n } from 'vue-i18n'
 import { SUPPORT_LANGUAGES } from '@/i18n'
 import axios from 'axios'
+import LoginDialog from '@/components/LoginDialog.vue'
+import type { Ref } from 'vue'
+
+interface FileInfo {
+  name: string
+  size: number
+  raw: File
+}
 
 // API基础URL - 使用Vite环境变量
 const apiBaseUrlDefault = import.meta.env.VITE_API_BASE_URL || ''
@@ -224,8 +235,8 @@ const scrollToSection = (sectionId) => {
 }
 
 // 文件上传相关
-const fileInput = ref(null)
-const currentFile = ref(null)
+const fileInput: Ref<HTMLInputElement | null> = ref(null)
+const currentFile: Ref<FileInfo | null> = ref(null)
 const converting = ref(false)
 const convertProgress = ref(0)
 const convertStatus = ref('')
@@ -849,9 +860,9 @@ const startConvert = async () => {
         console.log('HTML内容已处理完成，长度:', previewHtml.value.length)
         
         // 使用iframe模式渲染HTML
-        setTimeout(() => {
-          renderHTMLInIframe()
-        }, 0)
+          setTimeout(() => {
+            renderHTMLInIframe()
+          }, 0)
       } else {
         console.warn('未获取到有效的HTML内容')
         previewHtml.value = '<div class="error-message">未获取到有效的HTML内容</div>'
@@ -903,6 +914,12 @@ const formatFileSize = (size) => {
     index++
   }
   return `${size.toFixed(2)} ${units[index]}`
+}
+
+const loginDialog = ref()
+
+const handleLogin = () => {
+  loginDialog.value?.open()
 }
 </script>
 
@@ -1471,5 +1488,34 @@ const formatFileSize = (size) => {
 /* 减少FAQ与上方区域的间距 */
 .main-content > div:nth-last-child(2) {
   margin-bottom: 1rem;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding: 0 24px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 32px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 </style> 

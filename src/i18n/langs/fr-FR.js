@@ -92,8 +92,10 @@ export default {
     ]
   },
   faq: {
-    title: 'Questions Fréquemment Posées',
-    subtitle: 'Vous avez d\'autres questions ? Écrivez-nous à 758771757@qq.com',
+    title: 'Questions Fréquentes',
+    subtitle: 'Plus de questions ? Contactez-nous',
+    emailName: '758771757',
+    emailDomain: 'qq.com',
     questions: [
       {
         q: 'Qu\'est-ce que le Convertisseur de Documents IA ? Comment m\'aide-t-il à extraire l\'essence des articles ?',

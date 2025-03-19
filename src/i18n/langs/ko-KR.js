@@ -61,7 +61,9 @@ export default {
   },
   faq: {
     title: '자주 묻는 질문',
-    subtitle: '더 궁금한 점이 있으신가요? 이메일로 문의해 주세요: 758771757@qq.com',
+    subtitle: '다른 질문이 있으신가요? 문의하기',
+    emailName: '758771757',
+    emailDomain: 'qq.com',
     questions: [
       {
         q: 'AI 문서 변환기란 무엇인가요? 어떻게 글의 핵심을 추출하나요?',
