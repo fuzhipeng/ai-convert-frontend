@@ -214,7 +214,7 @@
   </div>
 </template>
 
-<script setup lang=ts>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal, ArrowDown, SwitchButton, Setting } from '@element-plus/icons-vue'

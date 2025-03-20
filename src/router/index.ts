@@ -10,12 +10,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../../pages/home/index.vue'),
+      component: () => import('../pages/home/index.vue'),
       children: [
         {
           path: 'settings',
           name: 'settings',
-          component: () => import('../../pages/settings/index.vue'),
+          component: () => import('../pages/settings/index.vue'),
           meta: {
             requiresAuth: true,
             title: '设置 - AI文档提取'
@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: '/error',
       name: 'error',
-      component: () => import('../../pages/error/index.vue'),
+      component: () => import('../pages/error/index.vue'),
       meta: {
         title: '出错了 - AI文档提取'
       }
