@@ -6,7 +6,8 @@ export default {
     login: 'Login'
   },
   system: {
-    languageChanged: 'Language changed to {lang}'
+    languageChanged: 'Language changed to {lang}',
+    loading: 'Loading...'
   },
   hero: {
     title: 'Extract Article Essence with One Click, Transform Complex Content into Beautiful Knowledge Cards',
@@ -159,5 +160,21 @@ export default {
     backHome: 'Back to Home',
     refresh: 'Refresh Page',
     details: 'Error Details'
+  },
+  login: {
+    title: 'Login to DocSmart',
+    subtitle: 'Sign in with your Google account to continue',
+    terms: 'By signing in, you agree to our',
+    termsLink: 'Terms of Service and Privacy Policy',
+    success: 'Login Successful',
+    error: 'Login Failed, Please Try Again',
+    googleLogin: 'Sign in with Google',
+    testUser: 'Test User',
+    unregisteredOrigin: 'The current domain is not registered in Google Cloud Console, please contact the administrator',
+    initError: 'Google login initialization failed',
+    statusError: 'Login status verification failed',
+    mockSuccess: 'Mock login successful',
+    mockStatusError: 'Mock login status verification failed',
+    scriptError: 'Failed to load Google login service'
   }
 } 

@@ -47,6 +47,18 @@ export default {
       smart: {
         title: 'Compréhension intelligente',
         desc: 'Reconnaît avec précision la structure du document, préservant la mise en forme et les styles d\'origine.'
+      },
+      privacy: {
+        title: 'Protection renforcée de la vie privée',
+        desc: 'Utilise une technologie de cryptage avancée pour garantir la sécurité du contenu de vos documents, avec suppression immédiate de toutes les données après traitement.'
+      },
+      understanding: {
+        title: 'Compréhension avancée du texte',
+        desc: 'Les modèles d\'apprentissage profond comprennent la sémantique et les relations contextuelles du texte pour extraire des informations véritablement précieuses.'
+      },
+      advanced: {
+        title: 'Qualité de pointe',
+        desc: 'Basé sur les dernières technologies d\'IA, offrant une qualité de conversion leader du secteur avec une précision exacte.'
       }
     },
     examples: {
@@ -130,5 +142,32 @@ export default {
         a: 'Oui, notre système d\'IA peut reconnaître et traiter des documents dans plusieurs langues, notamment le français, l\'anglais et d\'autres langues principales. Quelle que soit la langue utilisée par votre document, nous pouvons fournir des services d\'extraction d\'essence et de génération de cartes de connaissance de haute qualité.'
       }
     ]
+  },
+  system: {
+    languageChanged: 'Langue changée en {lang}',
+    loading: 'Chargement...'
+  },
+  login: {
+    title: 'Connexion à DocSmart',
+    subtitle: 'Connectez-vous avec votre compte Google pour continuer',
+    terms: 'En vous connectant, vous acceptez nos',
+    termsLink: 'Conditions d\'utilisation et Politique de confidentialité',
+    success: 'Connexion réussie',
+    error: 'Échec de la connexion, veuillez réessayer',
+    googleLogin: 'Se connecter avec Google',
+    testUser: 'Utilisateur Test',
+    unregisteredOrigin: 'Le domaine actuel n\'est pas enregistré dans Google Cloud Console, veuillez contacter l\'administrateur',
+    initError: 'Échec de l\'initialisation de la connexion Google',
+    statusError: 'Échec de la vérification du statut de connexion',
+    mockSuccess: 'Connexion simulée réussie',
+    mockStatusError: 'Échec de la vérification du statut de connexion simulée',
+    scriptError: 'Échec du chargement du service de connexion Google'
+  },
+  error: {
+    title: 'Erreur survenue',
+    defaultMessage: 'Un problème est survenu lors du chargement de la page',
+    backHome: 'Retour à l\'accueil',
+    refresh: 'Actualiser la page',
+    details: 'Détails de l\'erreur'
   }
 } 

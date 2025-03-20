@@ -47,6 +47,18 @@ export default {
       smart: {
         title: 'Intelligentes Verständnis',
         desc: 'Erkennt präzise die Dokumentstruktur und behält das ursprüngliche Format und Styling bei.'
+      },
+      privacy: {
+        title: 'Verbesserter Datenschutz',
+        desc: 'Verwendet fortschrittliche Verschlüsselungstechnologie, um die Sicherheit Ihrer Dokumentinhalte zu gewährleisten, mit sofortiger Löschung aller Daten nach der Verarbeitung.'
+      },
+      understanding: {
+        title: 'Fortschrittliches Textverständnis',
+        desc: 'Deep-Learning-Modelle verstehen Textbedeutung und kontextuelle Beziehungen, um wirklich wertvolle Informationen zu extrahieren.'
+      },
+      advanced: {
+        title: 'Modernste Qualität',
+        desc: 'Basierend auf neuester KI-Technologie, bietet branchenführende Konvertierungsqualität mit präziser Genauigkeit.'
       }
     },
     examples: {
@@ -130,5 +142,32 @@ export default {
         a: 'Ja, unser KI-System kann Dokumente in mehreren Sprachen erkennen und verarbeiten, darunter Deutsch, Englisch und andere wichtige Sprachen. Unabhängig davon, welche Sprache Ihr Dokument verwendet, können wir hochwertige Essenzextraktions- und Wissenskartengenerierungsdienste anbieten.'
       }
     ]
+  },
+  system: {
+    languageChanged: 'Sprache geändert zu {lang}',
+    loading: 'Wird geladen...'
+  },
+  login: {
+    title: 'Bei DocSmart anmelden',
+    subtitle: 'Melden Sie sich mit Ihrem Google-Konto an, um fortzufahren',
+    terms: 'Durch die Anmeldung stimmen Sie unseren',
+    termsLink: 'Nutzungsbedingungen und Datenschutzrichtlinien zu',
+    success: 'Anmeldung erfolgreich',
+    error: 'Anmeldung fehlgeschlagen, bitte versuchen Sie es erneut',
+    googleLogin: 'Mit Google anmelden',
+    testUser: 'Testbenutzer',
+    unregisteredOrigin: 'Die aktuelle Domain ist nicht in der Google Cloud Console registriert, bitte kontaktieren Sie den Administrator',
+    initError: 'Google-Anmeldung konnte nicht initialisiert werden',
+    statusError: 'Überprüfung des Anmeldestatus fehlgeschlagen',
+    mockSuccess: 'Simulierte Anmeldung erfolgreich',
+    mockStatusError: 'Überprüfung des simulierten Anmeldestatus fehlgeschlagen',
+    scriptError: 'Google-Anmeldedienst konnte nicht geladen werden'
+  },
+  error: {
+    title: 'Fehler aufgetreten',
+    defaultMessage: 'Beim Laden der Seite ist ein Problem aufgetreten',
+    backHome: 'Zurück zur Startseite',
+    refresh: 'Seite aktualisieren',
+    details: 'Fehlerdetails'
   }
 } 

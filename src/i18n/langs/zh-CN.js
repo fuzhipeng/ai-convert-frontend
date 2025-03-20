@@ -7,7 +7,8 @@ export default {
     login: '登录'
   },
   system: {
-    languageChanged: '语言已切换为{lang}'
+    languageChanged: '语言已切换为{lang}',
+    loading: '加载中...'
   },
   hero: {
     title: '一键提取文章精华，将复杂内容转化为精美知识卡片',
@@ -167,6 +168,14 @@ export default {
     terms: '登录即表示您同意我们的',
     termsLink: '服务条款和隐私政策',
     success: '登录成功',
-    error: '登录失败，请重试'
+    error: '登录失败，请重试',
+    googleLogin: '使用Google登录',
+    testUser: '测试用户',
+    unregisteredOrigin: '当前域名未在Google Cloud Console中注册，请联系管理员',
+    initError: 'Google登录初始化失败',
+    statusError: '登录状态验证失败',
+    mockSuccess: '模拟登录成功',
+    mockStatusError: '模拟登录状态验证失败',
+    scriptError: 'Google登录服务加载失败'
   }
 } 

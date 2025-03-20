@@ -47,6 +47,18 @@ export default {
       smart: {
         title: 'Comprensión inteligente',
         desc: 'Reconoce con precisión la estructura del documento, preservando el formato y estilos originales.'
+      },
+      privacy: {
+        title: 'Protección de privacidad mejorada',
+        desc: 'Utiliza tecnología de encriptación avanzada para garantizar la seguridad del contenido de tus documentos, con eliminación inmediata de todos los datos después del procesamiento.'
+      },
+      understanding: {
+        title: 'Comprensión avanzada de texto',
+        desc: 'Los modelos de aprendizaje profundo entienden la semántica del texto y las relaciones contextuales para extraer información verdaderamente valiosa.'
+      },
+      advanced: {
+        title: 'Calidad de vanguardia',
+        desc: 'Basado en la tecnología de IA más reciente, proporcionando calidad de conversión líder en la industria con precisión exacta.'
       }
     },
     examples: {
@@ -130,5 +142,32 @@ export default {
         a: 'Sí, nuestro sistema de IA puede reconocer y procesar documentos en múltiples idiomas, incluidos español, inglés y otros idiomas principales. Independientemente del idioma que utilice tu documento, podemos proporcionar servicios de extracción de esencia y generación de tarjetas de conocimiento de alta calidad.'
       }
     ]
+  },
+  system: {
+    languageChanged: 'Idioma cambiado a {lang}',
+    loading: 'Cargando...'
+  },
+  login: {
+    title: 'Iniciar sesión en DocSmart',
+    subtitle: 'Inicia sesión con tu cuenta de Google para continuar',
+    terms: 'Al iniciar sesión, aceptas nuestros',
+    termsLink: 'Términos de servicio y Política de privacidad',
+    success: 'Inicio de sesión exitoso',
+    error: 'Error de inicio de sesión, por favor intenta de nuevo',
+    googleLogin: 'Iniciar sesión con Google',
+    testUser: 'Usuario de prueba',
+    unregisteredOrigin: 'El dominio actual no está registrado en Google Cloud Console, por favor contacta al administrador',
+    initError: 'Error al inicializar el inicio de sesión de Google',
+    statusError: 'Error al verificar el estado de inicio de sesión',
+    mockSuccess: 'Inicio de sesión simulado exitoso',
+    mockStatusError: 'Error al verificar el estado de inicio de sesión simulado',
+    scriptError: 'Error al cargar el servicio de inicio de sesión de Google'
+  },
+  error: {
+    title: 'Error ocurrido',
+    defaultMessage: 'Ocurrió un problema al cargar la página',
+    backHome: 'Volver al inicio',
+    refresh: 'Actualizar página',
+    details: 'Detalles del error'
   }
 } 

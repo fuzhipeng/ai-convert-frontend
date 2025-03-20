@@ -1,5 +1,5 @@
 <template>
-  <div class="faq-section">
+  <div class="faq-section" id="faq">
     <div class="faq-tag">FAQ</div>
     <h2 class="faq-title">{{ $t('faq.title') }}</h2>
     <p class="faq-subtitle">

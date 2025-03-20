@@ -1,16 +1,16 @@
 <template>
   <el-dialog
     v-model="visible"
-    title="登录"
+    :title="$t('login.title')"
     width="400px"
     :close-on-click-modal="false"
     class="login-dialog dark-theme"
   >
     <div class="login-content">
-      <h3 class="subtitle">登录您的账户</h3>
+      <h3 class="subtitle">{{ $t('login.subtitle') }}</h3>
       
       <div v-if="!isScriptLoaded" class="loading-state">
-        加载中...
+        {{ $t('system.loading') }}
       </div>
       
       <div v-else>
@@ -19,7 +19,7 @@
           @click="handleGoogleLogin"
         >
           <img :src="googleIcon" alt="Google" class="google-icon">
-          使用Google登录
+          {{ $t('login.googleLogin') }}
         </button>
       </div>
     </div>
@@ -32,9 +32,11 @@ import { ElMessage } from 'element-plus'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const userStore = useUserStore()
+const { t } = useI18n()
 const visible = ref(false)
 const isScriptLoaded = ref(false)
 
@@ -75,7 +77,7 @@ const handleGoogleLogin = () => {
   }
 
   if (!window.google) {
-    ElMessage.error('Google登录服务未加载')
+    ElMessage.error(t('login.error'))
     return
   }
 
@@ -115,7 +117,7 @@ const handleGoogleLogin = () => {
         console.error('Google Sign-In prompt not displayed:', notification.getNotDisplayedReason())
         console.error('Moment type:', notification.getMomentType())
         if (notification.getNotDisplayedReason() === 'unregistered_origin') {
-          ElMessage.error('当前域名未在Google Cloud Console中注册，请联系管理员')
+          ElMessage.error(t('login.unregisteredOrigin'))
         }
       } else if (notification.isSkippedMoment()) {
         console.log('Google Sign-In prompt skipped:', notification.getSkippedReason())
@@ -125,7 +127,7 @@ const handleGoogleLogin = () => {
     })
   } catch (error) {
     console.error('Failed to initialize Google Sign-In:', error)
-    ElMessage.error('Google登录初始化失败')
+    ElMessage.error(t('login.initError'))
   }
 }
 
@@ -147,7 +149,7 @@ const handleGoogleCallback = async (response: any) => {
       const userData = {
         id: apiResponse.data.user.id || 'test_user_id',
         email: apiResponse.data.user.email || 'test@example.com',
-        name: apiResponse.data.user.name || '测试用户',
+        name: apiResponse.data.user.name || t('login.testUser'),
         picture: apiResponse.data.user.picture || 'https://lh3.googleusercontent.com/a/default-user'
       }
       
@@ -163,15 +165,15 @@ const handleGoogleCallback = async (response: any) => {
         close()
         
         // 显示成功消息
-        ElMessage.success('登录成功')
+        ElMessage.success(t('login.success'))
         
         // 跳转到设置页面
         router.push('/settings')
       } else {
-        throw new Error('登录状态验证失败')
+        throw new Error(t('login.statusError'))
       }
     } else {
-      throw new Error(apiResponse.data.message || '登录失败')
+      throw new Error(apiResponse.data.message || t('login.error'))
     }
   } catch (error) {
     console.error('Login error:', error)
@@ -183,7 +185,7 @@ const handleGoogleCallback = async (response: any) => {
       const mockUserData = {
         id: 'test_user_id',
         email: 'test@example.com',
-        name: '测试用户',
+        name: t('login.testUser'),
         picture: 'https://lh3.googleusercontent.com/a/default-user'
       }
       
@@ -194,15 +196,15 @@ const handleGoogleCallback = async (response: any) => {
       // 确认登录状态
       if (userStore.isAuthenticated) {
         close()
-        ElMessage.success('模拟登录成功')
+        ElMessage.success(t('login.mockSuccess'))
         router.push('/settings')
       } else {
-        throw new Error('模拟登录状态验证失败')
+        throw new Error(t('login.mockStatusError'))
       }
       return
     }
     
-    ElMessage.error('登录失败,请重试')
+    ElMessage.error(t('login.error'))
   }
 }
 
@@ -218,7 +220,7 @@ onMounted(() => {
   }
   script.onerror = (error) => {
     console.error('Failed to load Google Sign-In script:', error)
-    ElMessage.error('Google登录服务加载失败')
+    ElMessage.error(t('login.scriptError'))
   }
   document.head.appendChild(script)
 })
