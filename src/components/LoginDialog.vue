@@ -61,38 +61,16 @@ const handleGoogleLogin = () => {
   }
 
   try {
-    // 添加全局调试日志
-    console.log('===== 开始Google登录流程 =====')
-    console.log('客户端ID:', clientId)
-    console.log('当前URL:', window.location.href)
-    console.log('当前时间:', new Date().toISOString())
-    
-    // 确保回调函数可全局访问
-    (window as any).handleGoogleCallbackGlobal = (response: any) => {
-      console.log('通过全局函数收到Google回调:', response)
-      handleGoogleCallback(response).catch((err: any) => {
-        console.error('处理Google回调时出错:', err)
-      })
-    }
-
     window.google.accounts.id.initialize({
       client_id: clientId,
-      callback: (response: any) => {
-        console.log('直接收到Google回调:', response)
-        handleGoogleCallback(response).catch((err: any) => {
-          console.error('处理Google回调时出错:', err)
-        })
-      },
+      callback: handleGoogleCallback,
       auto_select: false,
       cancel_on_tap_outside: true,
       context: 'signin',
       ux_mode: 'popup',
       use_fedcm_for_prompt: false,
       prompt_parent_id: 'g_id_onload',
-      state_cookie_domain: window.location.hostname,
-      native_callback: (response: any) => {
-        console.log('收到原生回调:', response)
-      }
+      state_cookie_domain: window.location.hostname
     })
 
     // 清理旧的容器（如果存在）
@@ -107,21 +85,12 @@ const handleGoogleLogin = () => {
     container.style.display = 'none'
     document.body.appendChild(container)
 
-    console.log('正在显示Google登录提示...')
     window.google.accounts.id.prompt((notification: any) => {
-      console.log('Google登录提示状态:', notification)
       if (notification.isNotDisplayed()) {
         console.error('Google登录提示未显示:', notification.getNotDisplayedReason())
-        console.error('Moment类型:', notification.getMomentType())
         if (notification.getNotDisplayedReason() === 'unregistered_origin') {
           ElMessage.error(t('login.unregisteredOrigin'))
         }
-      } else if (notification.isSkippedMoment()) {
-        console.log('Google登录提示被跳过:', notification.getSkippedReason())
-      } else if (notification.isDismissedMoment()) {
-        console.log('Google登录提示被关闭:', notification.getDismissedReason())
-      } else {
-        console.log('Google登录提示正常显示')
       }
     })
   } catch (error) {
@@ -133,40 +102,18 @@ const handleGoogleLogin = () => {
 // 处理Google登录回调
 const handleGoogleCallback = async (response: any) => {
   try {
-    console.log('收到Google回调:', response)
-    
     // 获取ID Token
     const idToken = response.credential
     if (!idToken) {
-      console.error('Google返回的凭证无效:', response)
-      throw new Error('无效的Google登录凭证')
+      ElMessage.error('无效的Google登录凭证')
+      return
     }
     
-    console.log('成功获取ID Token')
-    
-    // 解析JWT查看内容（仅供调试）
     try {
-      const payload = decodeJwtPayload(idToken)
-      console.log('Token包含用户信息:', {
-        sub: payload.sub,
-        email: payload.email,
-        name: payload.name
-      })
-    } catch (e) {
-      console.warn('解析JWT失败，但这不影响登录流程:', e)
-    }
-    
-    // 发送ID Token到后端验证
-    console.log('准备发送Token到后端...')
-    console.log('目标API:', '/api/auth/google')
-    console.log('请求数据:', { idToken: idToken.substring(0, 20) + '...' })
-    
-    try {
+      // 发送ID Token到后端验证
       const apiResponse = await axios.post('/api/auth/google', {
         idToken: idToken
       })
-      
-      console.log('收到后端响应:', apiResponse.data)
       
       if (apiResponse.data.success) {
         // 存储用户信息
@@ -177,70 +124,61 @@ const handleGoogleCallback = async (response: any) => {
           picture: apiResponse.data.user.picture
         }
         
-        console.log('准备存储用户信息:', userData)
-        
         // 存储用户信息和token
         if (apiResponse.data.token) {
-          console.log('使用后端返回的token')
           await userStore.setToken(apiResponse.data.token)
         } else {
-          console.log('后端未返回token，使用Google ID token代替')
+          // 如果后端没有返回token，使用Google的ID token
           await userStore.setToken(idToken)
         }
         await userStore.setUser(userData)
         
         // 确认登录状态
-        console.log('检查登录状态:', userStore.isAuthenticated)
         if (userStore.isAuthenticated) {
           // 关闭登录弹窗
-          console.log('登录成功，关闭弹窗')
           close()
           
           // 显示成功消息
           ElMessage.success(t('login.success'))
           
           // 跳转到设置页面
-          console.log('准备跳转到设置页面')
           router.push('/settings')
         } else {
-          console.error('存储用户信息后，认证状态仍为false')
           throw new Error(t('login.statusError'))
         }
       } else {
-        console.error('后端API返回失败:', apiResponse.data)
         throw new Error(apiResponse.data.message || t('login.error'))
       }
     } catch (apiError) {
-      console.error('API调用失败:', apiError)
+      // 如果后端API调用失败，尝试直接使用Google信息
+      // 解析JWT获取用户信息
+      const payload = decodeJwtPayload(idToken)
       
-      // 尝试使用Google返回的数据进行直接登录
-      if (idToken) {
-        console.log('尝试直接使用Google信息登录（跳过后端）')
-        
-        // 解析JWT获取用户信息
-        const payload = decodeJwtPayload(idToken)
-        
-        const userData = {
-          id: payload.sub,
-          email: payload.email,
-          name: payload.name,
-          picture: payload.picture
-        }
-        
-        // 存储用户信息和token
-        await userStore.setToken(idToken)
-        await userStore.setUser(userData)
-        
-        if (userStore.isAuthenticated) {
-          console.log('直接使用Google信息登录成功')
-          close()
-          ElMessage.success('使用Google信息登录成功')
-          router.push('/settings')
-          return
-        }
+      // 直接使用Google返回的用户信息登录
+      const userData = {
+        id: payload.sub,
+        email: payload.email,
+        name: payload.name,
+        picture: payload.picture
       }
       
-      throw apiError
+      // 存储用户信息和token
+      await userStore.setToken(idToken)
+      await userStore.setUser(userData)
+      
+      // 确认登录状态
+      if (userStore.isAuthenticated) {
+        // 关闭登录弹窗
+        close()
+        
+        // 显示成功消息
+        ElMessage.success(t('login.success'))
+        
+        // 跳转到设置页面
+        router.push('/settings')
+      } else {
+        throw new Error(t('login.statusError'))
+      }
     }
   } catch (error) {
     console.error('登录错误:', error)
@@ -288,39 +226,6 @@ onMounted(() => {
 // 打开弹窗方法
 const open = () => {
   visible.value = true
-  
-  // 测试Google OAuth配置是否生效
-  testGoogleAuthConfig()
-}
-
-// 测试Google OAuth配置是否生效
-const testGoogleAuthConfig = () => {
-  console.log('测试Google OAuth配置...')
-  console.log('当前URL:', window.location.href)
-  console.log('当前域名:', window.location.origin)
-  console.log('使用的客户端ID:', clientId)
-  
-  try {
-    const testDiv = document.createElement('div')
-    testDiv.id = 'google-oauth-test'
-    testDiv.style.display = 'none'
-    document.body.appendChild(testDiv)
-    
-    window.google?.accounts.id.renderButton(
-      document.getElementById('google-oauth-test'),
-      { theme: 'outline', size: 'large', type: 'standard' }
-    )
-    
-    // 如果能够渲染按钮而不报错，配置可能有效
-    console.log('Google OAuth配置可能有效 - 按钮渲染成功')
-    
-    // 清理测试元素
-    setTimeout(() => {
-      testDiv.remove()
-    }, 1000)
-  } catch (error) {
-    console.error('Google OAuth配置测试失败:', error)
-  }
 }
 
 // 关闭弹窗方法
