@@ -14,9 +14,12 @@
       </div>
       
       <div v-else>
+        <div id="google-signin-button" class="google-button-container"></div>
+        
         <button 
+          v-if="!googleButtonRendered"
           class="google-login-btn"
-          @click="handleGoogleLogin"
+          @click="handleManualGoogleLogin"
         >
           <img :src="googleIcon" alt="Google" class="google-icon">
           {{ $t('login.googleLogin') }}
@@ -39,6 +42,7 @@ const userStore = useUserStore()
 const { t } = useI18n()
 const visible = ref(false)
 const isScriptLoaded = ref(false)
+const googleButtonRendered = ref(false)
 
 // Google OAuth客户端ID
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
@@ -66,33 +70,21 @@ const handleGoogleLogin = () => {
       callback: handleGoogleCallback,
       auto_select: false,
       cancel_on_tap_outside: true,
-      context: 'signin',
-      ux_mode: 'popup',
-      use_fedcm_for_prompt: false,
-      prompt_parent_id: 'g_id_onload',
-      state_cookie_domain: window.location.hostname
+      context: 'signin'
     })
 
-    // 清理旧的容器（如果存在）
-    const oldContainer = document.getElementById('g_id_onload')
-    if (oldContainer) {
-      oldContainer.remove()
-    }
-
-    // 渲染一个隐藏的容器用于Google登录
-    const container = document.createElement('div')
-    container.id = 'g_id_onload'
-    container.style.display = 'none'
-    document.body.appendChild(container)
-
-    window.google.accounts.id.prompt((notification: any) => {
-      if (notification.isNotDisplayed()) {
-        console.error('Google登录提示未显示:', notification.getNotDisplayedReason())
-        if (notification.getNotDisplayedReason() === 'unregistered_origin') {
-          ElMessage.error(t('login.unregisteredOrigin'))
-        }
+    // 使用显式渲染按钮，而不是依赖prompt
+    window.google.accounts.id.renderButton(
+      document.getElementById('google-signin-button'),
+      { 
+        type: 'standard',
+        theme: 'filled_blue',
+        size: 'large',
+        text: 'signin_with',
+        shape: 'rectangular',
+        width: 280
       }
-    })
+    )
   } catch (error) {
     console.error('初始化Google登录失败:', error)
     ElMessage.error(t('login.initError'))
@@ -206,6 +198,23 @@ function decodeJwtPayload(token: string) {
   }
 }
 
+// 手动触发Google登录
+const handleManualGoogleLogin = () => {
+  try {
+    window.google.accounts.id.prompt((notification: any) => {
+      if (notification.isNotDisplayed()) {
+        console.error('Google登录提示未显示:', notification.getNotDisplayedReason())
+        ElMessage.warning('尝试直接打开Google登录页面')
+        // 尝试直接打开OAuth授权页面
+        window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&response_type=token&scope=email%20profile&redirect_uri=${encodeURIComponent(window.location.origin)}`
+      }
+    })
+  } catch (error) {
+    console.error('手动触发Google登录失败:', error)
+    ElMessage.error(t('login.error'))
+  }
+}
+
 onMounted(() => {
   // 动态加载Google Sign-In脚本
   const script = document.createElement('script')
@@ -215,6 +224,15 @@ onMounted(() => {
   script.onload = () => {
     console.log('Google Sign-In script loaded')
     isScriptLoaded.value = true
+    // 脚本加载完成后初始化Google登录
+    setTimeout(() => {
+      handleGoogleLogin()
+      // 检查按钮是否渲染成功
+      const googleButton = document.getElementById('google-signin-button')
+      if (googleButton && googleButton.children.length > 0) {
+        googleButtonRendered.value = true
+      }
+    }, 500)
   }
   script.onerror = (error) => {
     console.error('Failed to load Google Sign-In script:', error)
@@ -307,5 +325,11 @@ defineExpose({
 .loading-state {
   padding: 20px;
   color: #ffffff;
+}
+
+.google-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
 }
 </style> 
