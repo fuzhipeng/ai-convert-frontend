@@ -102,8 +102,8 @@ const handleGoogleCallback = async (response: any) => {
     }
     
     try {
-      // 发送ID Token到后端验证
-      const apiResponse = await axios.post('/api/auth/google', {
+      // 发送ID Token到后端验证，使用完整URL
+      const apiResponse = await axios.post('https://docsmart-backend.zeabur.app/api/auth/google', {
         idToken: idToken
       })
       
