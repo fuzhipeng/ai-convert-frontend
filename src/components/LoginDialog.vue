@@ -61,11 +61,28 @@ const handleGoogleLogin = () => {
   }
 
   try {
-    console.log('Using client ID:', clientId)
+    // 添加全局调试日志
+    console.log('===== 开始Google登录流程 =====')
+    console.log('客户端ID:', clientId)
+    console.log('当前URL:', window.location.href)
+    console.log('当前时间:', new Date().toISOString())
+    
+    // 确保回调函数可全局访问
+    (window as any).handleGoogleCallbackGlobal = (response: any) => {
+      console.log('通过全局函数收到Google回调:', response)
+      handleGoogleCallback(response).catch((err: any) => {
+        console.error('处理Google回调时出错:', err)
+      })
+    }
 
     window.google.accounts.id.initialize({
       client_id: clientId,
-      callback: handleGoogleCallback,
+      callback: (response: any) => {
+        console.log('直接收到Google回调:', response)
+        handleGoogleCallback(response).catch((err: any) => {
+          console.error('处理Google回调时出错:', err)
+        })
+      },
       auto_select: false,
       cancel_on_tap_outside: true,
       context: 'signin',
@@ -74,7 +91,7 @@ const handleGoogleLogin = () => {
       prompt_parent_id: 'g_id_onload',
       state_cookie_domain: window.location.hostname,
       native_callback: (response: any) => {
-        console.log('Native callback response:', response)
+        console.log('收到原生回调:', response)
       }
     })
 
@@ -90,21 +107,25 @@ const handleGoogleLogin = () => {
     container.style.display = 'none'
     document.body.appendChild(container)
 
+    console.log('正在显示Google登录提示...')
     window.google.accounts.id.prompt((notification: any) => {
+      console.log('Google登录提示状态:', notification)
       if (notification.isNotDisplayed()) {
-        console.error('Google Sign-In prompt not displayed:', notification.getNotDisplayedReason())
-        console.error('Moment type:', notification.getMomentType())
+        console.error('Google登录提示未显示:', notification.getNotDisplayedReason())
+        console.error('Moment类型:', notification.getMomentType())
         if (notification.getNotDisplayedReason() === 'unregistered_origin') {
           ElMessage.error(t('login.unregisteredOrigin'))
         }
       } else if (notification.isSkippedMoment()) {
-        console.log('Google Sign-In prompt skipped:', notification.getSkippedReason())
+        console.log('Google登录提示被跳过:', notification.getSkippedReason())
       } else if (notification.isDismissedMoment()) {
-        console.log('Google Sign-In prompt dismissed:', notification.getDismissedReason())
+        console.log('Google登录提示被关闭:', notification.getDismissedReason())
+      } else {
+        console.log('Google登录提示正常显示')
       }
     })
   } catch (error) {
-    console.error('Failed to initialize Google Sign-In:', error)
+    console.error('初始化Google登录失败:', error)
     ElMessage.error(t('login.initError'))
   }
 }
