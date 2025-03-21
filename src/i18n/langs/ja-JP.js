@@ -21,9 +21,10 @@ export default {
     button: 'ファイルを選択',
     converting: '変換中...',
     success: '変換成功',
-    error: '変換失敗',
-    retry: '再試行',
-    cancel: 'キャンセル'
+    error: '変換に失敗しました',
+    retry: 'リトライ',
+    cancel: 'キャンセル',
+    fileSizeExceeded: 'ファイルサイズがユーザー制限を超えています。プレミアムアカウントにアップグレードしてください。'
   },
   preview: {
     title: '変換結果プレビュー',

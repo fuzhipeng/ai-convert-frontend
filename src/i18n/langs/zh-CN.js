@@ -28,7 +28,8 @@ export default {
     success: '转换成功',
     error: '转换失败',
     retry: '重试',
-    cancel: '取消'
+    cancel: '取消',
+    fileSizeExceeded: '文件大小超过用户限制，请开通会员'
   },
   preview: {
     title: '转换结果预览',

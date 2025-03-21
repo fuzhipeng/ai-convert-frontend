@@ -22,8 +22,9 @@ export default {
     converting: 'Konvertierung läuft...',
     success: 'Konvertierung erfolgreich',
     error: 'Konvertierung fehlgeschlagen',
-    retry: 'Erneut versuchen',
-    cancel: 'Abbrechen'
+    retry: 'Wiederholen',
+    cancel: 'Abbrechen',
+    fileSizeExceeded: 'Dateigröße überschreitet das Benutzerlimit. Bitte führen Sie ein Upgrade auf ein Premium-Konto durch.'
   },
   preview: {
     title: 'Ergebnisvorschau',

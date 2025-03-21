@@ -27,7 +27,8 @@ export default {
     success: 'Conversion Successful',
     error: 'Conversion Failed',
     retry: 'Retry',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    fileSizeExceeded: 'File size exceeds user limit. Please upgrade to a premium account.'
   },
   preview: {
     title: 'Preview Result',

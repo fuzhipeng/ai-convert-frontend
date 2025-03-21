@@ -304,6 +304,18 @@ const triggerFileInput = () => {
 const handleFileChange = (event) => {
   const file = event.target.files[0]
   if (file) {
+    // 检查文件大小是否超过1MB
+    const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB in bytes
+    if (file.size > MAX_FILE_SIZE) {
+      // 显示文件大小超过限制的提示
+      ElMessage.error(t('upload.fileSizeExceeded'));
+      // 重置文件输入
+      if (fileInput.value) {
+        fileInput.value.value = '';
+      }
+      return;
+    }
+    
     // 设置当前文件
     currentFile.value = {
       name: file.name,
@@ -321,6 +333,14 @@ const handleFileChange = (event) => {
 const handleDrop = (e) => {
   const file = e.dataTransfer.files[0]
   if (file) {
+    // 检查文件大小是否超过1MB
+    const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB in bytes
+    if (file.size > MAX_FILE_SIZE) {
+      // 显示文件大小超过限制的提示
+      ElMessage.error(t('upload.fileSizeExceeded'));
+      return;
+    }
+    
     // 设置当前文件
     currentFile.value = {
       name: file.name,

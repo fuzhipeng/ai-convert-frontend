@@ -21,9 +21,10 @@ export default {
     button: 'Elegir archivo',
     converting: 'Convirtiendo...',
     success: 'Conversión exitosa',
-    error: 'Error en la conversión',
+    error: 'Conversión fallida',
     retry: 'Reintentar',
-    cancel: 'Cancelar'
+    cancel: 'Cancelar',
+    fileSizeExceeded: 'El tamaño del archivo excede el límite de usuario. Por favor, actualice a una cuenta premium.'
   },
   preview: {
     title: 'Vista previa del resultado',

@@ -22,8 +22,9 @@ export default {
     converting: '변환 중...',
     success: '변환 성공',
     error: '변환 실패',
-    retry: '다시 시도',
-    cancel: '취소'
+    retry: '재시도',
+    cancel: '취소',
+    fileSizeExceeded: '파일 크기가 사용자 제한을 초과합니다. 프리미엄 계정으로 업그레이드하세요.'
   },
   preview: {
     title: '변환 결과 미리보기',

@@ -23,7 +23,8 @@ export default {
     success: 'Conversion réussie',
     error: 'Échec de la conversion',
     retry: 'Réessayer',
-    cancel: 'Annuler'
+    cancel: 'Annuler',
+    fileSizeExceeded: 'La taille du fichier dépasse la limite utilisateur. Veuillez passer à un compte premium.'
   },
   preview: {
     title: 'Aperçu du résultat',
