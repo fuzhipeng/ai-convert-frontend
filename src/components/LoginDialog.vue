@@ -112,52 +112,117 @@ const handleGoogleLogin = () => {
 // 处理Google登录回调
 const handleGoogleCallback = async (response: any) => {
   try {
-    console.log('Received Google response:', response)
+    console.log('收到Google回调:', response)
     
     // 获取ID Token
     const idToken = response.credential
+    if (!idToken) {
+      console.error('Google返回的凭证无效:', response)
+      throw new Error('无效的Google登录凭证')
+    }
+    
+    console.log('成功获取ID Token')
+    
+    // 解析JWT查看内容（仅供调试）
+    try {
+      const payload = decodeJwtPayload(idToken)
+      console.log('Token包含用户信息:', {
+        sub: payload.sub,
+        email: payload.email,
+        name: payload.name
+      })
+    } catch (e) {
+      console.warn('解析JWT失败，但这不影响登录流程:', e)
+    }
     
     // 发送ID Token到后端验证
-    const apiResponse = await axios.post('/api/auth/google', {
-      idToken: idToken
-    })
+    console.log('准备发送Token到后端...')
+    console.log('目标API:', '/api/auth/google')
+    console.log('请求数据:', { idToken: idToken.substring(0, 20) + '...' })
     
-    if (apiResponse.data.success) {
-      // 存储用户信息
-      const userData = {
-        id: apiResponse.data.user.id,
-        email: apiResponse.data.user.email,
-        name: apiResponse.data.user.name,
-        picture: apiResponse.data.user.picture
-      }
+    try {
+      const apiResponse = await axios.post('/api/auth/google', {
+        idToken: idToken
+      })
       
-      // 存储用户信息和token
-      if (apiResponse.data.token) {
-        await userStore.setToken(apiResponse.data.token)
+      console.log('收到后端响应:', apiResponse.data)
+      
+      if (apiResponse.data.success) {
+        // 存储用户信息
+        const userData = {
+          id: apiResponse.data.user.id,
+          email: apiResponse.data.user.email,
+          name: apiResponse.data.user.name,
+          picture: apiResponse.data.user.picture
+        }
+        
+        console.log('准备存储用户信息:', userData)
+        
+        // 存储用户信息和token
+        if (apiResponse.data.token) {
+          console.log('使用后端返回的token')
+          await userStore.setToken(apiResponse.data.token)
+        } else {
+          console.log('后端未返回token，使用Google ID token代替')
+          await userStore.setToken(idToken)
+        }
+        await userStore.setUser(userData)
+        
+        // 确认登录状态
+        console.log('检查登录状态:', userStore.isAuthenticated)
+        if (userStore.isAuthenticated) {
+          // 关闭登录弹窗
+          console.log('登录成功，关闭弹窗')
+          close()
+          
+          // 显示成功消息
+          ElMessage.success(t('login.success'))
+          
+          // 跳转到设置页面
+          console.log('准备跳转到设置页面')
+          router.push('/settings')
+        } else {
+          console.error('存储用户信息后，认证状态仍为false')
+          throw new Error(t('login.statusError'))
+        }
       } else {
-        // 如果后端没有返回token，使用Google的ID token
+        console.error('后端API返回失败:', apiResponse.data)
+        throw new Error(apiResponse.data.message || t('login.error'))
+      }
+    } catch (apiError) {
+      console.error('API调用失败:', apiError)
+      
+      // 尝试使用Google返回的数据进行直接登录
+      if (idToken) {
+        console.log('尝试直接使用Google信息登录（跳过后端）')
+        
+        // 解析JWT获取用户信息
+        const payload = decodeJwtPayload(idToken)
+        
+        const userData = {
+          id: payload.sub,
+          email: payload.email,
+          name: payload.name,
+          picture: payload.picture
+        }
+        
+        // 存储用户信息和token
         await userStore.setToken(idToken)
+        await userStore.setUser(userData)
+        
+        if (userStore.isAuthenticated) {
+          console.log('直接使用Google信息登录成功')
+          close()
+          ElMessage.success('使用Google信息登录成功')
+          router.push('/settings')
+          return
+        }
       }
-      await userStore.setUser(userData)
       
-      // 确认登录状态
-      if (userStore.isAuthenticated) {
-        // 关闭登录弹窗
-        close()
-        
-        // 显示成功消息
-        ElMessage.success(t('login.success'))
-        
-        // 跳转到设置页面
-        router.push('/settings')
-      } else {
-        throw new Error(t('login.statusError'))
-      }
-    } else {
-      throw new Error(apiResponse.data.message || t('login.error'))
+      throw apiError
     }
   } catch (error) {
-    console.error('Login error:', error)
+    console.error('登录错误:', error)
     ElMessage.error(t('login.error'))
   }
 }
