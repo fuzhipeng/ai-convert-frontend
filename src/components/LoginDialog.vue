@@ -55,34 +55,12 @@ declare global {
 
 // 处理Google登录
 const handleGoogleLogin = () => {
-  // 本地开发环境下模拟Google登录
-  if (import.meta.env.DEV) {
-    console.log('使用模拟的Google登录流程')
-    
-    // 模拟Google返回的用户信息
-    const mockGoogleResponse = {
-      credential: 'mock_id_token',
-      clientId: clientId,
-      select_by: 'btn',
-      user: {
-        email: 'test@example.com',
-        name: '测试用户',
-        picture: 'https://lh3.googleusercontent.com/a/default-user'
-      }
-    }
-
-    // 调用回调函数处理模拟响应
-    handleGoogleCallback(mockGoogleResponse)
-    return
-  }
-
   if (!window.google) {
     ElMessage.error(t('login.error'))
     return
   }
 
   try {
-    console.log('Current origin:', window.location.origin)
     console.log('Using client ID:', clientId)
 
     window.google.accounts.id.initialize({
@@ -147,15 +125,18 @@ const handleGoogleCallback = async (response: any) => {
     if (apiResponse.data.success) {
       // 存储用户信息
       const userData = {
-        id: apiResponse.data.user.id || 'test_user_id',
-        email: apiResponse.data.user.email || 'test@example.com',
-        name: apiResponse.data.user.name || t('login.testUser'),
-        picture: apiResponse.data.user.picture || 'https://lh3.googleusercontent.com/a/default-user'
+        id: apiResponse.data.user.id,
+        email: apiResponse.data.user.email,
+        name: apiResponse.data.user.name,
+        picture: apiResponse.data.user.picture
       }
       
       // 存储用户信息和token
       if (apiResponse.data.token) {
         await userStore.setToken(apiResponse.data.token)
+      } else {
+        // 如果后端没有返回token，使用Google的ID token
+        await userStore.setToken(idToken)
       }
       await userStore.setUser(userData)
       
@@ -177,34 +158,27 @@ const handleGoogleCallback = async (response: any) => {
     }
   } catch (error) {
     console.error('Login error:', error)
-    
-    // 在开发环境下，如果后端API调用失败，使用模拟数据
-    if (import.meta.env.DEV) {
-      console.log('使用模拟的用户数据')
-      
-      const mockUserData = {
-        id: 'test_user_id',
-        email: 'test@example.com',
-        name: t('login.testUser'),
-        picture: 'https://lh3.googleusercontent.com/a/default-user'
-      }
-      
-      // 在开发环境下的模拟登录
-      await userStore.setToken('mock_token_123')
-      await userStore.setUser(mockUserData)
-      
-      // 确认登录状态
-      if (userStore.isAuthenticated) {
-        close()
-        ElMessage.success(t('login.mockSuccess'))
-        router.push('/settings')
-      } else {
-        throw new Error(t('login.mockStatusError'))
-      }
-      return
-    }
-    
     ElMessage.error(t('login.error'))
+  }
+}
+
+// 解析JWT payload
+function decodeJwtPayload(token: string) {
+  try {
+    const base64Url = token.split('.')[1]
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+    }).join(''))
+    return JSON.parse(jsonPayload)
+  } catch (error) {
+    console.error('Failed to decode JWT:', error)
+    return {
+      sub: 'unknown_id',
+      email: 'unknown@example.com',
+      name: t('login.testUser'),
+      picture: 'https://lh3.googleusercontent.com/a/default-user'
+    }
   }
 }
 
@@ -228,6 +202,39 @@ onMounted(() => {
 // 打开弹窗方法
 const open = () => {
   visible.value = true
+  
+  // 测试Google OAuth配置是否生效
+  testGoogleAuthConfig()
+}
+
+// 测试Google OAuth配置是否生效
+const testGoogleAuthConfig = () => {
+  console.log('测试Google OAuth配置...')
+  console.log('当前URL:', window.location.href)
+  console.log('当前域名:', window.location.origin)
+  console.log('使用的客户端ID:', clientId)
+  
+  try {
+    const testDiv = document.createElement('div')
+    testDiv.id = 'google-oauth-test'
+    testDiv.style.display = 'none'
+    document.body.appendChild(testDiv)
+    
+    window.google?.accounts.id.renderButton(
+      document.getElementById('google-oauth-test'),
+      { theme: 'outline', size: 'large', type: 'standard' }
+    )
+    
+    // 如果能够渲染按钮而不报错，配置可能有效
+    console.log('Google OAuth配置可能有效 - 按钮渲染成功')
+    
+    // 清理测试元素
+    setTimeout(() => {
+      testDiv.remove()
+    }, 1000)
+  } catch (error) {
+    console.error('Google OAuth配置测试失败:', error)
+  }
 }
 
 // 关闭弹窗方法
