@@ -4,7 +4,8 @@ export default {
     features: '功能特点',
     faq: '常见问题',
     pricing: '价格',
-    login: '登录'
+    login: '登录',
+    points: '积分: {points}'
   },
   system: {
     languageChanged: '语言已切换为{lang}',

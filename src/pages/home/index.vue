@@ -14,6 +14,11 @@
         </nav>
       </div>
       <div class="header-right">
+        <!-- 积分显示，仅在用户已登录时显示 -->
+        <div v-if="userStore.isAuthenticated" class="user-points">
+          {{ $t('nav.points', { points: userPoints || 0 }) }}
+        </div>
+        
         <el-dropdown class="language-dropdown" @command="handleLanguageChange">
           <span class="el-dropdown-link">
             {{ currentLanguageLabel }} <el-icon><arrow-down /></el-icon>
@@ -215,7 +220,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { UploadFilled, Document, Money, Star, Reading, Lock, MagicStick, Medal, ArrowDown, SwitchButton, Setting } from '@element-plus/icons-vue'
 import Testimonials from '@/components/Testimonials.vue'
@@ -227,6 +232,7 @@ import LoginDialog from '@/components/LoginDialog.vue'
 import type { Ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { getUserPoints } from '@/api/user' // 导入获取用户积分的API
 
 interface FileInfo {
   name: string
@@ -1014,6 +1020,38 @@ const handleSettings = () => {
 }
 
 const route = useRoute()
+
+// 添加userPoints响应式变量
+const userPoints = ref(0)
+
+// 获取用户积分的方法
+const fetchUserPoints = async () => {
+  if (!userStore.isAuthenticated || !userStore.user?.id) {
+    userPoints.value = 0
+    return
+  }
+  
+  try {
+    const response = await getUserPoints(userStore.user.id)
+    if (response && response.points) {
+      userPoints.value = response.points
+    } else {
+      userPoints.value = 0
+    }
+  } catch (error) {
+    console.error('获取用户积分失败:', error)
+    userPoints.value = 0
+  }
+}
+
+// 监听用户登录状态变化
+watch(() => userStore.isAuthenticated, (newValue) => {
+  if (newValue) {
+    fetchUserPoints()
+  } else {
+    userPoints.value = 0
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -1701,5 +1739,14 @@ const route = useRoute()
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* 积分显示样式 */
+.user-points {
+  margin-right: 15px;
+  font-size: 14px;
+  color: var(--el-color-primary);
+  display: flex;
+  align-items: center;
 }
 </style> 

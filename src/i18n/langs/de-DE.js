@@ -3,7 +3,8 @@ export default {
     features: 'Funktionen',
     faq: 'FAQ',
     pricing: 'Preise',
-    login: 'Anmelden'
+    login: 'Anmelden',
+    points: 'Punkte: {points}'
   },
   hero: {
     title: 'Extrahieren Sie mit einem Klick die Essenz von Artikeln und verwandeln Sie komplexe Inhalte in schöne Wissenskarten',

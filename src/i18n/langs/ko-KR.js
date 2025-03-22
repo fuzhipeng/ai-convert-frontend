@@ -1,9 +1,10 @@
 export default {
   nav: {
     features: '기능',
-    faq: '자주 묻는 질문',
+    faq: 'FAQ',
     pricing: '가격',
-    login: '로그인'
+    login: '로그인',
+    points: '포인트: {points}'
   },
   hero: {
     title: '원클릭으로 기사의 핵심을 추출하고 복잡한 내용을 아름다운 지식 카드로 변환',

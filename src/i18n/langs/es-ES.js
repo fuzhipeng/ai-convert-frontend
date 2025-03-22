@@ -3,7 +3,8 @@ export default {
     features: 'Características',
     faq: 'FAQ',
     pricing: 'Precios',
-    login: 'Iniciar sesión'
+    login: 'Iniciar sesión',
+    points: 'Puntos: {points}'
   },
   hero: {
     title: 'Extrae la esencia de los artículos con un clic, transforma contenido complejo en hermosas tarjetas de conocimiento',

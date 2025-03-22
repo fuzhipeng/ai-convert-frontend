@@ -3,7 +3,8 @@ export default {
     features: 'Features',
     faq: 'FAQ',
     pricing: 'Pricing',
-    login: 'Login'
+    login: 'Login',
+    points: 'Points: {points}'
   },
   system: {
     languageChanged: 'Language changed to {lang}',

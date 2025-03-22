@@ -3,7 +3,8 @@ export default {
     features: '機能',
     faq: 'よくある質問',
     pricing: '料金',
-    login: 'ログイン'
+    login: 'ログイン',
+    points: 'ポイント: {points}'
   },
   hero: {
     title: 'ワンクリックで記事のエッセンスを抽出し、複雑なコンテンツを美しい知識カードに変換',

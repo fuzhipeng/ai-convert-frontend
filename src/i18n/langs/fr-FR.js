@@ -3,7 +3,8 @@ export default {
     features: 'Fonctionnalités',
     faq: 'FAQ',
     pricing: 'Tarifs',
-    login: 'Connexion'
+    login: 'Connexion',
+    points: 'Points: {points}'
   },
   hero: {
     title: 'Extrayez l\'essence des articles en un clic, transformez un contenu complexe en magnifiques cartes de connaissance',
