@@ -49,7 +49,7 @@
             </ul>
           </div>
           <div class="pricing-card-footer">
-            <el-button type="primary" plain>升级到高级版</el-button>
+            <button class="custom-button primary-button plain-button">升级到高级版</button>
           </div>
         </div>
         
@@ -110,7 +110,7 @@
             </ul>
           </div>
           <div class="pricing-card-footer">
-            <el-button type="primary">升级到旗舰版</el-button>
+            <button class="custom-button primary-button">升级到旗舰版</button>
           </div>
         </div>
         
@@ -155,7 +155,7 @@
             </ul>
           </div>
           <div class="pricing-card-footer">
-            <el-button type="primary" plain>即将推出</el-button>
+            <button class="custom-button primary-button plain-button">即将推出</button>
           </div>
         </div>
       </div>
@@ -289,7 +289,7 @@ onMounted(() => {
 
 <style scoped>
 .pricing-page {
-  padding-top: 20px;
+  padding-top: 0;
   background-color: #1a1a1a;
   color: #ffffff;
   min-height: 100vh;
@@ -298,21 +298,21 @@ onMounted(() => {
 .pricing-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 20px 40px;
+  padding: 12px 20px 40px;
 }
 
 .pricing-title {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .pricing-subtitle {
   font-size: 1.2rem;
   text-align: center;
   color: #aaaaaa;
-  margin-bottom: 32px;
+  margin-bottom: 15px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -323,7 +323,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 48px;
+  margin-bottom: 20px;
   gap: 16px;
 }
 
@@ -405,7 +405,7 @@ onMounted(() => {
 }
 
 .pricing-card-price {
-  padding: 24px;
+  padding: 16px;
   background-color: #222222;
   display: flex;
   align-items: baseline;
@@ -413,21 +413,21 @@ onMounted(() => {
 }
 
 .price-currency {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  margin-right: 4px;
+  margin-right: 2px;
 }
 
 .price-amount {
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
   line-height: 1;
 }
 
 .price-period {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #aaaaaa;
-  margin-left: 4px;
+  margin-left: 2px;
 }
 
 .pricing-card-features {
@@ -471,27 +471,55 @@ onMounted(() => {
   text-align: center;
 }
 
-.pricing-card-footer .el-button {
+.custom-button {
   width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.primary-button {
+  background-color: #409eff;
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: #66b1ff;
+}
+
+.plain-button {
+  background-color: transparent;
+  border: 1px solid #409eff;
+  color: #409eff;
+}
+
+.plain-button:hover {
+  background-color: rgba(64, 158, 255, 0.1);
 }
 
 /* FAQ样式 */
 .faq-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 30px;
+  padding-bottom: 40px;
 }
 
 .faq-section h2 {
   font-size: 2rem;
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .faq-subtitle {
   text-align: center;
   color: #aaaaaa;
   font-size: 1.1rem;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 .faq-container {
@@ -500,7 +528,7 @@ onMounted(() => {
 }
 
 .faq-item {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border-radius: 12px;
   background-color: #2a2a2a;
   overflow: hidden;
