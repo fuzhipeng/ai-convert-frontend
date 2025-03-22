@@ -18,11 +18,11 @@
         <div class="pricing-card">
           <div class="pricing-card-header">
             <h2>高级版</h2>
-            <p class="pricing-description">按年收费</p>
+            <p class="pricing-description">{{ planPeriod }}</p>
           </div>
           <div class="pricing-card-price">
             <span class="price-currency">$</span>
-            <span class="price-amount">10</span>
+            <span class="price-amount">{{ highTierPrice }}</span>
             <span class="price-period">/月</span>
           </div>
           <div class="pricing-card-features">
@@ -58,11 +58,11 @@
           <div class="pricing-card-header">
             <div class="popular-tag">最受欢迎</div>
             <h2>旗舰版</h2>
-            <p class="pricing-description">按年收费</p>
+            <p class="pricing-description">{{ planPeriod }}</p>
           </div>
           <div class="pricing-card-price">
             <span class="price-currency">$</span>
-            <span class="price-amount">20</span>
+            <span class="price-amount">{{ premiumTierPrice }}</span>
             <span class="price-period">/月</span>
           </div>
           <div class="pricing-card-features">
@@ -195,6 +195,11 @@ const { t } = useI18n()
 
 // 价格切换
 const isYearly = ref(true)
+
+// 根据付款方式计算价格
+const highTierPrice = computed(() => isYearly.value ? 10 : 12)
+const premiumTierPrice = computed(() => isYearly.value ? 20 : 24)
+const planPeriod = computed(() => isYearly.value ? '按年收费' : '按月收费')
 
 // FAQ数据
 const faqs = computed(() => [
