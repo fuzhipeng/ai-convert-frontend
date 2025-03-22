@@ -23,6 +23,15 @@ const router = createRouter({
         }
       ]
     },
+    // 添加价格页面路由
+    {
+      path: '/pricing',
+      name: 'pricing',
+      component: () => import('../pages/pricing/index.vue'),
+      meta: {
+        title: '价格套餐 - AI文档提取'
+      }
+    },
     // 添加错误页面路由
     {
       path: '/error',

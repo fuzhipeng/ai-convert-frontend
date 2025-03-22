@@ -3,12 +3,39 @@
     <!-- 顶部导航栏 -->
     <header class="app-header">
       <div class="header-left">
-        <h1 class="app-title">AI文档提取</h1>
+        <router-link to="/" class="logo">
+          <h1 class="app-title">AI文档提取</h1>
+        </router-link>
+        <nav class="nav-menu">
+          <a href="#features" @click.prevent="scrollToSection('features')">{{ $t('nav.features') }}</a>
+          <a href="#faq" @click.prevent="scrollToSection('faq')">{{ $t('nav.faq') }}</a>
+          <router-link to="/pricing">{{ $t('nav.pricing') }}</router-link>
+        </nav>
       </div>
       <div class="header-right">
+        <!-- 积分显示，仅在用户已登录时显示 -->
+        <div v-if="userStore.isAuthenticated" class="user-points">
+          {{ $t('nav.points', { points: userPoints || 0 }) }}
+        </div>
+        
+        <el-dropdown class="language-dropdown" @command="handleLanguageChange">
+          <span class="el-dropdown-link">
+            {{ currentLanguageLabel }} <el-icon><arrow-down /></el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item v-for="lang in supportedLanguages" :key="lang.value" :command="lang.value">
+                {{ lang.icon }} {{ lang.label }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+        
         <!-- 未登录时显示登录按钮 -->
         <template v-if="!userStore.isAuthenticated">
-          <el-button type="primary" @click="showLoginDialog">登录</el-button>
+          <el-button type="primary" class="login-btn" @click="showLoginDialog">
+            {{ $t('nav.login') }}
+          </el-button>
         </template>
         <!-- 已登录时显示用户信息 -->
         <template v-else>
@@ -49,16 +76,77 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from './stores/user'
 import LoginDialog from './components/LoginDialog.vue'
 import { ElMessage } from 'element-plus'
-import { Setting, SwitchButton } from '@element-plus/icons-vue'
+import { Setting, SwitchButton, ArrowDown } from '@element-plus/icons-vue'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
+const route = useRoute()
 const userStore = useUserStore()
 const loginDialog = ref()
+const { locale, t } = useI18n()
+
+// 用户积分
+const userPoints = ref(0)
+
+// 支持的语言
+interface LanguageOption {
+  label: string;
+  value: string;
+  icon: string;
+}
+
+const supportedLanguages: LanguageOption[] = [
+  { label: '简体中文', value: 'zh-CN', icon: '🇨🇳' },
+  { label: 'English', value: 'en-US', icon: '🇺🇸' },
+  { label: '日本語', value: 'ja-JP', icon: '🇯🇵' },
+  { label: '한국어', value: 'ko-KR', icon: '🇰🇷' },
+  { label: 'Français', value: 'fr-FR', icon: '🇫🇷' },
+  { label: 'Deutsch', value: 'de-DE', icon: '🇩🇪' },
+  { label: 'Español', value: 'es-ES', icon: '🇪🇸' },
+  { label: 'Русский', value: 'ru-RU', icon: '🇷🇺' }
+];
+
+// 当前语言标签
+const currentLanguageLabel = computed(() => {
+  const currentLang = supportedLanguages.find(lang => lang.value === locale.value)
+  return currentLang ? currentLang.label : '简体中文'
+})
+
+// 处理语言切换
+function handleLanguageChange(lang: string) {
+  if (lang !== locale.value) {
+    locale.value = lang
+    localStorage.setItem('appLanguage', lang)
+    ElMessage.success(t('system.languageChanged', { lang: supportedLanguages.find(l => l.value === lang)?.label }))
+  }
+}
+
+// 处理滚动到指定部分
+function scrollToSection(sectionId: string) {
+  // 如果不在首页，先跳转到首页
+  if (route.path !== '/') {
+    router.push('/').then(() => {
+      // 等待路由跳转完成后滚动
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 300)
+    })
+  } else {
+    // 在首页直接滚动
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+}
 
 // 添加调试日志
 console.log('App组件初始化')
@@ -70,6 +158,19 @@ onMounted(() => {
     userName: userStore.userName,
     userAvatar: userStore.userAvatar
   })
+  
+  // 加载用户积分
+  if (userStore.isAuthenticated) {
+    try {
+      // 这里可以调用API获取用户积分
+      // 示例: const response = await getUserPoints();
+      // userPoints.value = response.data.points;
+      // 模拟数据
+      userPoints.value = 1000;
+    } catch (error) {
+      console.error('获取用户积分失败:', error);
+    }
+  }
 })
 
 // 显示登录弹窗
@@ -142,7 +243,7 @@ body {
   align-items: center;
   padding: 0 24px;
   height: 64px;
-  background-color: #1f1f1f;
+  background-color: #1a1a1a;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: fixed;
   top: 0;
@@ -156,15 +257,61 @@ body {
   align-items: center;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+}
+
 .app-title {
   margin: 0;
   font-size: 20px;
   color: #ffffff;
 }
 
+.nav-menu {
+  display: flex;
+  margin-left: 20px;
+}
+
+.nav-menu a {
+  color: #aaaaaa;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.router-link-active {
+  color: #ffffff;
+}
+
 .header-right {
   display: flex;
   align-items: center;
+}
+
+.user-points {
+  color: #d4a055;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.language-dropdown {
+  margin-right: 16px;
+}
+
+.el-dropdown-link {
+  color: #aaaaaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.login-btn {
+  margin-left: 16px;
 }
 
 .user-info {
@@ -184,6 +331,16 @@ body {
   margin-left: 8px;
   color: #ffffff;
   font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .user-points {
+    display: none;
+  }
 }
 
 .app-main {
