@@ -71,7 +71,7 @@ async function initiateCheckout() {
       successUrl: successUrl.value,
       cancelUrl: cancelUrl.value,
       metadata: props.metadata,
-      userId: userStore.user?.id ? parseInt(userStore.user.id) : null
+      userId: userStore.user?.id ? String(userStore.user.id) : null
     })
     
     console.log('Creem API响应:', response)

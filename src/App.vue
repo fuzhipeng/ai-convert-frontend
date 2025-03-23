@@ -83,6 +83,7 @@ import LoginDialog from './components/LoginDialog.vue'
 import { ElMessage } from 'element-plus'
 import { Setting, SwitchButton, ArrowDown } from '@element-plus/icons-vue'
 import { useI18n } from 'vue-i18n'
+import { getUserPoints } from './api/user'
 
 const router = useRouter()
 const route = useRoute()
@@ -162,11 +163,20 @@ onMounted(() => {
   // 加载用户积分
   if (userStore.isAuthenticated) {
     try {
-      // 这里可以调用API获取用户积分
-      // 示例: const response = await getUserPoints();
-      // userPoints.value = response.data.points;
-      // 模拟数据
-      userPoints.value = 1000;
+      // 调用API获取用户积分
+      getUserPoints(userStore.user.id).then(response => {
+        console.log('获取积分成功:', response);
+        // 根据API实际返回结构调整
+        if (response && response.points !== undefined) {
+          userPoints.value = response.points;
+        } else if (response && response.data && response.data.points !== undefined) {
+          userPoints.value = response.data.points;
+        } else {
+          console.error('无法从API响应中获取积分数据');
+        }
+      }).catch(error => {
+        console.error('获取用户积分失败:', error);
+      });
     } catch (error) {
       console.error('获取用户积分失败:', error);
     }

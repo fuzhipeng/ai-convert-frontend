@@ -56,7 +56,7 @@ export function verifyPaymentStatus(params) {
 export function getUserSubscription() {
   // 获取当前登录用户ID
   const userStore = useUserStore()
-  const userId = userStore.user?.id
+  const userId = userStore.user?.id ? String(userStore.user.id) : null
   
   console.log('请求用户订阅信息，用户ID:', userId)
   
