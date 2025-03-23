@@ -1,41 +1,5 @@
 <template>
   <div class="creem-checkout">
-    <!-- 添加模拟登录状态显示 -->
-    <div class="login-status" v-if="showLoginStatus">
-      <p>
-        <span class="status-label">登录状态:</span>
-        <el-tag :type="userStore.isAuthenticated ? 'success' : 'danger'">
-          {{ userStore.isAuthenticated ? '已登录' : '未登录' }}
-        </el-tag>
-      </p>
-      <p v-if="userStore.isAuthenticated">
-        <span class="status-label">用户ID:</span> 
-        <span class="user-id">{{ userStore.user?.id }}</span>
-      </p>
-    </div>
-    
-    <!-- 模拟登录按钮 -->
-    <el-button 
-      v-if="showLoginButton && !userStore.isAuthenticated" 
-      type="primary" 
-      size="small" 
-      @click="mockLogin"
-      class="mock-login-button"
-    >
-      模拟用户登录
-    </el-button>
-    
-    <!-- 退出登录按钮 -->
-    <el-button 
-      v-if="showLoginButton && userStore.isAuthenticated" 
-      type="info" 
-      size="small" 
-      @click="mockLogout"
-      class="mock-logout-button"
-    >
-      退出登录
-    </el-button>
-    
     <!-- 支付按钮 -->
     <el-button 
       :type="buttonType" 
@@ -80,16 +44,6 @@ const props = defineProps({
   metadata: {
     type: Object,
     default: () => ({})
-  },
-  // 是否显示模拟登录按钮
-  showLoginButton: {
-    type: Boolean,
-    default: false
-  },
-  // 是否显示登录状态
-  showLoginStatus: {
-    type: Boolean,
-    default: false
   }
 })
 
@@ -98,27 +52,6 @@ const cancelUrl = computed(() => `${baseUrl}/payment/cancel`)
 
 const emit = defineEmits(['checkout-started', 'checkout-error'])
 const loading = ref(false)
-
-// 模拟登录方法
-function mockLogin() {
-  const mockUser = {
-    id: '1001', // 确保ID能被转换为整数
-    name: '测试用户',
-    email: 'test@example.com',
-    picture: ''  // 移除外部图片URL引用
-  }
-  
-  userStore.setUser(mockUser)
-  userStore.setToken('mock_token_' + Date.now())
-  
-  ElMessage.success('模拟用户登录成功')
-}
-
-// 模拟退出登录
-function mockLogout() {
-  userStore.clearUser()
-  ElMessage.info('已退出登录')
-}
 
 async function initiateCheckout() {
   loading.value = true
@@ -184,30 +117,5 @@ async function initiateCheckout() {
 .checkout-button-plain {
   border: 2px solid #d4a055;
   color: #d4a055;
-}
-
-.login-status {
-  margin-bottom: 15px;
-  padding: 10px;
-  background-color: #f8f8f8;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.status-label {
-  font-weight: 500;
-  margin-right: 8px;
-  color: #555;
-}
-
-.user-id {
-  font-family: monospace;
-  background-color: #eee;
-  padding: 2px 6px;
-  border-radius: 3px;
-}
-
-.mock-login-button, .mock-logout-button {
-  margin-bottom: 12px;
 }
 </style> 

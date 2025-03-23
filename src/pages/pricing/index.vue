@@ -2,7 +2,7 @@
   <div class="pricing-page">
     <main class="pricing-container">
       <h1 class="pricing-title">选择您的计划</h1>
-      <p class="pricing-subtitle">体验 Raphael AI 的最佳功能：更快的生成速度和商业使用权限</p>
+      <p class="pricing-subtitle">体验 TextQantum AI 的最佳功能：更快的文档处理速度和高级格式保留能力</p>
       
       <!-- 价格卡片 -->
       <div class="pricing-cards">
@@ -25,8 +25,8 @@
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                快速生成（5倍速）
-                <el-tooltip content="比免费版生成速度快5倍" placement="top">
+                快速文档处理（5倍速）
+                <el-tooltip content="比免费版处理速度快5倍" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
@@ -45,8 +45,6 @@
               :productId="highPlan.productId"
               :buttonText="highPlan.buttonText"
               :metadata="highPlan.metadata"
-              :showLoginButton="true"
-              :showLoginStatus="true"
               @checkout-started="trackCheckoutStarted('high')"
             />
           </div>
@@ -72,8 +70,8 @@
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                最快生成速度
-                <el-tooltip content="最高优先级的图像生成速度" placement="top">
+                最快文档处理速度
+                <el-tooltip content="最高优先级的文档处理速度" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
@@ -87,15 +85,15 @@
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                高级优化功能
-                <el-tooltip content="访问高级优化设置和增强工具" placement="top">
+                高级格式优化
+                <el-tooltip content="访问高级格式设置和文档增强工具" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                私密生成
-                <el-tooltip content="您的图像不会在公共画廊中展示" placement="top">
+                私密文档处理
+                <el-tooltip content="您的文档内容不会被用于训练模型" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
@@ -113,8 +111,6 @@
               :productId="premiumPlan.productId"
               :buttonText="premiumPlan.buttonText"
               :metadata="premiumPlan.metadata"
-              :showLoginButton="true"
-              :showLoginStatus="true"
               @checkout-started="trackCheckoutStarted('premium')"
             />
           </div>
@@ -229,7 +225,7 @@ const premiumPlan = computed(() => ({
 const faqs = computed(() => [
   {
     question: '为什么要订阅？',
-    answer: '您的支持有助于我们免费保持该网站，并带来一些宝贵的好处！\n\n• 您的图像不会有水印！\n\n• 它更快，您优先于其他用户。当有一个队列生成图像时，我们会将您移到前面，这在流量较高时特别有用！\n\n• 您的图像是完全私人的，不会在我们的公共画廊或建议的图像中共享。\n\n• 您将没有任何广告！'
+    answer: '您的支持有助于我们免费保持该网站，并带来一些宝贵的好处！\n\n• 您的文档转换不会有水印！\n\n• 转换速度更快，您优先于其他用户。当有队列处理文档时，我们会将您移到前面，这在流量较高时特别有用！\n\n• 您的文档内容完全私密，不会被用于训练模型或与第三方共享。\n\n• 无广告干扰，享受更流畅的使用体验！\n\n• 增加的积分可以处理更多文档，提高工作效率。'
   },
   {
     question: '我可以升级还是取消？',
@@ -244,28 +240,28 @@ const faqs = computed(() => [
     answer: '可能...当我们试图使计划负担得起时，我们还添加了更多功能并建立更强大的模型，这些模型的成本更高。\n但是，如果您购买年度计划，我们会很乐意尊重它。'
   },
   {
-    question: '如果我订阅，我会得到更高质量的图像吗？',
-    answer: '是的！\n尤其是在付费计划中可用的精炼图像功能的情况下，您会注意到图像质量和细节的显着改善。'
+    question: '如果我订阅，我会得到更高质量的文档转换吗？',
+    answer: '是的！\n付费计划用户可以使用高级转换功能，您会注意到文档结构保留更完整、格式更准确，以及更高的处理精度。同时，我们的高级算法能更好地处理复杂表格和图表内容。'
   },
   {
-    question: '如果我订阅，我仍然会收到"流量过多"？',
-    answer: '在正常使用情况下，您不会遇到此消息。但是，如果我们的系统检测到异常使用模式（例如反向工程尝试或其他未经授权的方法），则可能仍然会看到此消息。'
+    question: '如果我订阅，我仍然会遇到处理限制吗？',
+    answer: '在正常使用情况下，付费用户几乎不会受到处理限制。但是，如果我们的系统检测到异常使用模式（例如大量自动化请求或API滥用），则可能仍会应用某些限制。付费用户的处理配额明显高于免费用户。'
   },
   {
     question: '我可以使用该产品获得帮助吗？',
-    answer: '是的！\n您可以通过电子邮件support@raphael.ai与我们联系，以获取所需的任何帮助。'
+    answer: '是的！\n您可以通过电子邮件support@textqantum.ai与我们联系，以获取所需的任何帮助。'
   },
   {
     question: '企业级别是什么？',
-    answer: '如果您有独特的用例，并且想了解有关定价的更多信息，请通过sales@raphael.ai与我们联系。'
+    answer: '如果您有独特的用例，并且想了解有关定价的更多信息，请通过sales@textqantum.ai与我们联系。'
   },
   {
-    question: '我必须是商业使用图像的订户吗？',
-    answer: '否。只要您尊重使用条款，就可以随意使用我们的图像，以期为个人，学术或商业用途！\n如果您是免费的订户，请归功于Raphael.ai的图像。'
+    question: '我必须是付费用户才能将转换后的文档用于商业用途吗？',
+    answer: '否。只要您尊重使用条款，就可以自由使用我们的文档转换功能，无论是个人、学术还是商业用途！\n如果您是免费用户，请在使用时注明文档由TextQantum AI转换。'
   },
   {
     question: '我的订阅包括API访问吗？',
-    answer: '不，目前我们没有公共API，但将在不久的将来提供。\n我们很想听听您的特定要求。'
+    answer: '目前，常规订阅计划不包括API访问权限，但我们正在开发企业级API解决方案，将在不久的将来推出。\n如果您有特定的文档处理API需求，请联系我们的销售团队了解定制方案。'
   }
 ])
 
@@ -333,21 +329,21 @@ onMounted(() => {
 .pricing-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 20px 40px;
+  padding: 30px 20px 40px;
 }
 
 .pricing-title {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .pricing-subtitle {
   font-size: 1.2rem;
   text-align: center;
   color: #aaaaaa;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -358,7 +354,7 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: 36px;
   margin-bottom: 60px;
 }
 
@@ -594,7 +590,7 @@ onMounted(() => {
 /* 响应式样式 */
 @media (max-width: 1100px) {
   .pricing-cards {
-    gap: 16px;
+    gap: 28px;
   }
   
   .pricing-card {
