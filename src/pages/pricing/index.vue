@@ -4,14 +4,6 @@
       <h1 class="pricing-title">选择您的计划</h1>
       <p class="pricing-subtitle">体验 Raphael AI 的最佳功能：更快的生成速度和商业使用权限</p>
       
-      <!-- 价格选择开关 -->
-      <div class="pricing-toggle">
-        <span>月付</span>
-        <el-switch v-model="isYearly" class="pricing-toggle-switch" />
-        <span>年付</span>
-        <span class="discount-tag">节省20%</span>
-      </div>
-      
       <!-- 价格卡片 -->
       <div class="pricing-cards">
         <!-- 高级版 -->
@@ -29,7 +21,7 @@
             <ul>
               <li>
                 <el-icon><Check /></el-icon>
-                无限制图像生成
+                增加900积分
               </li>
               <li>
                 <el-icon><Check /></el-icon>
@@ -49,7 +41,14 @@
             </ul>
           </div>
           <div class="pricing-card-footer">
-            <button class="custom-button primary-button plain-button">升级到高级版</button>
+            <CreemCheckout
+              :productId="highPlan.productId"
+              :buttonText="highPlan.buttonText"
+              :metadata="highPlan.metadata"
+              :showLoginButton="true"
+              :showLoginStatus="true"
+              @checkout-started="trackCheckoutStarted('high')"
+            />
           </div>
         </div>
         
@@ -69,7 +68,7 @@
             <ul>
               <li>
                 <el-icon><Check /></el-icon>
-                无限制图像生成
+                增加2000积分
               </li>
               <li>
                 <el-icon><Check /></el-icon>
@@ -110,7 +109,14 @@
             </ul>
           </div>
           <div class="pricing-card-footer">
-            <button class="custom-button primary-button">升级到旗舰版</button>
+            <CreemCheckout
+              :productId="premiumPlan.productId"
+              :buttonText="premiumPlan.buttonText"
+              :metadata="premiumPlan.metadata"
+              :showLoginButton="true"
+              :showLoginStatus="true"
+              @checkout-started="trackCheckoutStarted('premium')"
+            />
           </div>
         </div>
         
@@ -190,16 +196,34 @@
 import { ref, computed, onMounted } from 'vue'
 import { ArrowDown, Check, InfoFilled } from '@element-plus/icons-vue'
 import { useI18n } from 'vue-i18n'
+import CreemCheckout from '@/components/CreemCheckout.vue'
+import { useUserStore } from '@/stores/user'
 
 const { t } = useI18n()
+const userStore = useUserStore()
 
-// 价格切换
-const isYearly = ref(true)
+// 设置为月付
+const isYearly = ref(false)
 
-// 根据付款方式计算价格
-const highTierPrice = computed(() => isYearly.value ? 10 : 12)
-const premiumTierPrice = computed(() => isYearly.value ? 20 : 24)
-const planPeriod = computed(() => isYearly.value ? '按年收费' : '按月收费')
+// 根据付款方式计算价格 - 只使用月付价格
+const highTierPrice = computed(() => 12)
+const premiumTierPrice = computed(() => 24)
+const planPeriod = computed(() => '按月收费')
+
+// 定义产品计划数据 - 只使用月付产品
+const highPlan = computed(() => ({
+  productId: 'prod_72KZNhyOAGYixU89pUMenL',
+  name: '高级版',
+  buttonText: '升级到高级版',
+  metadata: { plan: 'high', period: 'monthly' }
+}))
+
+const premiumPlan = computed(() => ({
+  productId: 'prod_2JByiTnhcB99sEdTUsbvDQ',
+  name: '旗舰版',
+  buttonText: '升级到旗舰版',
+  metadata: { plan: 'premium', period: 'monthly' }
+}))
 
 // FAQ数据
 const faqs = computed(() => [
@@ -287,6 +311,12 @@ const formatText = (text: string) => {
   return formattedText
 }
 
+// 跟踪结账事件
+function trackCheckoutStarted(plan: string) {
+  console.log(`${plan} 计划结账已开始`)
+  // 这里可以添加分析追踪代码
+}
+
 onMounted(() => {
   console.log('价格页面已加载')
 })
@@ -323,28 +353,7 @@ onMounted(() => {
   margin-right: auto;
 }
 
-/* 价格选择开关 */
-.pricing-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  gap: 16px;
-}
-
-.pricing-toggle-switch {
-  --el-switch-on-color: #d4a055;
-}
-
-.discount-tag {
-  background-color: #d4a055;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
+/* 价格卡片 */
 .pricing-cards {
   display: flex;
   flex-wrap: wrap;
@@ -672,5 +681,12 @@ onMounted(() => {
 :deep(ul.nested-list li::before) {
   content: '◦';
   font-size: 16px;
+}
+
+/* 移除价格选择开关相关样式 */
+.pricing-toggle,
+.pricing-toggle-switch,
+.discount-tag {
+  display: none;
 }
 </style> 

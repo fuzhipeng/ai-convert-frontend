@@ -29,74 +29,10 @@
               套餐与账单
             </h2>
             
-            <div class="current-plan">
-              <div class="plan-header">
-                <span class="label">当前套餐：</span>
-                <span class="value">Free</span>
-              </div>
-              
-              <div class="plan-features">
-                <div class="feature-item">
-                  <el-icon><Check /></el-icon>
-                  <span>无限制图像生成</span>
-                </div>
-                <div class="feature-item">
-                  <el-icon><Check /></el-icon>
-                  <span>基础生成速度 (20秒)</span>
-                </div>
-                <div class="feature-item">
-                  <el-icon><Check /></el-icon>
-                  <span>基础优化功能</span>
-                </div>
-              </div>
-            </div>
+            <SubscriptionManager />
             
-            <div class="upgrade-plan">
-              <h3 class="upgrade-title">
-                <el-icon><Star /></el-icon>
-                升级专业版特权
-              </h3>
-              
-              <div class="upgrade-features">
-                <div class="feature-item">
-                  <el-icon><DataAnalysis /></el-icon>
-                  <div class="feature-content">
-                    <span class="feature-name">5倍生成速度</span>
-                    <span class="feature-desc">图片生成只需4秒，而不是20秒</span>
-                  </div>
-                </div>
-                <div class="feature-item">
-                  <el-icon><Picture /></el-icon>
-                  <div class="feature-content">
-                    <span class="feature-name">无水印</span>
-                    <span class="feature-desc">所有生成图片均可商用</span>
-                  </div>
-                </div>
-                <div class="feature-item">
-                  <el-icon><Sort /></el-icon>
-                  <div class="feature-content">
-                    <span class="feature-name">优先生成队列</span>
-                    <span class="feature-desc">高峰期跳过等待队列</span>
-                  </div>
-                </div>
-                <div class="feature-item">
-                  <el-icon><Lock /></el-icon>
-                  <div class="feature-content">
-                    <span class="feature-name">私密生成</span>
-                    <span class="feature-desc">您生成的图片不会在社区或公开中显示</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="upgrade-pricing">
-                升级专业版仅需 <span class="price">$10/月</span> <span class="billing-cycle">(年付)</span>
-              </div>
-              
-              <el-button type="primary" class="upgrade-button">
-                立即升级
-                <el-icon><ArrowRight /></el-icon>
-              </el-button>
-            </div>
+            <!-- 用户付费套餐内容已经在SubscriptionManager中显示，无需重复展示 -->
+            
           </div>
         </div>
       </div>
@@ -109,9 +45,15 @@ import { useUserStore } from '../../stores/user'
 import { User, Ticket, Check, Star, DataAnalysis, Picture, Sort, Lock, ArrowRight } from '@element-plus/icons-vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import CreemCheckout from '@/components/CreemCheckout.vue'
+import SubscriptionManager from '@/components/SubscriptionManager.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+
+function trackCheckoutStarted(plan: string) {
+  console.log(`用户开始${plan}套餐的结账流程`)
+}
 
 onMounted(() => {
   console.log('Settings组件已挂载')
@@ -205,121 +147,18 @@ onMounted(() => {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.plan-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.plan-header .label {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.plan-header .value {
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  margin-left: 4px;
-}
-
-.plan-features {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #ffffff;
-}
-
-.feature-item .el-icon {
-  color: #d4a055;
-  font-size: 16px;
-}
-
-.upgrade-plan {
-  background-color: #2a2a2a;
-  border-radius: 8px;
-  padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.upgrade-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.upgrade-title .el-icon {
-  color: #d4a055;
-}
-
-.upgrade-features {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.feature-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.feature-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-}
-
-.feature-desc {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.upgrade-pricing {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 20px;
-}
-
-.price {
-  font-size: 20px;
-  font-weight: 600;
-  color: #d4a055;
-}
-
+.plan-header,
+.plan-features,
+.feature-item,
+.upgrade-title,
+.upgrade-features,
+.feature-content,
+.feature-name,
+.feature-desc,
+.upgrade-pricing,
+.price,
 .billing-cycle {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.upgrade-button {
-  width: 100%;
-  background-color: #d4a055;
-  border-color: #d4a055;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 40px;
-  font-size: 14px;
-  
-  &:hover {
-    background-color: #c2924a;
-    border-color: #c2924a;
-  }
+  display: none;
 }
 
 @media (max-width: 768px) {
