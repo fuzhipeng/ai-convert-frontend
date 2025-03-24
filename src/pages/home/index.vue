@@ -746,7 +746,10 @@ const startConvert = async () => {
       // 创建FormData对象
       const formData = new FormData()
       formData.append('file', currentFile.value.raw)
-
+    // 添加用户ID
+    if (userStore.isAuthenticated && userStore.user) {
+      formData.append('userId', userStore.user.id)
+    }
       // 发送POST请求上传文件
       console.log('正在调用上传API:', `${apiBaseUrl.value}/api/file/upload`)
       const response = await axios.post(`${apiBaseUrl.value}/api/file/upload`, formData, {
