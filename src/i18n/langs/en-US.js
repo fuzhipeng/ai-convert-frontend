@@ -178,5 +178,93 @@ export default {
     mockSuccess: 'Mock login successful',
     mockStatusError: 'Mock login status verification failed',
     scriptError: 'Failed to load Google login service'
+  },
+  pricing: {
+    title: 'Choose Your Plan',
+    subtitle: 'Experience the best features of TextQantum AI: faster document processing and advanced format preservation',
+    monthly: 'Monthly subscription',
+    yearly: 'Annual subscription (Save 20%)',
+    highTier: {
+      title: 'Advanced',
+      points: 'Add 900 points',
+      speed: 'Fast document processing (5x)',
+      speedTooltip: '5 times faster than the free version',
+      noAds: 'No advertisements',
+      noWatermark: 'No watermark',
+      buttonText: 'Subscribe Now'
+    },
+    premiumTier: {
+      title: 'Premium',
+      popular: 'Most Popular',
+      points: 'Add 2000 points',
+      speed: 'Fastest document processing',
+      speedTooltip: 'Highest priority document processing speed',
+      formatOptimization: 'Advanced format optimization',
+      formatTooltip: 'Access to advanced formatting settings and document enhancement tools',
+      privateProcessing: 'Private document processing',
+      privateTooltip: 'Your document content will not be used to train models',
+      earlyAccess: 'Early access to new features',
+      earlyAccessTooltip: 'Priority access to newly released features',
+      buttonText: 'Subscribe Now'
+    },
+    enterpriseTier: {
+      title: 'Enterprise',
+      description: 'Enterprise-level solution',
+      price: 'Custom',
+      privacy: 'Complete privacy',
+      privacyTooltip: 'Enterprise-grade data security and privacy protection',
+      customModel: 'Custom models',
+      customIntegration: 'Custom integration',
+      dedicatedSupport: 'Dedicated support',
+      apiAccess: 'API access',
+      highVolume: 'High capacity',
+      buttonText: 'Coming Soon'
+    },
+    faq: {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Get answers to common questions about our subscription plans',
+      items: [
+        {
+          question: 'Why subscribe?',
+          answer: 'Your support helps us keep this site free and brings some valuable benefits!\n\n• Your document conversions will have no watermark!\n\n• Faster conversion speeds with priority over other users. When there\'s a queue processing documents, we\'ll move you to the front - especially helpful during high traffic!\n\n• Your document content remains completely private and won\'t be used for model training or shared with third parties.\n\n• No ad interruptions for a smoother experience!\n\n• Additional points to process more documents, increasing your productivity.'
+        },
+        {
+          question: 'Can I upgrade or cancel?',
+          answer: 'Anytime!\nYou can upgrade or cancel with one click from the account settings page.\nYour subscription runs throughout your subscription period, but there\'s never a contract.'
+        },
+        {
+          question: 'Can I get a refund?',
+          answer: 'No, our sales are non-refundable.'
+        },
+        {
+          question: 'Will you raise prices?',
+          answer: 'Possibly... While we try to keep plans affordable, we also add more features and build more powerful models which cost more.\nHowever, if you purchase an annual plan, we\'ll be happy to honor it.'
+        },
+        {
+          question: 'Will I get higher quality document conversions if I subscribe?',
+          answer: 'Yes!\nPaid plan users have access to premium conversion features, and you\'ll notice more complete document structure preservation, more accurate formatting, and higher processing precision. Additionally, our advanced algorithms can better handle complex tables and chart content.'
+        },
+        {
+          question: 'Will I still encounter processing limits if I subscribe?',
+          answer: 'Under normal usage conditions, paid users rarely experience processing limits. However, if our system detects abnormal usage patterns (such as large-scale automated requests or API abuse), certain limitations may still apply. Paid users have significantly higher processing quotas than free users.'
+        },
+        {
+          question: 'Can I get help with the product?',
+          answer: 'Yes!\nYou can contact us at support@textqantum.ai for any assistance you need.'
+        },
+        {
+          question: 'What is the Enterprise tier?',
+          answer: 'If you have unique use cases and want to learn more about pricing, please contact us at sales@textqantum.ai.'
+        },
+        {
+          question: 'Do I have to be a paid user to use converted documents for commercial purposes?',
+          answer: 'No. As long as you respect the terms of use, you are free to use our document conversion features for personal, academic, or commercial purposes!\nIf you are a free user, please attribute that the document was converted by TextQantum AI when using it.'
+        },
+        {
+          question: 'Does my subscription include API access?',
+          answer: 'Currently, regular subscription plans do not include API access, but we are developing an enterprise-level API solution that will be available in the near future.\nIf you have specific document processing API needs, please contact our sales team for customized solutions.'
+        }
+      ]
+    }
   }
 } 

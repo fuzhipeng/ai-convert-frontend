@@ -171,5 +171,93 @@ export default {
     backHome: 'Zurück zur Startseite',
     refresh: 'Seite aktualisieren',
     details: 'Fehlerdetails'
+  },
+  pricing: {
+    title: 'Wählen Sie Ihren Plan',
+    subtitle: 'Erleben Sie die besten Funktionen von TextQantum AI: schnellere Dokumentenverarbeitung und erweiterte Formaterhaltung',
+    monthly: 'Monatsabonnement',
+    yearly: 'Jahresabonnement (20% sparen)',
+    highTier: {
+      title: 'Fortgeschritten',
+      points: '900 Punkte hinzufügen',
+      speed: 'Schnelle Dokumentenverarbeitung (5x)',
+      speedTooltip: '5-mal schneller als die kostenlose Version',
+      noAds: 'Keine Werbung',
+      noWatermark: 'Kein Wasserzeichen',
+      buttonText: 'Jetzt abonnieren'
+    },
+    premiumTier: {
+      title: 'Premium',
+      popular: 'Am beliebtesten',
+      points: '2000 Punkte hinzufügen',
+      speed: 'Schnellste Dokumentenverarbeitung',
+      speedTooltip: 'Höchste Priorität bei der Dokumentenverarbeitungsgeschwindigkeit',
+      formatOptimization: 'Erweiterte Formatoptimierung',
+      formatTooltip: 'Zugriff auf erweiterte Formatierungseinstellungen und Dokumentenverbesserungstools',
+      privateProcessing: 'Private Dokumentenverarbeitung',
+      privateTooltip: 'Ihre Dokumenteninhalte werden nicht zum Trainieren von Modellen verwendet',
+      earlyAccess: 'Frühzeitiger Zugang zu neuen Funktionen',
+      earlyAccessTooltip: 'Bevorzugter Zugang zu neu veröffentlichten Funktionen',
+      buttonText: 'Jetzt abonnieren'
+    },
+    enterpriseTier: {
+      title: 'Unternehmen',
+      description: 'Unternehmenslösung',
+      price: 'Individuell',
+      privacy: 'Vollständige Privatsphäre',
+      privacyTooltip: 'Datensicherheit und Datenschutz auf Unternehmensebene',
+      customModel: 'Benutzerdefinierte Modelle',
+      customIntegration: 'Benutzerdefinierte Integration',
+      dedicatedSupport: 'Dedizierter Support',
+      apiAccess: 'API-Zugang',
+      highVolume: 'Hohe Kapazität',
+      buttonText: 'Demnächst verfügbar'
+    },
+    faq: {
+      title: 'Häufig gestellte Fragen',
+      subtitle: 'Erhalten Sie Antworten auf häufige Fragen zu unseren Abonnementplänen',
+      items: [
+        {
+          question: 'Warum sollte ich mich anmelden?',
+          answer: 'Ihre Unterstützung hilft uns, diese Website kostenlos zu halten und bringt wertvolle Vorteile!\n\n• Ihre Dokumentkonvertierungen haben kein Wasserzeichen!\n\n• Schnellere Konvertierungsgeschwindigkeiten mit Priorität vor anderen Benutzern. Wenn es eine Warteschlange für die Dokumentenverarbeitung gibt, rücken wir Sie nach vorne - besonders nützlich bei hohem Verkehrsaufkommen!\n\n• Der Inhalt Ihrer Dokumente bleibt vollständig privat und wird nicht für Modelltraining oder an Dritte weitergegeben.\n\n• Keine Werbeunterbrechungen für ein flüssigeres Erlebnis!\n\n• Zusätzliche Punkte zur Verarbeitung weiterer Dokumente, was Ihre Produktivität steigert.'
+        },
+        {
+          question: 'Kann ich upgraden oder kündigen?',
+          answer: 'Jederzeit!\nSie können mit einem Klick auf der Kontoeinstellungsseite upgraden oder kündigen.\nIhr Abonnement läuft während Ihrer Abonnementzeit, aber es gibt nie einen Vertrag.'
+        },
+        {
+          question: 'Kann ich eine Rückerstattung erhalten?',
+          answer: 'Nein, unsere Verkäufe sind nicht rückerstattungsfähig.'
+        },
+        {
+          question: 'Werden Sie die Preise erhöhen?',
+          answer: 'Möglicherweise... Während wir versuchen, die Pläne erschwinglich zu halten, fügen wir auch mehr Funktionen hinzu und bauen leistungsfähigere Modelle, die mehr kosten.\nWenn Sie jedoch einen Jahresplan kaufen, werden wir diesen gerne einhalten.'
+        },
+        {
+          question: 'Erhalte ich bei einem Abonnement qualitativ hochwertigere Dokumentkonvertierungen?',
+          answer: 'Ja!\nBenutzer von kostenpflichtigen Plänen haben Zugriff auf Premium-Konvertierungsfunktionen, und Sie werden eine vollständigere Erhaltung der Dokumentstruktur, genauere Formatierung und höhere Verarbeitungsgenauigkeit bemerken. Darüber hinaus können unsere fortschrittlichen Algorithmen komplexe Tabellen und Grafikinhalte besser verarbeiten.'
+        },
+        {
+          question: 'Werde ich bei einem Abonnement immer noch auf Verarbeitungsbeschränkungen stoßen?',
+          answer: 'Unter normalen Nutzungsbedingungen stoßen kostenpflichtige Benutzer selten auf Verarbeitungsbeschränkungen. Wenn unser System jedoch abnormale Nutzungsmuster erkennt (wie groß angelegte automatisierte Anfragen oder API-Missbrauch), können bestimmte Beschränkungen weiterhin gelten. Kostenpflichtige Benutzer haben deutlich höhere Verarbeitungskontingente als kostenlose Benutzer.'
+        },
+        {
+          question: 'Kann ich Hilfe mit dem Produkt erhalten?',
+          answer: 'Ja!\nSie können uns unter support@textqantum.ai für jede benötigte Unterstützung kontaktieren.'
+        },
+        {
+          question: 'Was ist die Enterprise-Stufe?',
+          answer: 'Wenn Sie einzigartige Anwendungsfälle haben und mehr über die Preise erfahren möchten, kontaktieren Sie uns bitte unter sales@textqantum.ai.'
+        },
+        {
+          question: 'Muss ich ein kostenpflichtiger Benutzer sein, um konvertierte Dokumente für kommerzielle Zwecke zu verwenden?',
+          answer: 'Nein. Solange Sie die Nutzungsbedingungen einhalten, können Sie unsere Dokumentkonvertierungsfunktionen frei für persönliche, akademische oder kommerzielle Zwecke nutzen!\nWenn Sie ein kostenloser Benutzer sind, geben Sie bitte bei der Verwendung an, dass das Dokument von TextQantum AI konvertiert wurde.'
+        },
+        {
+          question: 'Beinhaltet mein Abonnement API-Zugriff?',
+          answer: 'Derzeit beinhalten reguläre Abonnementpläne keinen API-Zugriff, aber wir entwickeln eine Enterprise-Level-API-Lösung, die in naher Zukunft verfügbar sein wird.\nWenn Sie spezifische API-Anforderungen für die Dokumentenverarbeitung haben, kontaktieren Sie bitte unser Vertriebsteam für maßgeschneiderte Lösungen.'
+        }
+      ]
+    }
   }
 } 

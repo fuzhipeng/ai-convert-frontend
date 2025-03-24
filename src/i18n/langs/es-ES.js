@@ -171,5 +171,93 @@ export default {
     backHome: 'Volver al inicio',
     refresh: 'Actualizar página',
     details: 'Detalles del error'
+  },
+  pricing: {
+    title: 'Elija Su Plan',
+    subtitle: 'Experimente las mejores características de TextQantum AI: procesamiento de documentos más rápido y preservación avanzada de formatos',
+    monthly: 'Suscripción mensual',
+    yearly: 'Suscripción anual (Ahorre 20%)',
+    highTier: {
+      title: 'Avanzado',
+      points: 'Añadir 900 puntos',
+      speed: 'Procesamiento rápido de documentos (5x)',
+      speedTooltip: '5 veces más rápido que la versión gratuita',
+      noAds: 'Sin publicidad',
+      noWatermark: 'Sin marca de agua',
+      buttonText: 'Suscribirse Ahora'
+    },
+    premiumTier: {
+      title: 'Premium',
+      popular: 'Más Popular',
+      points: 'Añadir 2000 puntos',
+      speed: 'Procesamiento de documentos más rápido',
+      speedTooltip: 'Velocidad de procesamiento de documentos de máxima prioridad',
+      formatOptimization: 'Optimización avanzada de formato',
+      formatTooltip: 'Acceso a configuraciones avanzadas de formato y herramientas de mejora de documentos',
+      privateProcessing: 'Procesamiento privado de documentos',
+      privateTooltip: 'El contenido de su documento no se utilizará para entrenar modelos',
+      earlyAccess: 'Acceso anticipado a nuevas funciones',
+      earlyAccessTooltip: 'Acceso prioritario a funciones recién lanzadas',
+      buttonText: 'Suscribirse Ahora'
+    },
+    enterpriseTier: {
+      title: 'Empresarial',
+      description: 'Solución de nivel empresarial',
+      price: 'Personalizado',
+      privacy: 'Privacidad completa',
+      privacyTooltip: 'Seguridad de datos y protección de privacidad de nivel empresarial',
+      customModel: 'Modelos personalizados',
+      customIntegration: 'Integración personalizada',
+      dedicatedSupport: 'Soporte dedicado',
+      apiAccess: 'Acceso API',
+      highVolume: 'Alta capacidad',
+      buttonText: 'Próximamente'
+    },
+    faq: {
+      title: 'Preguntas Frecuentes',
+      subtitle: 'Obtenga respuestas a preguntas comunes sobre nuestros planes de suscripción',
+      items: [
+        {
+          question: '¿Por qué suscribirse?',
+          answer: '¡Su apoyo nos ayuda a mantener este sitio gratuito y trae beneficios valiosos!\n\n• ¡Sus conversiones de documentos no tendrán marca de agua!\n\n• Velocidades de conversión más rápidas con prioridad sobre otros usuarios. Cuando hay una cola para procesar documentos, lo movemos al frente - ¡especialmente útil durante el tráfico alto!\n\n• El contenido de sus documentos permanece completamente privado y no se utilizará para entrenar modelos ni se compartirá con terceros.\n\n• ¡Sin interrupciones publicitarias para una experiencia más fluida!\n\n• Puntos adicionales para procesar más documentos, aumentando su productividad.'
+        },
+        {
+          question: '¿Puedo actualizar o cancelar?',
+          answer: '¡En cualquier momento!\nPuede actualizar o cancelar con un clic desde la página de configuración de la cuenta.\nSu suscripción se extiende durante su período de suscripción, pero nunca hay un contrato.'
+        },
+        {
+          question: '¿Puedo obtener un reembolso?',
+          answer: 'No, nuestras ventas no son reembolsables.'
+        },
+        {
+          question: '¿Aumentarán los precios?',
+          answer: 'Posiblemente... Si bien intentamos mantener los planes asequibles, también agregamos más funciones y construimos modelos más potentes que cuestan más.\nSin embargo, si compra un plan anual, estaremos encantados de honrarlo.'
+        },
+        {
+          question: '¿Obtendré conversiones de documentos de mayor calidad si me suscribo?',
+          answer: '¡Sí!\nLos usuarios de planes pagados tienen acceso a funciones de conversión premium, y notará una preservación más completa de la estructura del documento, un formato más preciso y una mayor precisión de procesamiento. Además, nuestros algoritmos avanzados pueden manejar mejor las tablas complejas y el contenido gráfico.'
+        },
+        {
+          question: '¿Todavía encontraré límites de procesamiento si me suscribo?',
+          answer: 'En condiciones normales de uso, los usuarios pagados rara vez encuentran límites de procesamiento. Sin embargo, si nuestro sistema detecta patrones de uso anormales (como solicitudes automatizadas a gran escala o abuso de API), ciertas limitaciones pueden seguir aplicándose. Los usuarios pagados tienen cuotas de procesamiento significativamente más altas que los usuarios gratuitos.'
+        },
+        {
+          question: '¿Puedo obtener ayuda con el producto?',
+          answer: '¡Sí!\nPuede contactarnos en support@textqantum.ai para cualquier asistencia que necesite.'
+        },
+        {
+          question: '¿Qué es el nivel Empresarial?',
+          answer: 'Si tiene casos de uso únicos y desea saber más sobre los precios, contáctenos en sales@textqantum.ai.'
+        },
+        {
+          question: '¿Tengo que ser un usuario pagado para usar documentos convertidos con fines comerciales?',
+          answer: 'No. Siempre que respete los términos de uso, es libre de usar nuestras funciones de conversión de documentos para fines personales, académicos o comerciales.\nSi es un usuario gratuito, por favor indique que el documento fue convertido por TextQantum AI cuando lo use.'
+        },
+        {
+          question: '¿Mi suscripción incluye acceso a la API?',
+          answer: 'Actualmente, los planes de suscripción regulares no incluyen acceso a la API, pero estamos desarrollando una solución API de nivel empresarial que estará disponible en un futuro próximo.\nSi tiene necesidades específicas de API para el procesamiento de documentos, contáctenos en nuestro equipo de ventas para soluciones personalizadas.'
+        }
+      ]
+    }
   }
 } 

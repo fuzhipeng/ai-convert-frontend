@@ -163,8 +163,9 @@ onMounted(() => {
   // 加载用户积分
   if (userStore.isAuthenticated) {
     try {
-      // 调用API获取用户积分
-      getUserPoints(userStore.user.id).then(response => {
+      // 调用API获取用户积分，确保ID为字符串类型
+      const userId = userStore.user && userStore.user.id ? String(userStore.user.id) : userStore.googleId;
+      getUserPoints(userId).then(response => {
         console.log('获取积分成功:', response);
         // 根据API实际返回结构调整
         if (response && response.points !== undefined) {

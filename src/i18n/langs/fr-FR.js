@@ -171,5 +171,93 @@ export default {
     backHome: 'Retour à l\'accueil',
     refresh: 'Actualiser la page',
     details: 'Détails de l\'erreur'
+  },
+  pricing: {
+    title: 'Choisissez Votre Forfait',
+    subtitle: 'Découvrez les meilleures fonctionnalités de TextQantum AI: traitement de documents plus rapide et préservation avancée du format',
+    monthly: 'Abonnement mensuel',
+    yearly: 'Abonnement annuel (Économisez 20%)',
+    highTier: {
+      title: 'Avancé',
+      points: 'Ajoutez 900 points',
+      speed: 'Traitement rapide des documents (5x)',
+      speedTooltip: '5 fois plus rapide que la version gratuite',
+      noAds: 'Sans publicités',
+      noWatermark: 'Sans filigrane',
+      buttonText: 'S\'abonner Maintenant'
+    },
+    premiumTier: {
+      title: 'Premium',
+      popular: 'Le Plus Populaire',
+      points: 'Ajoutez 2000 points',
+      speed: 'Traitement des documents le plus rapide',
+      speedTooltip: 'Vitesse de traitement prioritaire',
+      formatOptimization: 'Optimisation avancée du format',
+      formatTooltip: 'Accès aux paramètres de formatage avancés et aux outils d\'amélioration des documents',
+      privateProcessing: 'Traitement privé des documents',
+      privateTooltip: 'Votre contenu de document ne sera pas utilisé pour entraîner des modèles',
+      earlyAccess: 'Accès anticipé aux nouvelles fonctionnalités',
+      earlyAccessTooltip: 'Accès prioritaire aux fonctionnalités nouvellement publiées',
+      buttonText: 'S\'abonner Maintenant'
+    },
+    enterpriseTier: {
+      title: 'Entreprise',
+      description: 'Solution de niveau entreprise',
+      price: 'Personnalisé',
+      privacy: 'Confidentialité complète',
+      privacyTooltip: 'Sécurité des données et protection de la vie privée de niveau entreprise',
+      customModel: 'Modèles personnalisés',
+      customIntegration: 'Intégration personnalisée',
+      dedicatedSupport: 'Support dédié',
+      apiAccess: 'Accès API',
+      highVolume: 'Haute capacité',
+      buttonText: 'Bientôt Disponible'
+    },
+    faq: {
+      title: 'Questions Fréquentes',
+      subtitle: 'Obtenez des réponses aux questions courantes sur nos plans d\'abonnement',
+      items: [
+        {
+          question: 'Pourquoi s\'abonner ?',
+          answer: 'Votre soutien nous aide à maintenir ce site gratuit et apporte des avantages précieux !\n\n• Vos conversions de documents n\'auront pas de filigrane !\n\n• Des vitesses de conversion plus rapides avec priorité sur les autres utilisateurs. Lorsqu\'il y a une file d\'attente pour le traitement des documents, nous vous déplaçons en avant - particulièrement utile en période de forte affluence !\n\n• Le contenu de vos documents reste totalement privé et ne sera pas utilisé pour l\'entraînement des modèles ou partagé avec des tiers.\n\n• Pas d\'interruptions publicitaires pour une expérience plus fluide !\n\n• Des points supplémentaires pour traiter plus de documents, augmentant votre productivité.'
+        },
+        {
+          question: 'Puis-je mettre à niveau ou annuler ?',
+          answer: 'À tout moment !\nVous pouvez mettre à niveau ou annuler en un clic depuis la page des paramètres du compte.\nVotre abonnement s\'étend sur toute la durée de votre période d\'abonnement, mais il n\'y a jamais de contrat.'
+        },
+        {
+          question: 'Puis-je obtenir un remboursement ?',
+          answer: 'Non, nos ventes ne sont pas remboursables.'
+        },
+        {
+          question: 'Allez-vous augmenter les prix ?',
+          answer: 'Peut-être... Bien que nous essayions de maintenir les plans abordables, nous ajoutons également plus de fonctionnalités et construisons des modèles plus puissants qui coûtent plus cher.\nCependant, si vous achetez un plan annuel, nous serons ravis de le respecter.'
+        },
+        {
+          question: 'Obtiendrai-je des conversions de documents de meilleure qualité si je m\'abonne ?',
+          answer: 'Oui !\nLes utilisateurs des plans payants ont accès aux fonctionnalités de conversion premium, et vous remarquerez une préservation plus complète de la structure des documents, un formatage plus précis et une précision de traitement plus élevée. De plus, nos algorithmes avancés peuvent mieux gérer les tableaux et les contenus graphiques complexes.'
+        },
+        {
+          question: 'Rencontrerai-je encore des limites de traitement si je m\'abonne ?',
+          answer: 'Dans des conditions d\'utilisation normales, les utilisateurs payants rencontrent rarement des limites de traitement. Cependant, si notre système détecte des modèles d\'utilisation anormaux (tels que des requêtes automatisées à grande échelle ou des abus d\'API), certaines limitations peuvent toujours s\'appliquer. Les utilisateurs payants ont des quotas de traitement beaucoup plus élevés que les utilisateurs gratuits.'
+        },
+        {
+          question: 'Puis-je obtenir de l\'aide avec le produit ?',
+          answer: 'Oui !\nVous pouvez nous contacter à support@textqantum.ai pour toute assistance dont vous avez besoin.'
+        },
+        {
+          question: 'Qu\'est-ce que le niveau Entreprise ?',
+          answer: 'Si vous avez des cas d\'utilisation uniques et souhaitez en savoir plus sur les tarifs, veuillez nous contacter à sales@textqantum.ai.'
+        },
+        {
+          question: 'Dois-je être un utilisateur payant pour utiliser les documents convertis à des fins commerciales ?',
+          answer: 'Non. Tant que vous respectez les conditions d\'utilisation, vous êtes libre d\'utiliser nos fonctionnalités de conversion de documents à des fins personnelles, académiques ou commerciales !\nSi vous êtes un utilisateur gratuit, veuillez indiquer que le document a été converti par TextQantum AI lors de son utilisation.'
+        },
+        {
+          question: 'Mon abonnement inclut-il l\'accès à l\'API ?',
+          answer: 'Actuellement, les plans d\'abonnement réguliers n\'incluent pas l\'accès à l\'API, mais nous développons une solution API de niveau entreprise qui sera disponible dans un avenir proche.\nSi vous avez des besoins spécifiques en matière d\'API de traitement de documents, veuillez contacter notre équipe commerciale pour des solutions personnalisées.'
+        }
+      ]
+    }
   }
 } 

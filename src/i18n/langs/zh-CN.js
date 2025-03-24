@@ -179,5 +179,93 @@ export default {
     mockSuccess: '模拟登录成功',
     mockStatusError: '模拟登录状态验证失败',
     scriptError: 'Google登录服务加载失败'
+  },
+  pricing: {
+    title: '选择您的计划',
+    subtitle: '体验 TextQantum AI 的最佳功能：更快的文档处理速度和高级格式保留能力',
+    monthly: '月度订阅',
+    yearly: '年度订阅（节省20%）',
+    highTier: {
+      title: '高级版',
+      points: '增加900积分',
+      speed: '快速文档处理（5倍速）',
+      speedTooltip: '比免费版处理速度快5倍',
+      noAds: '无广告',
+      noWatermark: '无水印',
+      buttonText: '立即订阅'
+    },
+    premiumTier: {
+      title: '旗舰版',
+      popular: '最受欢迎',
+      points: '增加2000积分',
+      speed: '最快文档处理速度',
+      speedTooltip: '最高优先级的文档处理速度',
+      formatOptimization: '高级格式优化',
+      formatTooltip: '访问高级格式设置和文档增强工具',
+      privateProcessing: '私密文档处理',
+      privateTooltip: '您的文档内容不会被用于训练模型',
+      earlyAccess: '抢先体验新功能',
+      earlyAccessTooltip: '优先访问最新发布的功能',
+      buttonText: '立即订阅'
+    },
+    enterpriseTier: {
+      title: '企业版',
+      description: '企业级解决方案',
+      price: '定制',
+      privacy: '完全隐私',
+      privacyTooltip: '企业级数据安全和隐私保护',
+      customModel: '定制模型',
+      customIntegration: '定制集成',
+      dedicatedSupport: '专属支持',
+      apiAccess: 'API 访问',
+      highVolume: '高容量',
+      buttonText: '即将推出'
+    },
+    faq: {
+      title: '常见问题',
+      subtitle: '获取有关我们订阅计划的常见问题的答案',
+      items: [
+        {
+          question: '为什么要订阅？',
+          answer: '您的支持有助于我们免费保持该网站，并带来一些宝贵的好处！\n\n• 您的文档转换不会有水印！\n\n• 转换速度更快，您优先于其他用户。当有队列处理文档时，我们会将您移到前面，这在流量较高时特别有用！\n\n• 您的文档内容完全私密，不会被用于训练模型或与第三方共享。\n\n• 无广告干扰，享受更流畅的使用体验！\n\n• 增加的积分可以处理更多文档，提高工作效率。'
+        },
+        {
+          question: '我可以升级还是取消？',
+          answer: '随时！\n您可以从帐户设置页面一单击中升级或取消。\n您的订阅贯穿您的订阅期限，但从来没有合同。'
+        },
+        {
+          question: '我可以退款吗？',
+          answer: '不，我们的销售额不退还。'
+        },
+        {
+          question: '您要提高价格吗？',
+          answer: '可能...当我们试图使计划负担得起时，我们还添加了更多功能并建立更强大的模型，这些模型的成本更高。\n但是，如果您购买年度计划，我们会很乐意尊重它。'
+        },
+        {
+          question: '如果我订阅，我会得到更高质量的文档转换吗？',
+          answer: '是的！\n付费计划用户可以使用高级转换功能，您会注意到文档结构保留更完整、格式更准确，以及更高的处理精度。同时，我们的高级算法能更好地处理复杂表格和图表内容。'
+        },
+        {
+          question: '如果我订阅，我仍然会遇到处理限制吗？',
+          answer: '在正常使用情况下，付费用户几乎不会受到处理限制。但是，如果我们的系统检测到异常使用模式（例如大量自动化请求或API滥用），则可能仍会应用某些限制。付费用户的处理配额明显高于免费用户。'
+        },
+        {
+          question: '我可以使用该产品获得帮助吗？',
+          answer: '是的！\n您可以通过电子邮件support@textqantum.ai与我们联系，以获取所需的任何帮助。'
+        },
+        {
+          question: '企业级别是什么？',
+          answer: '如果您有独特的用例，并且想了解有关定价的更多信息，请通过sales@textqantum.ai与我们联系。'
+        },
+        {
+          question: '我必须是付费用户才能将转换后的文档用于商业用途吗？',
+          answer: '否。只要您尊重使用条款，就可以自由使用我们的文档转换功能，无论是个人、学术还是商业用途！\n如果您是免费用户，请在使用时注明文档由TextQantum AI转换。'
+        },
+        {
+          question: '我的订阅包括API访问吗？',
+          answer: '目前，常规订阅计划不包括API访问权限，但我们正在开发企业级API解决方案，将在不久的将来推出。\n如果您有特定的文档处理API需求，请联系我们的销售团队了解定制方案。'
+        }
+      ]
+    }
   }
 } 

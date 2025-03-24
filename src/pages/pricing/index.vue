@@ -1,49 +1,49 @@
 <template>
   <div class="pricing-page">
     <main class="pricing-container">
-      <h1 class="pricing-title">选择您的计划</h1>
-      <p class="pricing-subtitle">体验 TextQantum AI 的最佳功能：更快的文档处理速度和高级格式保留能力</p>
+      <h1 class="pricing-title">{{ $t('pricing.title') }}</h1>
+      <p class="pricing-subtitle">{{ $t('pricing.subtitle') }}</p>
       
       <!-- 价格卡片 -->
       <div class="pricing-cards">
         <!-- 高级版 -->
         <div class="pricing-card">
           <div class="pricing-card-header">
-            <h2>高级版</h2>
+            <h2>{{ $t('pricing.highTier.title') }}</h2>
             <p class="pricing-description">{{ planPeriod }}</p>
           </div>
           <div class="pricing-card-price">
             <span class="price-currency">$</span>
             <span class="price-amount">{{ highTierPrice }}</span>
-            <span class="price-period">/月</span>
+            <span class="price-period">/{{ !isYearly ? $t('pricing.monthly').split(' ')[0].toLowerCase() : $t('pricing.yearly').split(' ')[0].toLowerCase() }}</span>
           </div>
           <div class="pricing-card-features">
             <ul>
               <li>
                 <el-icon><Check /></el-icon>
-                增加900积分
+                {{ $t('pricing.highTier.points') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                快速文档处理（5倍速）
-                <el-tooltip content="比免费版处理速度快5倍" placement="top">
+                {{ $t('pricing.highTier.speed') }}
+                <el-tooltip :content="$t('pricing.highTier.speedTooltip')" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                无广告
+                {{ $t('pricing.highTier.noAds') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                无水印
+                {{ $t('pricing.highTier.noWatermark') }}
               </li>
             </ul>
           </div>
           <div class="pricing-card-footer">
             <CreemCheckout
               :productId="highPlan.productId"
-              :buttonText="highPlan.buttonText"
+              :buttonText="$t('pricing.highTier.buttonText')"
               :metadata="highPlan.metadata"
               @checkout-started="trackCheckoutStarted('high')"
             />
@@ -53,54 +53,54 @@
         <!-- 旗舰版 -->
         <div class="pricing-card highlighted">
           <div class="pricing-card-header">
-            <div class="popular-tag">最受欢迎</div>
-            <h2>旗舰版</h2>
+            <div class="popular-tag">{{ $t('pricing.premiumTier.popular') }}</div>
+            <h2>{{ $t('pricing.premiumTier.title') }}</h2>
             <p class="pricing-description">{{ planPeriod }}</p>
           </div>
           <div class="pricing-card-price">
             <span class="price-currency">$</span>
             <span class="price-amount">{{ premiumTierPrice }}</span>
-            <span class="price-period">/月</span>
+            <span class="price-period">/{{ !isYearly ? $t('pricing.monthly').split(' ')[0].toLowerCase() : $t('pricing.yearly').split(' ')[0].toLowerCase() }}</span>
           </div>
           <div class="pricing-card-features">
             <ul>
               <li>
                 <el-icon><Check /></el-icon>
-                增加2000积分
+                {{ $t('pricing.premiumTier.points') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                最快文档处理速度
-                <el-tooltip content="最高优先级的文档处理速度" placement="top">
+                {{ $t('pricing.premiumTier.speed') }}
+                <el-tooltip :content="$t('pricing.premiumTier.speedTooltip')" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                无广告
+                {{ $t('pricing.highTier.noAds') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                无水印
+                {{ $t('pricing.highTier.noWatermark') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                高级格式优化
-                <el-tooltip content="访问高级格式设置和文档增强工具" placement="top">
+                {{ $t('pricing.premiumTier.formatOptimization') }}
+                <el-tooltip :content="$t('pricing.premiumTier.formatTooltip')" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                私密文档处理
-                <el-tooltip content="您的文档内容不会被用于训练模型" placement="top">
+                {{ $t('pricing.premiumTier.privateProcessing') }}
+                <el-tooltip :content="$t('pricing.premiumTier.privateTooltip')" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                抢先体验新功能
-                <el-tooltip content="优先访问最新发布的功能" placement="top">
+                {{ $t('pricing.premiumTier.earlyAccess') }}
+                <el-tooltip :content="$t('pricing.premiumTier.earlyAccessTooltip')" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
@@ -109,7 +109,7 @@
           <div class="pricing-card-footer">
             <CreemCheckout
               :productId="premiumPlan.productId"
-              :buttonText="premiumPlan.buttonText"
+              :buttonText="$t('pricing.premiumTier.buttonText')"
               :metadata="premiumPlan.metadata"
               @checkout-started="trackCheckoutStarted('premium')"
             />
@@ -119,53 +119,53 @@
         <!-- 企业版 -->
         <div class="pricing-card">
           <div class="pricing-card-header">
-            <h2>Enterprise</h2>
-            <p class="pricing-description">企业级解决方案</p>
+            <h2>{{ $t('pricing.enterpriseTier.title') }}</h2>
+            <p class="pricing-description">{{ $t('pricing.enterpriseTier.description') }}</p>
           </div>
           <div class="pricing-card-price">
-            <span class="price-amount">定制</span>
+            <span class="price-amount">{{ $t('pricing.enterpriseTier.price') }}</span>
           </div>
           <div class="pricing-card-features">
             <ul>
               <li>
                 <el-icon><Check /></el-icon>
-                完全隐私
-                <el-tooltip content="企业级数据安全和隐私保护" placement="top">
+                {{ $t('pricing.enterpriseTier.privacy') }}
+                <el-tooltip :content="$t('pricing.enterpriseTier.privacyTooltip')" placement="top">
                   <el-icon class="info-icon"><InfoFilled /></el-icon>
                 </el-tooltip>
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                定制模型
+                {{ $t('pricing.enterpriseTier.customModel') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                定制集成
+                {{ $t('pricing.enterpriseTier.customIntegration') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                专属支持
+                {{ $t('pricing.enterpriseTier.dedicatedSupport') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                API 访问
+                {{ $t('pricing.enterpriseTier.apiAccess') }}
               </li>
               <li>
                 <el-icon><Check /></el-icon>
-                高容量
+                {{ $t('pricing.enterpriseTier.highVolume') }}
               </li>
             </ul>
           </div>
           <div class="pricing-card-footer">
-            <button class="custom-button primary-button plain-button">即将推出</button>
+            <button class="custom-button primary-button plain-button">{{ $t('pricing.enterpriseTier.buttonText') }}</button>
           </div>
         </div>
       </div>
       
       <!-- 常见问题 FAQ -->
       <div id="faq" class="faq-section">
-        <h2>常见问题</h2>
-        <p class="faq-subtitle">获取有关我们订阅计划的常见问题的答案</p>
+        <h2>{{ $t('pricing.faq.title') }}</h2>
+        <p class="faq-subtitle">{{ $t('pricing.faq.subtitle') }}</p>
         <div class="faq-container">
           <div v-for="(faq, index) in faqs" :key="index" class="faq-item">
             <div 
@@ -189,14 +189,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { ArrowDown, Check, InfoFilled } from '@element-plus/icons-vue'
 import { useI18n } from 'vue-i18n'
 import CreemCheckout from '@/components/CreemCheckout.vue'
 import { useUserStore } from '@/stores/user'
 
-const { t } = useI18n()
+const { t, locale, messages } = useI18n()
 const userStore = useUserStore()
+
+// 调试
+console.log('当前语言:', locale.value)
 
 // 设置为月付
 const isYearly = ref(false)
@@ -204,7 +207,9 @@ const isYearly = ref(false)
 // 根据付款方式计算价格 - 只使用月付价格
 const highTierPrice = computed(() => 12)
 const premiumTierPrice = computed(() => 24)
-const planPeriod = computed(() => '按月收费')
+const planPeriod = computed(() => {
+  return isYearly.value ? t('pricing.yearly') : t('pricing.monthly')
+})
 
 // 定义产品计划数据 - 只使用月付产品
 const highPlan = computed(() => ({
@@ -222,51 +227,28 @@ const premiumPlan = computed(() => ({
 }))
 
 // FAQ数据
-const faqs = computed(() => [
-  {
-    question: '为什么要订阅？',
-    answer: '您的支持有助于我们免费保持该网站，并带来一些宝贵的好处！\n\n• 您的文档转换不会有水印！\n\n• 转换速度更快，您优先于其他用户。当有队列处理文档时，我们会将您移到前面，这在流量较高时特别有用！\n\n• 您的文档内容完全私密，不会被用于训练模型或与第三方共享。\n\n• 无广告干扰，享受更流畅的使用体验！\n\n• 增加的积分可以处理更多文档，提高工作效率。'
-  },
-  {
-    question: '我可以升级还是取消？',
-    answer: '随时！\n您可以从帐户设置页面一单击中升级或取消。\n您的订阅贯穿您的订阅期限，但从来没有合同。'
-  },
-  {
-    question: '我可以退款吗？',
-    answer: '不，我们的销售额不退还。'
-  },
-  {
-    question: '您要提高价格吗？',
-    answer: '可能...当我们试图使计划负担得起时，我们还添加了更多功能并建立更强大的模型，这些模型的成本更高。\n但是，如果您购买年度计划，我们会很乐意尊重它。'
-  },
-  {
-    question: '如果我订阅，我会得到更高质量的文档转换吗？',
-    answer: '是的！\n付费计划用户可以使用高级转换功能，您会注意到文档结构保留更完整、格式更准确，以及更高的处理精度。同时，我们的高级算法能更好地处理复杂表格和图表内容。'
-  },
-  {
-    question: '如果我订阅，我仍然会遇到处理限制吗？',
-    answer: '在正常使用情况下，付费用户几乎不会受到处理限制。但是，如果我们的系统检测到异常使用模式（例如大量自动化请求或API滥用），则可能仍会应用某些限制。付费用户的处理配额明显高于免费用户。'
-  },
-  {
-    question: '我可以使用该产品获得帮助吗？',
-    answer: '是的！\n您可以通过电子邮件support@textqantum.ai与我们联系，以获取所需的任何帮助。'
-  },
-  {
-    question: '企业级别是什么？',
-    answer: '如果您有独特的用例，并且想了解有关定价的更多信息，请通过sales@textqantum.ai与我们联系。'
-  },
-  {
-    question: '我必须是付费用户才能将转换后的文档用于商业用途吗？',
-    answer: '否。只要您尊重使用条款，就可以自由使用我们的文档转换功能，无论是个人、学术还是商业用途！\n如果您是免费用户，请在使用时注明文档由TextQantum AI转换。'
-  },
-  {
-    question: '我的订阅包括API访问吗？',
-    answer: '目前，常规订阅计划不包括API访问权限，但我们正在开发企业级API解决方案，将在不久的将来推出。\n如果您有特定的文档处理API需求，请联系我们的销售团队了解定制方案。'
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqs = computed<FaqItem[]>(() => {
+  try {
+    const currentMessages = messages.value[locale.value] as any;
+    return currentMessages?.pricing?.faq?.items || [];
+  } catch (error) {
+    console.error('获取FAQ数据出错:', error);
+    return [];
   }
-])
+});
 
 // 初始化所有面板为展开状态（设置为false表示不折叠）
-const collapsedPanels = ref(Array(faqs.value.length).fill(false))
+const collapsedPanels = ref<boolean[]>([])
+
+// 监听FAQ数据变化，更新面板状态数组
+watch(faqs, (newFaqs) => {
+  collapsedPanels.value = Array(newFaqs.length).fill(false);
+}, { immediate: true })
 
 // 切换面板展开/折叠状态
 const togglePanel = (index: number) => {
