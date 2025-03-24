@@ -226,6 +226,15 @@ const goToSettings = () => {
     showLoginDialog()
   }
 }
+
+// 检查登录状态并显示登录弹窗
+const checkLoginAndShowDialog = () => {
+  if (!userStore.isAuthenticated) {
+    showLoginDialog()
+    return false
+  }
+  return true
+}
 </script>
 
 <style>

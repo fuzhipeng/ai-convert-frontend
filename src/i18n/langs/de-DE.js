@@ -1,5 +1,6 @@
 export default {
   nav: {
+    home: 'KI-Dokumentenextraktor',
     features: 'Funktionen',
     faq: 'FAQ',
     pricing: 'Preise',
@@ -25,7 +26,8 @@ export default {
     error: 'Konvertierung fehlgeschlagen',
     retry: 'Wiederholen',
     cancel: 'Abbrechen',
-    fileSizeExceeded: 'Dateigröße überschreitet das Benutzerlimit. Bitte führen Sie ein Upgrade auf ein Premium-Konto durch.'
+    fileSizeExceeded: 'Dateigröße überschreitet Limit, bitte upgraden',
+    needLogin: 'Bitte melden Sie sich an, um Dateien hochzuladen'
   },
   preview: {
     title: 'Ergebnisvorschau',

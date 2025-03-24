@@ -1,5 +1,6 @@
 export default {
   nav: {
+    home: 'AI文書抽出',
     features: '機能',
     faq: 'よくある質問',
     pricing: '料金',
@@ -17,15 +18,16 @@ export default {
     }
   },
   upload: {
-    title: 'ここにファイルをドラッグ＆ドロップまたはクリックしてアップロード',
+    title: 'ファイルをドロップまたはクリックしてアップロード',
     subtitle: 'PDF、Word、TXTなどに対応',
     button: 'ファイルを選択',
     converting: '変換中...',
     success: '変換成功',
-    error: '変換に失敗しました',
-    retry: 'リトライ',
+    error: '変換失敗',
+    retry: '再試行',
     cancel: 'キャンセル',
-    fileSizeExceeded: 'ファイルサイズがユーザー制限を超えています。プレミアムアカウントにアップグレードしてください。'
+    fileSizeExceeded: 'ファイルサイズが制限を超えています。アップグレードしてください',
+    needLogin: 'ファイルをアップロードするには、先にログインしてください'
   },
   preview: {
     title: '変換結果プレビュー',

@@ -1,5 +1,6 @@
 export default {
   nav: {
+    home: 'Extracteur de documents AI',
     features: 'Fonctionnalités',
     faq: 'FAQ',
     pricing: 'Tarifs',
@@ -17,7 +18,7 @@ export default {
     }
   },
   upload: {
-    title: 'Glissez-déposez vos fichiers ici ou cliquez pour télécharger',
+    title: 'Déposez des fichiers ici ou cliquez pour télécharger',
     subtitle: 'Prend en charge PDF, Word, TXT et plus',
     button: 'Choisir un fichier',
     converting: 'Conversion en cours...',
@@ -25,7 +26,8 @@ export default {
     error: 'Échec de la conversion',
     retry: 'Réessayer',
     cancel: 'Annuler',
-    fileSizeExceeded: 'La taille du fichier dépasse la limite utilisateur. Veuillez passer à un compte premium.'
+    fileSizeExceeded: 'La taille du fichier dépasse la limite, veuillez mettre à niveau',
+    needLogin: 'Veuillez vous connecter pour télécharger des fichiers'
   },
   preview: {
     title: 'Aperçu du résultat',

@@ -1,5 +1,6 @@
 export default {
   nav: {
+    home: 'AI Document Extractor',
     features: 'Features',
     faq: 'FAQ',
     pricing: 'Pricing',
@@ -21,15 +22,16 @@ export default {
     }
   },
   upload: {
-    title: 'Drag and drop files here or click to upload',
+    title: 'Drop files here or click to upload',
     subtitle: 'Supports PDF, Word, TXT and more',
     button: 'Choose File',
     converting: 'Converting...',
-    success: 'Conversion Successful',
-    error: 'Conversion Failed',
+    success: 'Conversion successful',
+    error: 'Conversion failed',
     retry: 'Retry',
     cancel: 'Cancel',
-    fileSizeExceeded: 'File size exceeds user limit. Please upgrade to a premium account.'
+    fileSizeExceeded: 'File size exceeds user limit, please upgrade',
+    needLogin: 'Please login first to upload files'
   },
   preview: {
     title: 'Preview Result',

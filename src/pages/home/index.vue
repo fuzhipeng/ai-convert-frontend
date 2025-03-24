@@ -247,6 +247,17 @@ const triggerFileInput = () => {
 const handleFileChange = (event) => {
   const file = event.target.files[0]
   if (file) {
+    // 检查登录状态
+    if (!userStore.isAuthenticated) {
+      ElMessage.warning(t('upload.needLogin'))
+      loginDialog.value?.open()
+      // 重置文件输入
+      if (fileInput.value) {
+        fileInput.value.value = ''
+      }
+      return
+    }
+
     // 检查文件大小是否超过1MB
     const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB in bytes
     if (file.size > MAX_FILE_SIZE) {
@@ -276,6 +287,13 @@ const handleFileChange = (event) => {
 const handleDrop = (e) => {
   const file = e.dataTransfer.files[0]
   if (file) {
+    // 检查登录状态
+    if (!userStore.isAuthenticated) {
+      ElMessage.warning(t('upload.needLogin'))
+      loginDialog.value?.open()
+      return
+    }
+
     // 检查文件大小是否超过1MB
     const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB in bytes
     if (file.size > MAX_FILE_SIZE) {

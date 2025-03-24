@@ -30,7 +30,8 @@ export default {
     error: '转换失败',
     retry: '重试',
     cancel: '取消',
-    fileSizeExceeded: '文件大小超过用户限制，请开通会员'
+    fileSizeExceeded: '文件大小超过用户限制，请开通会员',
+    needLogin: '请先登录后再上传文件'
   },
   preview: {
     title: '转换结果预览',
