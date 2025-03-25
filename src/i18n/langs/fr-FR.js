@@ -8,11 +8,11 @@ export default {
     points: 'Points: {points}'
   },
   hero: {
-    title: 'Extrayez l\'essence des articles en un clic, transformez un contenu complexe en magnifiques cartes de connaissance',
-    subtitle: '✨ Rendre le contenu complexe simple et le partage des connaissances plus efficace ✨',
+    title: 'Extrayez l\'essence des articles en un clic, transformez le contenu complexe en belles images de connaissance',
+    subtitle: '✨ Rendre le contenu complexe simple et compréhensible, rendre le partage des connaissances plus efficace ✨',
     tags: {
       free: 'Extraction Intelligente',
-      ai: 'Cartes Élégantes',
+      ai: 'Belles Images',
       noRegister: 'Opération en Un Clic',
       unlimited: 'Apprentissage Efficace'
     }
@@ -114,12 +114,12 @@ export default {
     emailDomain: 'qq.com',
     questions: [
       {
-        q: 'Qu\'est-ce que le Convertisseur de Documents IA ? Comment m\'aide-t-il à extraire l\'essence des articles ?',
-        a: 'Le Convertisseur de Documents IA est un outil intelligent qui analyse automatiquement le contenu des articles, extrait les points de vue essentiels et les informations clés, et transforme un contenu complexe et volumineux en de magnifiques cartes de connaissance. Il vous aide à comprendre rapidement les points clés d\'un article, à économiser du temps de lecture et à améliorer l\'efficacité de l\'apprentissage et du travail.'
+        q: 'Qu\'est-ce que l\'extraction de documents IA ? Comment m\'aide-t-elle à extraire l\'essence des articles ?',
+        a: 'L\'extraction de documents IA est un outil intelligent qui analyse automatiquement le contenu des articles, extrait les points de vue essentiels et les informations clés, et transforme le contenu complexe et long en belles images de connaissance. Elle vous aide à comprendre rapidement les points clés des articles, à économiser du temps de lecture et à améliorer l\'efficacité de l\'apprentissage et du travail.'
       },
       {
-        q: 'Quels avantages offrent les cartes de connaissance ? Pourquoi sont-elles plus efficaces que les notes traditionnelles ?',
-        a: 'Les cartes de connaissance utilisent une présentation visuelle pour structurer et simplifier les informations complexes, facilitant la compréhension et la mémorisation. Par rapport aux notes traditionnelles, les cartes de connaissance sont plus intuitives, visuellement attrayantes et denses en information. Elles sont plus faciles à partager et à réviser, améliorant considérablement l\'efficacité de l\'apprentissage et la rétention des connaissances.'
+        q: 'Quels sont les avantages des images de connaissance ? Pourquoi sont-elles plus efficaces que les notes traditionnelles ?',
+        a: 'Les images de connaissance utilisent une présentation visuelle pour structurer et simplifier les informations complexes, facilitant ainsi la compréhension et la mémorisation. Par rapport aux notes traditionnelles, les images de connaissance sont plus intuitives, visuellement attrayantes et riches en informations. Elles sont plus faciles à partager et à réviser, améliorant considérablement l\'efficacité de l\'apprentissage et l\'absorption des connaissances.'
       },
       {
         q: 'Comment l\'IA garantit-elle que le contenu extrait reflète fidèlement l\'essence originale ?',
@@ -134,16 +134,16 @@ export default {
         a: 'Nous utilisons une technologie de cryptage avancée pour protéger le contenu de votre document. Tous les documents téléchargés sont uniquement utilisés pour le traitement d\'extraction et sont immédiatement supprimés du serveur une fois terminé. Nous ne stockons aucun contenu original. L\'ensemble du processus se déroule dans un environnement sécurisé, garantissant que la confidentialité de vos données bénéficie du plus haut niveau de protection.'
       },
       {
-        q: 'Les cartes de connaissance générées peuvent-elles être personnalisées ou modifiées ?',
-        a: 'Oui, les cartes de connaissance générées par le système peuvent être téléchargées au format HTML, que vous pouvez modifier et personnaliser selon vos besoins. À l\'avenir, nous introduirons davantage d\'options de personnalisation, notamment des styles de cartes, des structures de mise en page, des marqueurs de surlignage et d\'autres fonctionnalités pour rendre vos cartes de connaissance plus personnalisées et pratiques.'
+        q: 'Puis-je personnaliser ou modifier les images de connaissance générées ?',
+        a: 'Oui, les images de connaissance générées par le système peuvent être téléchargées au format HTML, que vous pouvez éditer et personnaliser selon vos besoins. À l\'avenir, nous introduirons plus d\'options de personnalisation, notamment des styles d\'images, des structures de mise en page, des marqueurs de surbrillance et d\'autres fonctionnalités pour rendre vos images de connaissance plus personnalisées et pratiques.'
       },
       {
         q: 'Ce service nécessite-t-il un paiement ? Y a-t-il des limites d\'utilisation ?',
         a: 'Nous proposons un service de base gratuit qui permet aux nouveaux utilisateurs de bénéficier de 3 conversions complètes de documents sans frais, vous donnant un aperçu complet de nos puissantes capacités d\'extraction par IA. Pour les utilisateurs nécessitant un accès plus fréquent, nous offrons des forfaits premium à forte valeur ajoutée qui débloquent des conversions illimitées et des fonctionnalités avancées supplémentaires. Notre stratégie tarifaire vise à équilibrer accessibilité et durabilité, garantissant que chacun puisse expérimenter cet outil puissant tout en offrant des fonctionnalités améliorées aux utilisateurs intensifs.'
       },
       {
-        q: 'Le traitement de documents multilingues est-il pris en charge ?',
-        a: 'Oui, notre système d\'IA peut reconnaître et traiter des documents dans plusieurs langues, notamment le français, l\'anglais et d\'autres langues principales. Quelle que soit la langue utilisée par votre document, nous pouvons fournir des services d\'extraction d\'essence et de génération de cartes de connaissance de haute qualité.'
+        q: 'Le traitement multilingue des documents est-il pris en charge ?',
+        a: 'Oui, notre système IA peut reconnaître et traiter des documents dans plusieurs langues, notamment le français, l\'anglais et d\'autres langues principales. Quelle que soit la langue de votre document, nous pouvons fournir des services de haute qualité pour l\'extraction d\'essence et la génération d\'images de connaissance.'
       }
     ]
   },
@@ -368,7 +368,7 @@ export default {
         content: 'Nous traitons uniquement les informations suivantes :',
         items: [
           'Contenu temporaire pendant le traitement des documents',
-          'Cartes de connaissances générées',
+          'Images de connaissance générées',
           'Statistiques d\'utilisation de base (informations non personnellement identifiables)'
         ]
       },

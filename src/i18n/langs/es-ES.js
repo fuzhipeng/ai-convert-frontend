@@ -8,12 +8,12 @@ export default {
     points: 'Puntos: {points}'
   },
   hero: {
-    title: 'Extrae la esencia de los artículos con un clic, transforma contenido complejo en hermosas tarjetas de conocimiento',
-    subtitle: '✨ Haciendo que el contenido complejo sea simple y la difusión del conocimiento más eficiente ✨',
+    title: 'Extraiga la esencia de los artículos con un clic, transforme contenido complejo en hermosas imágenes de conocimiento',
+    subtitle: '✨ Hacer que el contenido complejo sea simple y comprensible, hacer que el compartir conocimiento sea más eficiente ✨',
     tags: {
       free: 'Extracción Inteligente',
-      ai: 'Tarjetas Hermosas',
-      noRegister: 'Operación con Un Clic',
+      ai: 'Imágenes Hermosas',
+      noRegister: 'Operación de Un Clic',
       unlimited: 'Aprendizaje Eficiente'
     }
   },
@@ -114,12 +114,12 @@ export default {
     emailDomain: 'qq.com',
     questions: [
       {
-        q: '¿Qué es el Convertidor de Documentos IA? ¿Cómo me ayuda a extraer la esencia de los artículos?',
-        a: 'El Convertidor de Documentos IA es una herramienta inteligente que analiza automáticamente el contenido de los artículos, extrae los puntos de vista centrales y la información clave, y transforma contenido complejo y extenso en hermosas tarjetas de conocimiento. Te ayuda a comprender rápidamente los puntos clave del artículo, ahorrar tiempo de lectura y mejorar la eficiencia del aprendizaje y el trabajo.'
+        q: '¿Qué es la extracción de documentos con IA? ¿Cómo me ayuda a extraer la esencia de los artículos?',
+        a: 'La extracción de documentos con IA es una herramienta inteligente que analiza automáticamente el contenido de los artículos, extrae puntos de vista esenciales e información clave, y transforma contenido complejo y extenso en hermosas imágenes de conocimiento. Le ayuda a comprender rápidamente los puntos clave de los artículos, ahorrar tiempo de lectura y mejorar la eficiencia del aprendizaje y el trabajo.'
       },
       {
-        q: '¿Qué ventajas tienen las tarjetas de conocimiento? ¿Por qué son más efectivas que las notas tradicionales?',
-        a: 'Las tarjetas de conocimiento utilizan presentación visual para estructurar y simplificar información compleja, facilitando su comprensión y memorización. En comparación con las notas tradicionales, las tarjetas de conocimiento son más intuitivas, visualmente atractivas y densas en información. Son más fáciles de compartir y revisar, mejorando significativamente la eficiencia del aprendizaje y la retención de conocimientos.'
+        q: '¿Cuáles son las ventajas de las imágenes de conocimiento? ¿Por qué son más efectivas que las notas tradicionales?',
+        a: 'Las imágenes de conocimiento utilizan presentación visual para estructurar y simplificar información compleja, facilitando así la comprensión y la memorización. En comparación con las notas tradicionales, las imágenes de conocimiento son más intuitivas, visualmente atractivas y ricas en información. Son más fáciles de compartir y revisar, mejorando significativamente la eficiencia del aprendizaje y la absorción de conocimientos.'
       },
       {
         q: '¿Cómo garantiza la IA que el contenido extraído refleje con precisión la esencia original?',
@@ -134,16 +134,16 @@ export default {
         a: 'Utilizamos tecnología de encriptación avanzada para proteger el contenido de tu documento. Todos los documentos cargados se utilizan solo para el procesamiento de extracción y se eliminan inmediatamente del servidor después de completarse. No almacenamos ningún contenido original. Todo el proceso se lleva a cabo en un entorno seguro, garantizando que tu privacidad de datos reciba el más alto nivel de protección.'
       },
       {
-        q: '¿Se pueden personalizar o editar las tarjetas de conocimiento generadas?',
-        a: 'Sí, las tarjetas de conocimiento generadas por el sistema se pueden descargar en formato HTML, que puedes editar y personalizar según sea necesario. En el futuro, introduciremos más opciones de personalización, incluidos estilos de tarjetas, estructuras de diseño, marcadores de resaltado y otras características para hacer que tus tarjetas de conocimiento sean más personalizadas y prácticas.'
+        q: '¿Puedo personalizar o editar las imágenes de conocimiento generadas?',
+        a: 'Sí, las imágenes de conocimiento generadas por el sistema se pueden descargar en formato HTML, que puede editar y personalizar según sus necesidades. En el futuro, introduciremos más opciones de personalización, incluyendo estilos de imágenes, estructuras de diseño, marcadores de resaltado y otras características para hacer sus imágenes de conocimiento más personalizadas y prácticas.'
       },
       {
         q: '¿Este servicio requiere pago? ¿Hay límites de uso?',
         a: 'Ofrecemos un servicio básico gratuito que permite a los nuevos usuarios experimentar 3 conversiones completas de documentos sin costo, brindándote una experiencia completa de nuestras potentes capacidades de extracción con IA. Para usuarios que necesitan acceso más frecuente, proporcionamos planes premium con excelente valor que desbloquean conversiones ilimitadas y características avanzadas adicionales. Nuestra estrategia de precios busca equilibrar la accesibilidad con la sostenibilidad, asegurando que todos puedan experimentar esta poderosa herramienta mientras ofrecemos funcionalidad mejorada para usuarios intensivos.'
       },
       {
-        q: '¿Se admite el procesamiento de documentos en varios idiomas?',
-        a: 'Sí, nuestro sistema de IA puede reconocer y procesar documentos en múltiples idiomas, incluidos español, inglés y otros idiomas principales. Independientemente del idioma que utilice tu documento, podemos proporcionar servicios de extracción de esencia y generación de tarjetas de conocimiento de alta calidad.'
+        q: '¿Se admite el procesamiento multilingüe de documentos?',
+        a: 'Sí, nuestro sistema de IA puede reconocer y procesar documentos en varios idiomas, incluyendo español, inglés y otros idiomas principales. Independientemente del idioma de su documento, podemos proporcionar servicios de alta calidad para la extracción de esencia y la generación de imágenes de conocimiento.'
       }
     ]
   },
@@ -368,7 +368,7 @@ export default {
         content: 'Solo procesamos la siguiente información:',
         items: [
           'Contenido temporal durante el procesamiento de documentos',
-          'Tarjetas de conocimiento generadas',
+          'Imágenes de conocimiento generadas',
           'Estadísticas básicas de uso (información no personalmente identificable)'
         ]
       },

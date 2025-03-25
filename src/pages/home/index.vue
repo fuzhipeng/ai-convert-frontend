@@ -144,7 +144,7 @@
         </div>
 
         <!-- 用户评价部分 -->
-        <Testimonials />
+        <!-- <Testimonials /> -->
 
         <!-- FAQ部分 -->
         <FAQ />

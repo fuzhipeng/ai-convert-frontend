@@ -12,11 +12,11 @@ export default {
     loading: 'Loading...'
   },
   hero: {
-    title: 'Extract Article Essence with One Click, Transform Complex Content into Beautiful Knowledge Cards',
-    subtitle: '✨ Making Complex Content Simple and Knowledge Sharing More Efficient ✨',
+    title: 'Extract article essence with one click, transform complex content into beautiful knowledge images',
+    subtitle: '✨ Making complex content simple and understandable, making knowledge sharing more efficient ✨',
     tags: {
       free: 'Smart Extraction',
-      ai: 'Beautiful Cards',
+      ai: 'Beautiful Images',
       noRegister: 'One-Click Operation',
       unlimited: 'Efficient Learning'
     }
@@ -44,7 +44,7 @@ export default {
   features: {
     title: 'Key Features of AI Article Essence Extraction',
     subtitle: 'Experience Next-Gen AI Article Essence Extraction - Smart Analysis, Precise Extraction, Efficient Learning',
-    cards: {
+    images: {
       free: {
         title: 'AI Smart Analysis',
         desc: 'Advanced algorithms automatically identify core viewpoints and key information, no manual filtering needed.'
@@ -55,7 +55,7 @@ export default {
       },
       smart: {
         title: 'Beautiful Presentation',
-        desc: 'Utilizes modern design techniques to transform content into visually appealing cards for easy sharing and memorization.'
+        desc: 'Utilizes modern design techniques to transform content into visually appealing images for easy sharing and memorization.'
       },
       privacy: {
         title: 'Enhanced Privacy Protection',
@@ -83,7 +83,7 @@ export default {
       {
         name: 'Jennifer Chen',
         title: 'Content Creator | 100K+ Followers',
-        text: 'As a content creator, I read numerous articles daily for inspiration. DocSmart helps me quickly extract article essence and transform it into beautiful knowledge cards, greatly improving my content production efficiency. I especially love the beautiful presentation feature - the generated cards work perfectly for my videos and posts, and my followers love them!',
+        text: 'As a content creator, I read numerous articles daily for inspiration. DocSmart helps me quickly extract article essence and transform it into beautiful knowledge images, greatly improving my content production efficiency. I especially love the beautiful presentation feature - the generated images work perfectly for my videos and posts, and my followers love them!',
         avatar: ''
       },
       {
@@ -125,12 +125,12 @@ export default {
     emailDomain: 'qq.com',
     questions: [
       {
-        q: 'What is the AI Document Converter? How does it help me extract article essence?',
-        a: 'The AI Document Converter is an intelligent tool that automatically analyzes article content, extracts core viewpoints and key information, and transforms complex, lengthy content into beautiful knowledge cards. It helps you quickly understand article key points, save reading time, and improve learning and work efficiency.'
+        q: 'What is AI Document Extraction? How does it help me extract article essence?',
+        a: 'AI Document Extraction is an intelligent tool that automatically analyzes article content, extracts core viewpoints and key information, and transforms complex, lengthy content into beautiful knowledge images. It helps you quickly understand article points, save reading time, and improve learning and work efficiency.'
       },
       {
-        q: 'What advantages do knowledge cards have? Why are they more effective than traditional notes?',
-        a: 'Knowledge cards use visual presentation to structure and simplify complex information, making it easier to understand and remember. Compared to traditional notes, knowledge cards are more intuitive, visually appealing, and information-dense. They\'re easier to share and review, significantly improving learning efficiency and knowledge retention.'
+        q: 'What are the advantages of knowledge images? Why are they more effective than traditional notes?',
+        a: 'Knowledge images use visual presentation to structure and simplify complex information, making it easier to understand and remember. Compared to traditional notes, knowledge images are more intuitive, visually appealing, and information-dense. They are easier to share and review, significantly improving learning efficiency and knowledge absorption.'
       },
       {
         q: 'How does AI ensure the extracted content accurately reflects the original essence?',
@@ -145,16 +145,16 @@ export default {
         a: 'We use advanced encryption technology to protect your document content. All uploaded documents are only used for extraction processing and are immediately deleted from the server after completion. We don\'t store any original content. The entire process takes place in a secure environment, ensuring your data privacy receives the highest level of protection.'
       },
       {
-        q: 'Can the generated knowledge cards be customized or edited?',
-        a: 'Yes, the knowledge cards generated by the system can be downloaded in HTML format, which you can edit and customize as needed. In the future, we\'ll introduce more customization options, including card styles, layout structures, highlight markers, and other features to make your knowledge cards more personalized and practical.'
+        q: 'Can I customize or edit the generated knowledge images?',
+        a: 'Yes, the knowledge images generated by the system can be downloaded in HTML format, which you can edit and customize as needed. In the future, we will introduce more customization options, including image styles, layout structures, highlight markers, and other features to make your knowledge images more personalized and practical.'
       },
       {
         q: 'Does this service require payment? Are there usage limits?',
         a: 'We offer a basic free service that allows new users to experience 3 complete document conversions at no cost, giving you a full taste of our powerful AI extraction capabilities. For users who need more frequent access, we provide value-packed premium plans that unlock unlimited conversions and additional advanced features. Our pricing strategy aims to balance accessibility with sustainability, ensuring everyone can experience this powerful tool while offering enhanced functionality for heavy users.'
       },
       {
-        q: 'Is multi-language document processing supported?',
-        a: 'Yes, our AI system can recognize and process documents in multiple languages, including Chinese, English, and other major languages. Regardless of what language your document uses, we can provide high-quality essence extraction and knowledge card generation services.'
+        q: 'Does it support multilingual document processing?',
+        a: 'Yes, our AI system can recognize and process documents in multiple languages, including English, Chinese, and other major languages. Regardless of the language your document is in, we can provide high-quality essence extraction and knowledge image generation services.'
       }
     ]
   },
