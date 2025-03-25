@@ -1,52 +1,74 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '../stores/user'
+import Home from '../pages/home/index.vue'
+import Privacy from '../views/Privacy.vue'
+import Terms from '../views/Terms.vue'
 
 // 添加调试日志
 console.log('正在加载路由配置...')
 
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    children: [
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => import('../pages/settings/index.vue'),
+        meta: {
+          requiresAuth: true,
+          title: '设置 - AI文档提取'
+        }
+      }
+    ]
+  },
+  // 添加价格页面路由
+  {
+    path: '/pricing',
+    name: 'pricing',
+    component: () => import('../pages/pricing/index.vue'),
+    meta: {
+      title: '价格套餐 - AI文档提取'
+    }
+  },
+  // 添加错误页面路由
+  {
+    path: '/error',
+    name: 'error',
+    component: () => import('../pages/error/index.vue'),
+    meta: {
+      title: '出错了 - AI文档提取'
+    }
+  },
+  {
+    path: '/privacy',
+    name: 'Privacy',
+    component: Privacy
+  },
+  {
+    path: '/terms',
+    name: 'Terms',
+    component: Terms
+  },
+  // 捕获所有未匹配路由
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
+  }
+]
+
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('../pages/home/index.vue'),
-      children: [
-        {
-          path: 'settings',
-          name: 'settings',
-          component: () => import('../pages/settings/index.vue'),
-          meta: {
-            requiresAuth: true,
-            title: '设置 - AI文档提取'
-          }
-        }
-      ]
-    },
-    // 添加价格页面路由
-    {
-      path: '/pricing',
-      name: 'pricing',
-      component: () => import('../pages/pricing/index.vue'),
-      meta: {
-        title: '价格套餐 - AI文档提取'
-      }
-    },
-    // 添加错误页面路由
-    {
-      path: '/error',
-      name: 'error',
-      component: () => import('../pages/error/index.vue'),
-      meta: {
-        title: '出错了 - AI文档提取'
-      }
-    },
-    // 捕获所有未匹配路由
-    {
-      path: '/:pathMatch(.*)*',
-      redirect: '/'
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
     }
-  ]
+  }
 })
 
 // 路由守卫

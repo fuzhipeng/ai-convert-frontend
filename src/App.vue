@@ -70,6 +70,17 @@
       </router-view>
     </main>
     
+    <!-- 底部版权信息 -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <span class="copyright">© {{ new Date().getFullYear() }} • Raphael AI 保留所有权利。</span>
+        <div class="footer-links">
+          <router-link to="/privacy" class="footer-link">隐私政策</router-link>
+          <router-link to="/terms" class="footer-link">服务条款</router-link>
+        </div>
+      </div>
+    </footer>
+    
     <!-- 登录弹窗组件 -->
     <login-dialog ref="loginDialog" />
   </div>
@@ -366,7 +377,7 @@ body {
 .app-main {
   flex: 1;
   padding-top: 64px; /* 为固定的header留出空间 */
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px - 61px); /* 减去header和footer的高度 */
 }
 
 /* Element Plus 暗色主题覆盖 */
@@ -412,5 +423,49 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* 修改底部样式 */
+.app-footer {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #666;
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
 }
 </style> 

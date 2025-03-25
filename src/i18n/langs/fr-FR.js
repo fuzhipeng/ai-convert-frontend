@@ -261,5 +261,160 @@ export default {
         }
       ]
     }
+  },
+  terms: {
+    title: 'Conditions d\'Utilisation',
+    lastUpdated: 'Dernière mise à jour : 10 janvier 2024',
+    sections: {
+      acceptance: {
+        title: 'Acceptation des Conditions',
+        content: 'Bienvenue sur DocSmart. En utilisant notre service, vous acceptez d\'être lié par ces conditions. Si vous n\'acceptez pas une partie quelconque de ces conditions, veuillez ne pas utiliser notre service.'
+      },
+      description: {
+        title: 'Description du Service',
+        content: 'DocSmart AI fournit des services de conversion de documents basés sur l\'IA. Nos services comprennent :',
+        items: [
+          'Conversion de documents assistée par IA',
+          'Extraction et analyse de texte',
+          'Édition et optimisation de documents',
+          'Autres fonctionnalités connexes'
+        ]
+      },
+      conditions: {
+        title: 'Conditions d\'Utilisation',
+        content: 'En utilisant notre service, vous acceptez de :',
+        items: [
+          'Ne pas générer ou télécharger de contenu illégal, nuisible ou portant atteinte aux droits',
+          'Ne pas abuser ou perturber le service',
+          'Ne pas utiliser d\'outils ou de scripts automatisés pour un accès en masse',
+          'Respecter toutes les lois et réglementations applicables'
+        ]
+      },
+      intellectual: {
+        title: 'Propriété Intellectuelle',
+        content: 'Concernant la propriété intellectuelle, veuillez noter que :',
+        items: [
+          'Notre service et notre technologie sont protégés par les lois sur la propriété intellectuelle',
+          'Vous possédez les droits d\'utilisation des documents que vous générez via notre service',
+          'Vous ne pouvez pas copier ou distribuer le service lui-même',
+          'Vous devez respecter les droits de propriété intellectuelle d\'autrui'
+        ]
+      },
+      changes: {
+        title: 'Modifications du Service',
+        content: 'Nous nous réservons le droit de :',
+        items: [
+          'Modifier ou mettre fin à toute partie du service à tout moment',
+          'Mettre à jour les fonctionnalités et le contenu du service',
+          'Ajuster les limitations d\'utilisation',
+          'Modifier les exigences techniques'
+        ]
+      },
+      disclaimer: {
+        title: 'Clause de Non-Responsabilité',
+        content: 'Notre service est fourni "tel quel" sans aucune garantie expresse ou implicite. Nous ne sommes pas responsables de :',
+        items: [
+          'Interruptions ou indisponibilité du service',
+          'Exactitude ou pertinence du contenu généré',
+          'Perte ou dommage de données',
+          'Toute perte résultant de l\'utilisation de notre service'
+        ]
+      },
+      liability: {
+        title: 'Limitation de Responsabilité',
+        content: 'Dans toute la mesure permise par la loi, nous ne serons pas responsables des dommages directs, indirects, accessoires, spéciaux, punitifs ou consécutifs.'
+      },
+      termsChanges: {
+        title: 'Modifications des Conditions',
+        content: 'Nous pouvons mettre à jour ces Conditions d\'Utilisation de temps à autre. Les conditions mises à jour seront publiées sur le site web, et la poursuite de l\'utilisation de notre service indique votre acceptation des nouvelles conditions.'
+      },
+      termination: {
+        title: 'Résiliation',
+        content: 'Nous nous réservons le droit de :',
+        items: [
+          'Mettre fin à votre accès au service pour quelque raison que ce soit',
+          'Supprimer le contenu en violation',
+          'Bloquer les utilisations suspectes',
+          'Prendre les mesures nécessaires pour protéger le service et les utilisateurs'
+        ]
+      },
+      contact: {
+        title: 'Nous Contacter',
+        content: 'Si vous avez des questions concernant ces Conditions d\'Utilisation, veuillez nous contacter à support@docsmart.app.'
+      }
+    }
+  },
+  privacy: {
+    title: 'Politique de Confidentialité',
+    lastUpdated: 'Dernière mise à jour : 10 janvier 2024',
+    sections: {
+      intro: {
+        title: 'Introduction',
+        content: 'Chez DocSmart, nous prenons votre vie privée très au sérieux. Cette Politique de Confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre service de conversion de documents AI (docsmart.app, ci-après dénommé le "Service").'
+      },
+      noCollection: {
+        title: 'Informations que Nous ne Collectons Pas',
+        content: 'Nous nous engageons à minimiser la collecte de données. Nous ne :',
+        items: [
+          'Demandons pas aux utilisateurs de s\'inscrire ou de créer des comptes',
+          'Stockons pas vos documents originaux',
+          'Collectons pas d\'informations personnelles',
+          'Utilisons pas de cookies pour le suivi',
+          'Partageons pas de données avec des tiers'
+        ]
+      },
+      processedInfo: {
+        title: 'Informations que Nous Traitons',
+        content: 'Nous traitons uniquement les informations suivantes :',
+        items: [
+          'Contenu temporaire pendant le traitement des documents',
+          'Cartes de connaissances générées',
+          'Statistiques d\'utilisation de base (informations non personnellement identifiables)'
+        ]
+      },
+      usage: {
+        title: 'Utilisation des Informations',
+        content: 'Toutes les informations traitées sont utilisées uniquement pour :',
+        items: [
+          'Fournir des services de conversion et d\'extraction de documents',
+          'Améliorer la qualité et les performances du service',
+          'Maintenir la sécurité du service et prévenir les abus'
+        ]
+      },
+      retention: {
+        title: 'Conservation des Données',
+        content: 'Nous suivons une politique stricte de non-stockage. Tous les documents téléchargés et le contenu généré sont traités en temps réel et supprimés immédiatement après traitement. Nous ne maintenons aucune base de données de contenu utilisateur.'
+      },
+      security: {
+        title: 'Mesures de Sécurité',
+        content: 'Nous utilisons des technologies de cryptage avancées et des mesures de sécurité pour garantir la sécurité de vos documents pendant leur traitement. Tous les transferts de données sont effectués via des connexions cryptées sécurisées.'
+      },
+      children: {
+        title: 'Confidentialité des Enfants',
+        content: 'Notre service n\'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons ni ne traitons sciemment les informations des enfants de moins de 13 ans.'
+      },
+      changes: {
+        title: 'Modifications de la Politique de Confidentialité',
+        content: 'Nous pouvons mettre à jour cette Politique de Confidentialité de temps à autre. En cas de modifications importantes, nous en informerons les utilisateurs en publiant la nouvelle Politique de Confidentialité sur cette page.'
+      },
+      rights: {
+        title: 'Vos Droits',
+        content: 'Comme nous ne collectons pas de données personnelles, il n\'y a généralement pas de données utilisateur à :',
+        items: [
+          'Accéder',
+          'Corriger',
+          'Supprimer',
+          'Exporter'
+        ]
+      },
+      contact: {
+        title: 'Nous Contacter',
+        content: 'Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter à support@docsmart.app.'
+      },
+      legal: {
+        title: 'Base Légale',
+        content: 'Nous traitons les informations minimales requises sur la base d\'intérêts légitimes dans la fourniture et l\'amélioration de notre service tout en maintenant la confidentialité et la sécurité des utilisateurs.'
+      }
+    }
   }
 } 

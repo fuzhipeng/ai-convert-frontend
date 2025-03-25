@@ -261,5 +261,160 @@ export default {
         }
       ]
     }
+  },
+  terms: {
+    title: 'Términos de Servicio',
+    lastUpdated: 'Última actualización: 10 de enero de 2024',
+    sections: {
+      acceptance: {
+        title: 'Aceptación de los Términos',
+        content: 'Bienvenido a DocSmart. Al utilizar nuestro servicio, usted acepta estar sujeto a estos términos. Si no está de acuerdo con alguna parte de estos términos, por favor no utilice nuestro servicio.'
+      },
+      description: {
+        title: 'Descripción del Servicio',
+        content: 'DocSmart AI proporciona servicios de conversión de documentos basados en IA. Nuestros servicios incluyen:',
+        items: [
+          'Conversión de documentos asistida por IA',
+          'Extracción y análisis de texto',
+          'Edición y optimización de documentos',
+          'Otras funciones relacionadas'
+        ]
+      },
+      conditions: {
+        title: 'Condiciones de Uso',
+        content: 'Al utilizar nuestro servicio, usted acepta:',
+        items: [
+          'No generar ni subir contenido ilegal, dañino o que infrinja derechos',
+          'No abusar ni interrumpir el servicio',
+          'No utilizar herramientas o scripts automatizados para acceso masivo',
+          'Cumplir con todas las leyes y regulaciones aplicables'
+        ]
+      },
+      intellectual: {
+        title: 'Propiedad Intelectual',
+        content: 'Con respecto a la propiedad intelectual, tenga en cuenta que:',
+        items: [
+          'Nuestro servicio y tecnología están protegidos por leyes de propiedad intelectual',
+          'Usted posee los derechos de uso de los documentos que genera a través de nuestro servicio',
+          'No puede copiar ni distribuir el servicio en sí',
+          'Debe respetar los derechos de propiedad intelectual de otros'
+        ]
+      },
+      changes: {
+        title: 'Cambios en el Servicio',
+        content: 'Nos reservamos el derecho de:',
+        items: [
+          'Modificar o terminar cualquier parte del servicio en cualquier momento',
+          'Actualizar las características y contenido del servicio',
+          'Ajustar las limitaciones de uso',
+          'Cambiar los requisitos técnicos'
+        ]
+      },
+      disclaimer: {
+        title: 'Descargo de Responsabilidad',
+        content: 'Nuestro servicio se proporciona "tal cual" sin garantías expresas o implícitas. No somos responsables de:',
+        items: [
+          'Interrupciones o indisponibilidad del servicio',
+          'Precisión o idoneidad del contenido generado',
+          'Pérdida o daño de datos',
+          'Cualquier pérdida resultante del uso de nuestro servicio'
+        ]
+      },
+      liability: {
+        title: 'Limitación de Responsabilidad',
+        content: 'En la máxima medida permitida por la ley, no seremos responsables de ningún daño directo, indirecto, incidental, especial, punitivo o consecuente.'
+      },
+      termsChanges: {
+        title: 'Cambios en los Términos',
+        content: 'Podemos actualizar estos Términos de Servicio de vez en cuando. Los términos actualizados se publicarán en el sitio web, y el uso continuado de nuestro servicio indica su aceptación de los nuevos términos.'
+      },
+      termination: {
+        title: 'Terminación',
+        content: 'Nos reservamos el derecho de:',
+        items: [
+          'Terminar su acceso al servicio por cualquier motivo',
+          'Eliminar contenido que viole las normas',
+          'Bloquear usos sospechosos',
+          'Tomar las medidas necesarias para proteger el servicio y los usuarios'
+        ]
+      },
+      contact: {
+        title: 'Contáctenos',
+        content: 'Si tiene alguna pregunta sobre estos Términos de Servicio, por favor contáctenos en support@docsmart.app.'
+      }
+    }
+  },
+  privacy: {
+    title: 'Política de Privacidad',
+    lastUpdated: 'Última actualización: 10 de enero de 2024',
+    sections: {
+      intro: {
+        title: 'Introducción',
+        content: 'En DocSmart, nos tomamos muy en serio su privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos su información cuando utiliza nuestro servicio de conversión de documentos AI (docsmart.app, en adelante denominado el "Servicio").'
+      },
+      noCollection: {
+        title: 'Información que No Recopilamos',
+        content: 'Nos comprometemos a minimizar la recopilación de datos. No:',
+        items: [
+          'Requerimos registro de usuarios ni creación de cuentas',
+          'Almacenamos sus documentos originales',
+          'Recopilamos información personal',
+          'Utilizamos cookies para rastreo',
+          'Compartimos datos con terceros'
+        ]
+      },
+      processedInfo: {
+        title: 'Información que Procesamos',
+        content: 'Solo procesamos la siguiente información:',
+        items: [
+          'Contenido temporal durante el procesamiento de documentos',
+          'Tarjetas de conocimiento generadas',
+          'Estadísticas básicas de uso (información no personalmente identificable)'
+        ]
+      },
+      usage: {
+        title: 'Uso de la Información',
+        content: 'Toda la información procesada se utiliza únicamente para:',
+        items: [
+          'Proporcionar servicios de conversión y extracción de documentos',
+          'Mejorar la calidad y el rendimiento del servicio',
+          'Mantener la seguridad del servicio y prevenir abusos'
+        ]
+      },
+      retention: {
+        title: 'Retención de Datos',
+        content: 'Seguimos una política estricta de no almacenamiento. Todos los documentos cargados y el contenido generado se procesan en tiempo real y se eliminan inmediatamente después del procesamiento. No mantenemos ninguna base de datos de contenido de usuarios.'
+      },
+      security: {
+        title: 'Medidas de Seguridad',
+        content: 'Utilizamos tecnologías de encriptación avanzadas y medidas de seguridad para garantizar la seguridad de sus documentos durante el procesamiento. Todas las transferencias de datos se realizan a través de conexiones encriptadas seguras.'
+      },
+      children: {
+        title: 'Privacidad de los Niños',
+        content: 'Nuestro servicio no está dirigido a niños menores de 13 años. No recopilamos ni procesamos conscientemente información de niños menores de 13 años.'
+      },
+      changes: {
+        title: 'Cambios en la Política de Privacidad',
+        content: 'Podemos actualizar esta Política de Privacidad de vez en cuando. En caso de cambios significativos, notificaremos a los usuarios publicando la nueva Política de Privacidad en esta página.'
+      },
+      rights: {
+        title: 'Sus Derechos',
+        content: 'Como no recopilamos datos personales, generalmente no hay datos de usuario para:',
+        items: [
+          'Acceder',
+          'Corregir',
+          'Eliminar',
+          'Exportar'
+        ]
+      },
+      contact: {
+        title: 'Contáctenos',
+        content: 'Si tiene alguna pregunta sobre esta Política de Privacidad, por favor contáctenos en support@docsmart.app.'
+      },
+      legal: {
+        title: 'Base Legal',
+        content: 'Procesamos la información mínima requerida basándonos en intereses legítimos en la provisión y mejora de nuestro servicio mientras mantenemos la privacidad y seguridad de los usuarios.'
+      }
+    }
   }
 } 

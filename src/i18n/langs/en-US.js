@@ -268,5 +268,160 @@ export default {
         }
       ]
     }
+  },
+  privacy: {
+    title: 'Privacy Policy',
+    lastUpdated: 'Last Updated: January 10, 2024',
+    sections: {
+      intro: {
+        title: 'Introduction',
+        content: 'At Raphael, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our AI image generation service (raphael.app, hereinafter referred to as the "Service").'
+      },
+      noCollection: {
+        title: 'Information We Don\'t Collect',
+        content: 'We are committed to minimizing data collection. We do not:',
+        items: [
+          'Require users to register or create accounts',
+          'Store your prompts or generated images',
+          'Collect personal information',
+          'Use cookies for tracking',
+          'Share any data with third parties'
+        ]
+      },
+      processedInfo: {
+        title: 'Information We Process',
+        content: 'We only process the following information:',
+        items: [
+          'Temporary text prompts during image generation',
+          'Generated images during creation',
+          'Basic usage analytics (non-personally identifiable information)'
+        ]
+      },
+      usage: {
+        title: 'How We Use Information',
+        content: 'All processed information is used only for:',
+        items: [
+          'Generating images based on your prompts',
+          'Improving service performance and quality',
+          'Maintaining service security and preventing abuse'
+        ]
+      },
+      retention: {
+        title: 'Data Retention',
+        content: 'We follow a strict no-storage policy. All prompts and generated images are processed in real-time and deleted immediately after generation. We do not maintain any user content database.'
+      },
+      security: {
+        title: 'Security Measures',
+        content: 'We implement appropriate technical measures to prevent unauthorized access, alteration, or destruction of the limited data we process. Our service operates on secure, encrypted connections.'
+      },
+      children: {
+        title: 'Children\'s Privacy',
+        content: 'Our service is not directed at children under 13. We do not knowingly collect or process information from children under 13.'
+      },
+      changes: {
+        title: 'Changes to Privacy Policy',
+        content: 'We may update this Privacy Policy from time to time. We will notify users of any significant changes by posting the new Privacy Policy on this page.'
+      },
+      rights: {
+        title: 'Your Rights',
+        content: 'Since we don\'t collect personal data, there is typically no user data to:',
+        items: [
+          'Access',
+          'Correct',
+          'Delete',
+          'Export'
+        ]
+      },
+      contact: {
+        title: 'Contact Information',
+        content: 'If you have any questions about this Privacy Policy, please contact us at [email protected].'
+      },
+      legal: {
+        title: 'Legal Basis',
+        content: 'We process the minimum required information based on legitimate interests in providing and improving our service while maintaining user privacy and security.'
+      }
+    }
+  },
+  terms: {
+    title: 'Terms of Service',
+    lastUpdated: 'Last Updated: January 10, 2024',
+    sections: {
+      acceptance: {
+        title: 'Acceptance of Terms',
+        content: 'Welcome to Raphael AI. By accessing or using our service, you agree to be bound by these terms. If you do not agree to any part of these terms, please do not use our service.'
+      },
+      description: {
+        title: 'Service Description',
+        content: 'Raphael AI provides AI-powered image generation services. Our services include:',
+        items: [
+          'AI-assisted image generation',
+          'Text-to-image conversion',
+          'Image editing and optimization',
+          'Other related features'
+        ]
+      },
+      conditions: {
+        title: 'Usage Conditions',
+        content: 'When using our service, you agree to:',
+        items: [
+          'Not generate or upload any illegal, harmful, or rights-infringing content',
+          'Not abuse or attempt to disrupt our service',
+          'Not use automated tools or scripts for bulk access',
+          'Comply with all applicable laws and regulations'
+        ]
+      },
+      intellectual: {
+        title: 'Intellectual Property',
+        content: 'Regarding intellectual property, please note:',
+        items: [
+          'Our service and technology are protected by intellectual property laws',
+          'You own the usage rights to images you generate through our service',
+          'You may not copy or distribute our service itself',
+          'You should respect others\' intellectual property rights'
+        ]
+      },
+      changes: {
+        title: 'Service Changes',
+        content: 'We reserve the right to:',
+        items: [
+          'Modify or terminate any part of the service at any time',
+          'Update service features and content',
+          'Adjust usage limitations',
+          'Change technical requirements'
+        ]
+      },
+      disclaimer: {
+        title: 'Disclaimer',
+        content: 'Our service is provided "as is" without any express or implied warranties. We are not responsible for:',
+        items: [
+          'Service interruptions or unavailability',
+          'Accuracy or suitability of generated content',
+          'Data loss or damage',
+          'Any losses resulting from using our service'
+        ]
+      },
+      liability: {
+        title: 'Limitation of Liability',
+        content: 'To the maximum extent permitted by law, we shall not be liable for any direct, indirect, incidental, special, punitive, or consequential damages.'
+      },
+      termsChanges: {
+        title: 'Changes to Terms',
+        content: 'We may update these Terms of Service from time to time. Updated terms will be posted on the website, and continued use of our service indicates your acceptance of the new terms.'
+      },
+      termination: {
+        title: 'Termination',
+        content: 'We reserve the right to:',
+        items: [
+          'Terminate your service access for any reason',
+          'Remove violating content',
+          'Block suspicious usage',
+          'Take necessary measures to protect the service and users'
+        ]
+      },
+      contact: {
+        title: 'Contact Us',
+        content: 'If you have any questions about these Terms of Service, please contact us at [email protected].'
+      }
+    }
   }
 } 

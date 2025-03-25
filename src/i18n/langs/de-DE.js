@@ -261,5 +261,160 @@ export default {
         }
       ]
     }
+  },
+  terms: {
+    title: 'Nutzungsbedingungen',
+    lastUpdated: 'Letzte Aktualisierung: 10. Januar 2024',
+    sections: {
+      acceptance: {
+        title: 'Annahme der Bedingungen',
+        content: 'Willkommen bei DocSmart. Durch die Nutzung unseres Services stimmen Sie diesen Bedingungen zu. Wenn Sie einem Teil dieser Bedingungen nicht zustimmen, nutzen Sie bitte unseren Service nicht.'
+      },
+      description: {
+        title: 'Servicebeschreibung',
+        content: 'DocSmart AI bietet KI-gestützte Dokumentenkonvertierungsdienste an. Unsere Services umfassen:',
+        items: [
+          'KI-gestützte Dokumentenkonvertierung',
+          'Textextraktion und -analyse',
+          'Dokumentenbearbeitung und -optimierung',
+          'Weitere verwandte Funktionen'
+        ]
+      },
+      conditions: {
+        title: 'Nutzungsbedingungen',
+        content: 'Bei der Nutzung unseres Services stimmen Sie zu:',
+        items: [
+          'Keine illegalen, schädlichen oder rechteverletzenden Inhalte zu erstellen oder hochzuladen',
+          'Den Service nicht zu missbrauchen oder zu stören',
+          'Keine automatisierten Tools oder Skripte für Massenzugriffe zu verwenden',
+          'Alle geltenden Gesetze und Vorschriften einzuhalten'
+        ]
+      },
+      intellectual: {
+        title: 'Geistiges Eigentum',
+        content: 'Bezüglich des geistigen Eigentums beachten Sie bitte:',
+        items: [
+          'Unser Service und unsere Technologie sind durch Gesetze zum geistigen Eigentum geschützt',
+          'Sie besitzen die Nutzungsrechte an den über unseren Service erstellten Dokumenten',
+          'Sie dürfen den Service selbst nicht kopieren oder verteilen',
+          'Sie müssen die geistigen Eigentumsrechte anderer respektieren'
+        ]
+      },
+      changes: {
+        title: 'Serviceänderungen',
+        content: 'Wir behalten uns das Recht vor:',
+        items: [
+          'Jederzeit Teile des Services zu ändern oder zu beenden',
+          'Servicefunktionen und -inhalte zu aktualisieren',
+          'Nutzungsbeschränkungen anzupassen',
+          'Technische Anforderungen zu ändern'
+        ]
+      },
+      disclaimer: {
+        title: 'Haftungsausschluss',
+        content: 'Unser Service wird "wie besehen" ohne ausdrückliche oder stillschweigende Garantien bereitgestellt. Wir sind nicht verantwortlich für:',
+        items: [
+          'Serviceunterbrechungen oder -nichtverfügbarkeit',
+          'Genauigkeit oder Eignung der generierten Inhalte',
+          'Datenverlust oder -beschädigung',
+          'Jegliche Verluste aus der Nutzung unseres Services'
+        ]
+      },
+      liability: {
+        title: 'Haftungsbeschränkung',
+        content: 'Im maximal gesetzlich zulässigen Umfang haften wir nicht für direkte, indirekte, zufällige, besondere, strafende oder Folgeschäden.'
+      },
+      termsChanges: {
+        title: 'Änderungen der Bedingungen',
+        content: 'Wir können diese Nutzungsbedingungen von Zeit zu Zeit aktualisieren. Aktualisierte Bedingungen werden auf der Website veröffentlicht, und die weitere Nutzung unseres Services bedeutet Ihre Zustimmung zu den neuen Bedingungen.'
+      },
+      termination: {
+        title: 'Kündigung',
+        content: 'Wir behalten uns das Recht vor:',
+        items: [
+          'Ihren Servicezugang aus beliebigem Grund zu beenden',
+          'Verstoßende Inhalte zu entfernen',
+          'Verdächtige Nutzung zu blockieren',
+          'Notwendige Maßnahmen zum Schutz des Services und der Nutzer zu ergreifen'
+        ]
+      },
+      contact: {
+        title: 'Kontakt',
+        content: 'Wenn Sie Fragen zu diesen Nutzungsbedingungen haben, kontaktieren Sie uns bitte unter support@docsmart.app.'
+      }
+    }
+  },
+  privacy: {
+    title: 'Datenschutzerklärung',
+    lastUpdated: 'Letzte Aktualisierung: 10. Januar 2024',
+    sections: {
+      intro: {
+        title: 'Einführung',
+        content: 'Bei DocSmart nehmen wir Ihre Privatsphäre sehr ernst. Diese Datenschutzerklärung erläutert, wie wir Ihre Informationen sammeln, verwenden und schützen, wenn Sie unseren KI-Dokumentenkonvertierungsservice (docsmart.app, nachfolgend als "Service" bezeichnet) nutzen.'
+      },
+      noCollection: {
+        title: 'Informationen, die wir nicht sammeln',
+        content: 'Wir sind bestrebt, die Datenerfassung zu minimieren. Wir:',
+        items: [
+          'Verlangen keine Benutzerregistrierung oder Kontoerstellung',
+          'Speichern keine Originaldokumente',
+          'Sammeln keine persönlichen Informationen',
+          'Verwenden keine Cookies für Tracking',
+          'Teilen keine Daten mit Dritten'
+        ]
+      },
+      processedInfo: {
+        title: 'Informationen, die wir verarbeiten',
+        content: 'Wir verarbeiten nur die folgenden Informationen:',
+        items: [
+          'Temporäre Inhalte während der Dokumentenverarbeitung',
+          'Generierte Wissenskarten',
+          'Grundlegende Nutzungsstatistiken (nicht personenbezogene Informationen)'
+        ]
+      },
+      usage: {
+        title: 'Verwendung von Informationen',
+        content: 'Alle verarbeiteten Informationen werden nur verwendet für:',
+        items: [
+          'Bereitstellung von Dokumentenkonvertierungs- und Extraktionsdiensten',
+          'Verbesserung der Servicequalität und -leistung',
+          'Aufrechterhaltung der Servicesicherheit und Missbrauchsprävention'
+        ]
+      },
+      retention: {
+        title: 'Datenspeicherung',
+        content: 'Wir folgen einer strikten Nicht-Speicherungs-Politik. Alle hochgeladenen Dokumente und generierten Inhalte werden in Echtzeit verarbeitet und sofort nach der Verarbeitung gelöscht. Wir führen keine Datenbank mit Benutzerinhalten.'
+      },
+      security: {
+        title: 'Sicherheitsmaßnahmen',
+        content: 'Wir verwenden fortschrittliche Verschlüsselungstechnologien und Sicherheitsmaßnahmen, um die Sicherheit Ihrer Dokumente während der Verarbeitung zu gewährleisten. Alle Datenübertragungen erfolgen über sichere, verschlüsselte Verbindungen.'
+      },
+      children: {
+        title: 'Datenschutz für Kinder',
+        content: 'Unser Service richtet sich nicht an Kinder unter 13 Jahren. Wir sammeln oder verarbeiten wissentlich keine Informationen von Kindern unter 13 Jahren.'
+      },
+      changes: {
+        title: 'Änderungen der Datenschutzerklärung',
+        content: 'Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Bei wesentlichen Änderungen werden wir die Nutzer informieren, indem wir die neue Datenschutzerklärung auf dieser Seite veröffentlichen.'
+      },
+      rights: {
+        title: 'Ihre Rechte',
+        content: 'Da wir keine personenbezogenen Daten sammeln, gibt es in der Regel keine Benutzerdaten zum:',
+        items: [
+          'Zugreifen',
+          'Korrigieren',
+          'Löschen',
+          'Exportieren'
+        ]
+      },
+      contact: {
+        title: 'Kontakt',
+        content: 'Wenn Sie Fragen zu dieser Datenschutzerklärung haben, kontaktieren Sie uns bitte unter support@docsmart.app.'
+      },
+      legal: {
+        title: 'Rechtsgrundlage',
+        content: 'Wir verarbeiten die minimal erforderlichen Informationen auf Basis berechtigter Interessen bei der Bereitstellung und Verbesserung unseres Services unter Wahrung der Privatsphäre und Sicherheit der Nutzer.'
+      }
+    }
   }
 } 
