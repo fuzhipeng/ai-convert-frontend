@@ -9,7 +9,7 @@
         <nav class="nav-menu">
           <a href="#features" @click.prevent="scrollToSection('features')">{{ $t('nav.features') }}</a>
           <a href="#faq" @click.prevent="scrollToSection('faq')">{{ $t('nav.faq') }}</a>
-          <router-link to="/pricing">{{ $t('nav.pricing') }}</router-link>
+          <!-- <router-link to="/pricing">{{ $t('nav.pricing') }}</router-link> -->
         </nav>
       </div>
       <div class="header-right">
