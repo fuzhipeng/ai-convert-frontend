@@ -131,12 +131,12 @@ const getBrowserLanguage = () => {
     console.log('[i18n] 浏览器语言:', language)
     // 检查是否支持当前语言
     const supportedLanguage = SUPPORT_LANGUAGES.find(lang => language.startsWith(lang.value))
-    const result = supportedLanguage ? supportedLanguage.value : 'zh-CN'
+    const result = supportedLanguage ? supportedLanguage.value : 'en-US'
     console.log('[i18n] 选择的语言:', result)
     return result
   } catch (e) {
     console.error('[i18n] 获取浏览器语言失败:', e)
-    return 'zh-CN'
+    return 'en-US'
   }
 }
 
@@ -151,7 +151,7 @@ const getStoredLanguage = () => {
     return getBrowserLanguage()
   } catch (e) {
     console.error('[i18n] 获取存储语言失败:', e)
-    return 'zh-CN'
+    return 'en-US'
   }
 }
 
@@ -189,8 +189,8 @@ const i18n = createI18n({
   globalInjection: true,
   locale: initialLocale,
   fallbackLocale: {
-    'zh': ['zh-CN'],
-    'default': ['zh-CN']
+    'en': ['en-US'],
+    'default': ['en-US']
   },
   allowComposition: true,
   messages,
@@ -246,8 +246,8 @@ try {
   const storedLang = localStorage.getItem('lang')
   if (storedLang && !Object.keys(i18n.global.messages).includes(storedLang)) {
     console.warn(`[i18n] 检测到无效的语言设置: ${storedLang}，重置为默认语言`)
-    localStorage.setItem('lang', 'zh-CN')
-    i18n.global.locale = 'zh-CN'
+    localStorage.setItem('lang', 'en-US')
+    i18n.global.locale = 'en-US'
   }
   
   // 验证当前语言包
